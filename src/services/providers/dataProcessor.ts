@@ -83,7 +83,7 @@ export function mapServiceType(type: string): ServiceType {
     subscribers: "subscribers",
   };
 
-  return typeMap[type?.toLowerCase()] || "followers";
+  return typeMap[type?.toLowerCase() || ""] || "followers";
 }
 
 // تحديد المنصة
