@@ -32,10 +32,8 @@ import {
   AlertTriangle,
   CheckCircle,
 } from "lucide-react";
-import {
-  advancedProviderSync,
-  type ProviderService,
-} from "@/services/providers/advancedProviderSync";
+import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
+import type { ProviderService } from "@/services/providers/types";
 
 interface PricingRule {
   id: string;
