@@ -38,7 +38,7 @@ export default defineConfig(({ mode }) => ({
     logOverride: { "this-is-undefined-in-esm": "silent" },
   },
   build: {
-    target: "es2020",
+    target: "es2019",
     sourcemap: false,
     rollupOptions: {
       output: {
