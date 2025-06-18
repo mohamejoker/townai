@@ -44,7 +44,7 @@ const SystemTestPage: React.FC = () => {
     setIsRunning(true);
     const testResults: TestResult[] = [];
 
-    // اختبار 1: حالة المصادقة
+    // اختبار 1: حالة المص��دقة
     testResults.push({
       name: "نظام المصادقة",
       status: isAuthenticated ? "success" : "error",
@@ -270,6 +270,9 @@ const SystemTestPage: React.FC = () => {
             إعادة تحميل الصفحة
           </Button>
         </div>
+
+        {/* تشخيص الاتصال */}
+        <ConnectionDiagnostics />
 
         {/* نتائج الاختبارات */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
