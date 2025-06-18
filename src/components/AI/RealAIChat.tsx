@@ -47,35 +47,41 @@ const RealAIChat: React.FC<RealAIChatProps> = ({ onActionClick }) => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
-  const providers = [
-    {
-      id: "openai",
-      name: "OpenAI GPT",
-      icon: Brain,
-      color: "from-green-500 to-blue-500",
-    },
-    {
-      id: "google",
-      name: "Google Gemini",
-      icon: Globe,
-      color: "from-blue-500 to-purple-500",
-    },
-    {
-      id: "grok",
-      name: "Grok AI",
-      icon: Zap,
-      color: "from-purple-500 to-pink-500",
-    },
-  ];
-
-  const models = {
-    openai: [
-      { id: "gpt-4.1-2025-04-14", name: "GPT-4.1 (الأحدث)", cost: 0.01 },
-      { id: "gpt-3.5-turbo", name: "GPT-3.5 Turbo (سريع)", cost: 0.002 },
+  const providers = useMemo(
+    () => [
+      {
+        id: "openai",
+        name: "OpenAI GPT",
+        icon: Brain,
+        color: "from-green-500 to-blue-500",
+      },
+      {
+        id: "google",
+        name: "Google Gemini",
+        icon: Globe,
+        color: "from-blue-500 to-purple-500",
+      },
+      {
+        id: "grok",
+        name: "Grok AI",
+        icon: Zap,
+        color: "from-purple-500 to-pink-500",
+      },
     ],
-    google: [{ id: "gemini-1.5-pro", name: "Gemini 1.5 Pro", cost: 0.0125 }],
-    grok: [{ id: "grok-2", name: "Grok 2", cost: 0.02 }],
-  };
+    [],
+  );
+
+  const models = useMemo(
+    () => ({
+      openai: [
+        { id: "gpt-4.1-2025-04-14", name: "GPT-4.1 (الأحدث)", cost: 0.01 },
+        { id: "gpt-3.5-turbo", name: "GPT-3.5 Turbo (سريع)", cost: 0.002 },
+      ],
+      google: [{ id: "gemini-1.5-pro", name: "Gemini 1.5 Pro", cost: 0.0125 }],
+      grok: [{ id: "grok-2", name: "Grok 2", cost: 0.02 }],
+    }),
+    [],
+  );
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
