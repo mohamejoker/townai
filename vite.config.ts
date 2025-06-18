@@ -33,6 +33,10 @@ export default defineConfig(({ mode }) => ({
     include: ["react", "react-dom"],
     exclude: ["@vite/client", "@vite/env"],
   },
+  esbuild: {
+    target: "es2020",
+    logOverride: { "this-is-undefined-in-esm": "silent" },
+  },
   build: {
     target: "es2020",
     sourcemap: false,
