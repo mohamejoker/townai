@@ -13,6 +13,7 @@ import EnhancedLandingPage from "@/pages/EnhancedLandingPage";
 import EnhancedServicesPage from "@/pages/EnhancedServicesPage";
 import AIChatPage from "@/pages/AIChatPage";
 import SiteBuilderPage from "@/pages/SiteBuilderPage";
+import TestDashboardPage from "@/pages/admin/TestDashboardPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import UsersPage from "@/pages/admin/UsersPage";
 import ServicesPage from "@/pages/admin/ServicesPage";
@@ -141,7 +142,7 @@ function App() {
                   </Routes>
                 </Suspense>
 
-                {/* زر الذكاء الاصطناعي العائم */}
+                {/* زر الذكاء الاص��ناعي العائم */}
                 <FloatingAIButton />
 
                 {/* أدوات التطوير */}
