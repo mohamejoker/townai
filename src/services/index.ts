@@ -1,9 +1,7 @@
-// تصدير مركزي محدود للخدمات - متوافق مع Node 20.x/22.x
+// تصدير محدود جداً للخدمات - تجنب المراجع الدائرية
 
-// Core Provider Services only - minimal exports
-export { advancedProviderSync } from "./providers/advancedProviderSync";
-export { calculateFinalPrice, processService } from "./providers/dataProcessor";
+// Note: Most exports disabled to prevent circular dependencies and Node.js compatibility issues
+// Import services directly from their source files when needed
 
-// Essential Services only
-export { default as roleService } from "./roleService";
-export { default as serviceService } from "./serviceService";
+// Only the most essential provider service
+export { calculateFinalPrice } from "./providers/dataProcessor";
