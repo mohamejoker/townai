@@ -22,6 +22,7 @@ import CompactAIChat from "@/components/Sections/CompactAIChat";
 import RealAIChat from "@/components/AI/RealAIChat";
 import Footer from "@/components/Frontend/Footer";
 import Navbar from "@/components/Frontend/Navbar";
+import AdvancedPaymentSystem from "@/components/Payment/AdvancedPaymentSystem";
 
 import {
   Star,
