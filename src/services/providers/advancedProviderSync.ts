@@ -113,7 +113,7 @@ class AdvancedProviderSync {
 
       for (const service of providerServices) {
         try {
-          const processedService = this.processService(service, provider);
+          const processedService = await this.processService(service, provider);
           const existingIndex = this.services.findIndex(
             (s) =>
               s.providerId === provider.id &&
@@ -229,8 +229,11 @@ class AdvancedProviderSync {
   }
 
   // معالجة وتحويل الخدمة
-  private processService(rawService: any, provider: Provider): ProviderService {
-    return processService(rawService, provider);
+  private async processService(
+    rawService: any,
+    provider: Provider,
+  ): Promise<ProviderService> {
+    return await processService(rawService, provider);
   }
 
   // إعداد المزامنة التلقائية

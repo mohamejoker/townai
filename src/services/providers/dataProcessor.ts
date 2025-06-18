@@ -140,10 +140,10 @@ export function extractCustomFields(service: any): Record<string, any> {
 }
 
 // معالجة وتحويل الخدمة
-export function processService(
+export async function processService(
   rawService: any,
   provider: Provider,
-): ProviderService {
+): Promise<ProviderService> {
   const originalRate = parseFloat(rawService.rate) || 0;
   const profitMargin = provider.profitMargin;
   const finalRate = calculateFinalPrice(originalRate, profitMargin);
