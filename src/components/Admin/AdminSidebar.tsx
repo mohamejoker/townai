@@ -21,6 +21,7 @@ import {
   PieChart,
   MonitorSpeaker,
   Gauge,
+  Briefcase,
 } from "lucide-react";
 
 interface AdminSidebarProps {
