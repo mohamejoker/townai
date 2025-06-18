@@ -1,9 +1,8 @@
-
-import React, { useState } from 'react';
-import { MessageCircle, X, Send, Bot } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import React, { useState } from "react";
+import { MessageCircle, X, Send, Bot } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 interface Message {
   id: string;
@@ -16,13 +15,13 @@ const FloatingAIButton: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
-      id: '1',
-      text: 'مرحباً! كيف يمكنني مساعدتك اليوم؟',
+      id: "1",
+      text: "مرحباً! كيف يمكنني مساعدتك اليوم؟",
       isUser: false,
-      timestamp: new Date()
-    }
+      timestamp: new Date(),
+    },
   ]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleSendMessage = () => {
     if (!inputValue.trim()) return;
@@ -31,26 +30,26 @@ const FloatingAIButton: React.FC = () => {
       id: Date.now().toString(),
       text: inputValue,
       isUser: true,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
-    setInputValue('');
+    setMessages((prev) => [...prev, userMessage]);
+    setInputValue("");
 
     // Simulate AI response
     setTimeout(() => {
       const aiResponse: Message = {
         id: (Date.now() + 1).toString(),
-        text: 'شكراً لك على رسالتك! سأقوم بالرد عليك في أقرب وقت ممكن.',
+        text: "شكراً لك على رسالتك! سأقوم بالرد عليك في أقرب وقت ممكن.",
         isUser: false,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      setMessages(prev => [...prev, aiResponse]);
+      setMessages((prev) => [...prev, aiResponse]);
     }, 1000);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       handleSendMessage();
     }
   };
@@ -82,13 +81,13 @@ const FloatingAIButton: React.FC = () => {
               {messages.map((message) => (
                 <div
                   key={message.id}
-                  className={`flex ${message.isUser ? 'justify-end' : 'justify-start'}`}
+                  className={`flex ${message.isUser ? "justify-end" : "justify-start"}`}
                 >
                   <div
                     className={`max-w-xs px-3 py-2 rounded-lg ${
                       message.isUser
-                        ? 'bg-blue-500 text-white'
-                        : 'bg-gray-100 text-gray-900'
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100 text-gray-900"
                     }`}
                   >
                     <p className="text-sm">{message.text}</p>
@@ -122,6 +121,7 @@ const FloatingAIButton: React.FC = () => {
 
       {/* Floating Button */}
       <Button
+        data-tour="floating-ai"
         onClick={() => setIsOpen(!isOpen)}
         className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 shadow-2xl z-50 p-0"
       >
