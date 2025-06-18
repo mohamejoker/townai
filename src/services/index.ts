@@ -1,11 +1,11 @@
 // تصدير مركزي للخدمات الأساسية فقط
 
-// Core Provider Services
-export * from "./providers";
+// Temporarily disabled to fix CI build performance issues
+// All services can be imported directly from their source files
 
-// Essential Services
-export { default as roleService } from "./roleService";
-export { default as apiKeyService } from "./apiKeyService";
-export { default as serviceService } from "./serviceService";
-export { default as accountAnalyzer } from "./accountAnalyzer";
-export { default as platformExpansion } from "./platformExpansion";
+// export * from './providers';
+// export { default as roleService } from './roleService';
+// export { default as apiKeyService } from './apiKeyService';
+// export { default as serviceService } from './serviceService';
+// export { default as accountAnalyzer } from './accountAnalyzer';
+// export { default as platformExpansion } from './platformExpansion';
