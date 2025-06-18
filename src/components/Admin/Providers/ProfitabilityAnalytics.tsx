@@ -39,10 +39,8 @@ import {
   Filter,
   Download,
 } from "lucide-react";
-import {
-  advancedProviderSync,
-  type ProviderService,
-} from "@/services/providers/advancedProviderSync";
+import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
+import type { ProviderService } from "@/services/providers/types";
 
 interface ProfitMetrics {
   totalRevenue: number;
@@ -268,7 +266,7 @@ const ProfitabilityAnalytics = () => {
             تحليل الربحية والأداء
           </h2>
           <p className="text-gray-600">
-            إحصائيات مفصلة للأرباح والعوائد من الخدما��
+            إحصائيات مفصلة للأرباح والعوائد من الخدمات
           </p>
         </div>
         <div className="flex gap-3">
