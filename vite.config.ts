@@ -65,6 +65,9 @@ export default defineConfig(({ mode }) => ({
           if (id.includes("SiteBuilder")) {
             return "sitebuilder";
           }
+          if (id.includes("Providers/")) {
+            return "providers";
+          }
           if (id.includes("Admin") && !id.includes("pages")) {
             return "admin-components";
           }
