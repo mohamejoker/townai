@@ -113,7 +113,7 @@ class AdvancedProviderSync {
 
       for (const service of providerServices) {
         try {
-          const processedService = await this.processService(service, provider);
+          const processedService = this.processService(service, provider);
           const existingIndex = this.services.findIndex(
             (s) =>
               s.providerId === provider.id &&
