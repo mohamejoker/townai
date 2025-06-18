@@ -37,35 +37,6 @@ export default defineConfig(({ mode }) => ({
     target: "es2019",
   },
   build: {
-    target: "es2019",
-    sourcemap: false,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "vendor";
-            }
-            if (id.includes("@radix-ui")) {
-              return "ui";
-            }
-            if (id.includes("lucide-react")) {
-              return "lucide";
-            }
-            if (id.includes("recharts")) {
-              return "charts";
-            }
-            if (id.includes("react-hook-form")) {
-              return "forms";
-            }
-            if (id.includes("clsx") || id.includes("tailwind-merge")) {
-              return "utils";
-            }
-            return "vendor";
-          }
-        },
-      },
-    },
     chunkSizeWarningLimit: 1000,
   },
 }));
