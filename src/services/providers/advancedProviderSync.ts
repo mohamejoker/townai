@@ -1,7 +1,7 @@
 // نظام متقدم لسحب وإدارة الخدمات من الموردين
 
-import type { Provider, ProviderService, SyncResult } from "./types";
-import { processService, calculateFinalPrice } from "./dataProcessor";
+import type { Provider, ProviderService, SyncResult } from './types';
+import { processService, calculateFinalPrice } from './dataProcessor';
 
 class AdvancedProviderSync {
   private providers: Provider[] = [];
@@ -18,52 +18,46 @@ class AdvancedProviderSync {
   private loadProviders() {
     this.providers = [
       {
-        id: "smm-party",
-        name: "SMM Party",
-        apiUrl: "https://smmparty.com/api/v2",
-        apiKey: "8b9d9d15570d233646b130210dba475a",
+        id: 'smm-party',
+        name: 'SMM Party',
+        apiUrl: 'https://smmparty.com/api/v2',
+        apiKey: '8b9d9d15570d233646b130210dba475a',
         isActive: true,
-        description: "مورد خدمات سوشيال ميديا عالي الجودة",
+        description: 'مورد خدمات سوشيال ميديا عالي الجودة',
         reliability: 96,
-        speed: "fast",
-        supportedPlatforms: [
-          "instagram",
-          "tiktok",
-          "youtube",
-          "twitter",
-          "facebook",
-        ],
+        speed: 'fast',
+        supportedPlatforms: ['instagram', 'tiktok', 'youtube', 'twitter', 'facebook'],
         lastSync: new Date(),
         profitMargin: 30, // 30% ربح افتراضي
-        currency: "USD",
-        syncInterval: 60, // كل ساعة
+        currency: 'USD',
+        syncInterval: 60 // كل ساعة
       },
       {
-        id: "arabic-smm",
-        name: "Arabic SMM",
-        apiUrl: "https://api.arabicsmm.com/v1",
-        apiKey: "demo-api-key",
+        id: 'arabic-smm',
+        name: 'Arabic SMM',
+        apiUrl: 'https://api.arabicsmm.com/v1',
+        apiKey: 'demo-api-key',
         isActive: true,
-        description: "مورد خدمات عربي متخصص",
+        description: 'مورد خدمات عربي متخصص',
         reliability: 89,
-        speed: "medium",
-        supportedPlatforms: ["instagram", "tiktok", "snapchat"],
+        speed: 'medium',
+        supportedPlatforms: ['instagram', 'tiktok', 'snapchat'],
         lastSync: new Date(),
         profitMargin: 25,
-        currency: "SAR",
-        syncInterval: 120,
-      },
+        currency: 'SAR',
+        syncInterval: 120
+      }
     ];
   }
 
   // تحميل الخدمات المحفوظة
   private loadServices() {
-    const savedServices = localStorage.getItem("provider_services");
+    const savedServices = localStorage.getItem('provider_services');
     if (savedServices) {
       try {
         this.services = JSON.parse(savedServices);
       } catch (error) {
-        console.error("خطأ في تحميل الخدمات المحفوظة:", error);
+        console.error('خطأ في تحميل الخدمات المحفوظة:', error);
         this.services = [];
       }
     }
@@ -71,7 +65,7 @@ class AdvancedProviderSync {
 
   // حفظ الخدمات
   private saveServices() {
-    localStorage.setItem("provider_services", JSON.stringify(this.services));
+    localStorage.setItem('provider_services', JSON.stringify(this.services));
   }
 
   // سحب الخدمات من جميع الموردين
@@ -102,7 +96,7 @@ class AdvancedProviderSync {
       errors: 0,
       syncTime: new Date(),
       duration: 0,
-      errorDetails: [],
+      errorDetails: []
     };
 
     try {
@@ -115,9 +109,7 @@ class AdvancedProviderSync {
         try {
           const processedService = await this.processService(service, provider);
           const existingIndex = this.services.findIndex(
-            (s) =>
-              s.providerId === provider.id &&
-              s.providerServiceId === service.id,
+            s => s.providerId === provider.id && s.providerServiceId === service.id
           );
 
           if (existingIndex >= 0) {
@@ -131,22 +123,19 @@ class AdvancedProviderSync {
           }
         } catch (error) {
           result.errors++;
-          result.errorDetails.push(
-            `خطأ في معالجة الخدمة ${service.name}: ${error}`,
-          );
+          result.errorDetails.push(`خطأ في معالجة الخدمة ${service.name}: ${error}`);
         }
       }
 
       provider.lastSync = new Date();
+
     } catch (error) {
       result.errors++;
       result.errorDetails.push(`خطأ في الاتصال بالمورد: ${error}`);
     }
 
     result.duration = Math.round((Date.now() - startTime) / 1000);
-    console.log(
-      `انتهى سحب الخدمات من ${provider.name} في ${result.duration} ثانية`,
-    );
+    console.log(`انتهى سحب الخدمات من ${provider.name} في ${result.duration} ثانية`);
 
     return result;
   }
@@ -154,9 +143,9 @@ class AdvancedProviderSync {
   // جلب الخدمات من مورد
   private async fetchProviderServices(provider: Provider): Promise<any[]> {
     switch (provider.id) {
-      case "smm-party":
+      case 'smm-party':
         return this.fetchSMMPartyServices(provider);
-      case "arabic-smm":
+      case 'arabic-smm':
         return this.fetchArabicSMMServices(provider);
       default:
         return this.fetchGenericServices(provider);
@@ -166,12 +155,12 @@ class AdvancedProviderSync {
   // جلب خدمات SMM Party
   private async fetchSMMPartyServices(provider: Provider): Promise<any[]> {
     const response = await fetch(provider.apiUrl, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         key: provider.apiKey,
-        action: "services",
-      }),
+        action: 'services'
+      })
     });
 
     if (!response.ok) {
@@ -192,23 +181,23 @@ class AdvancedProviderSync {
     // محاكاة بيانات مورد عربي
     return [
       {
-        id: "1",
-        name: "Instagram Arabic Followers",
-        type: "followers",
-        rate: "0.5",
-        min: "100",
-        max: "10000",
-        category: "Instagram",
+        id: '1',
+        name: 'Instagram Arabic Followers',
+        type: 'followers',
+        rate: '0.5',
+        min: '100',
+        max: '10000',
+        category: 'Instagram'
       },
       {
-        id: "2",
-        name: "TikTok Views Saudi",
-        type: "views",
-        rate: "0.3",
-        min: "1000",
-        max: "100000",
-        category: "TikTok",
-      },
+        id: '2',
+        name: 'TikTok Views Saudi',
+        type: 'views',
+        rate: '0.3',
+        min: '1000',
+        max: '100000',
+        category: 'TikTok'
+      }
     ];
   }
 
@@ -216,9 +205,9 @@ class AdvancedProviderSync {
   private async fetchGenericServices(provider: Provider): Promise<any[]> {
     const response = await fetch(`${provider.apiUrl}/services`, {
       headers: {
-        Authorization: `Bearer ${provider.apiKey}`,
-        "Content-Type": "application/json",
-      },
+        'Authorization': `Bearer ${provider.apiKey}`,
+        'Content-Type': 'application/json'
+      }
     });
 
     if (!response.ok) {
@@ -229,37 +218,31 @@ class AdvancedProviderSync {
   }
 
   // معالجة وتحويل الخدمة
-  private async processService(
-    rawService: any,
-    provider: Provider,
-  ): Promise<ProviderService> {
+  private async processService(rawService: any, provider: Provider): Promise<ProviderService> {
     return processService(rawService, provider);
   }
 
   // إعداد المزامنة التلقائية
   private setupAutoSync() {
     // مزامنة كل 30 دقيقة
-    setInterval(
-      () => {
-        this.syncAllProviders().catch(console.error);
-      },
-      30 * 60 * 1000,
-    );
+    setInterval(() => {
+      this.syncAllProviders().catch(console.error);
+    }, 30 * 60 * 1000);
   }
 
   // تحديث نسبة الربح لمورد
   updateProviderProfitMargin(providerId: string, profitMargin: number) {
-    const provider = this.providers.find((p) => p.id === providerId);
+    const provider = this.providers.find(p => p.id === providerId);
     if (provider) {
       provider.profitMargin = profitMargin;
 
       // تحديث جميع خدمات هذا المورد
-      this.services.forEach((service) => {
+      this.services.forEach(service => {
         if (service.providerId === providerId) {
           service.profitMargin = profitMargin;
           service.finalRate = calculateFinalPrice(
             service.originalRate,
-            profitMargin,
+            profitMargin
           );
         }
       });
@@ -270,24 +253,19 @@ class AdvancedProviderSync {
 
   // تحديث نسبة الربح لخدمة واحدة
   updateServiceProfitMargin(serviceId: string, profitMargin: number) {
-    const service = this.services.find((s) => s.id === serviceId);
+    const service = this.services.find(s => s.id === serviceId);
     if (service) {
       service.profitMargin = profitMargin;
-      service.finalRate = DataProcessor.calculateFinalPrice(
+      service.finalRate = calculateFinalPrice(
         service.originalRate,
-        profitMargin,
-      );
+      service.finalRate = DataProcessor.calculateFinalPrice(service.originalRate, profitMargin);
       this.saveServices();
     }
   }
 
   // تحديث وصف خدمة
-  updateServiceDescription(
-    serviceId: string,
-    description: string,
-    arabicDescription: string,
-  ) {
-    const service = this.services.find((s) => s.id === serviceId);
+  updateServiceDescription(serviceId: string, description: string, arabicDescription: string) {
+    const service = this.services.find(s => s.id === serviceId);
     if (service) {
       service.description = description;
       service.arabicDescription = arabicDescription;
@@ -302,22 +280,20 @@ class AdvancedProviderSync {
 
   // الحصول على خدمات مورد معين
   getProviderServices(providerId: string): ProviderService[] {
-    return this.services.filter((s) => s.providerId === providerId);
+    return this.services.filter(s => s.providerId === providerId);
   }
 
-  // الحصول على إحصائيات المزامنة
+  // الحصول على إحصائيا�� المزامنة
   getSyncStats() {
-    const activeProviders = this.providers.filter((p) => p.isActive).length;
+    const activeProviders = this.providers.filter(p => p.isActive).length;
     const totalServices = this.services.length;
-    const lastSync = Math.max(
-      ...this.providers.map((p) => p.lastSync.getTime()),
-    );
+    const lastSync = Math.max(...this.providers.map(p => p.lastSync.getTime()));
 
     return {
       activeProviders,
       totalServices,
       lastSync: new Date(lastSync),
-      syncHistory: this.syncHistory.slice(-10), // آخر 10 عمليات مزامنة
+      syncHistory: this.syncHistory.slice(-10) // آخر 10 عمليات مزامنة
     };
   }
 
@@ -330,18 +306,13 @@ class AdvancedProviderSync {
     quality?: string;
     isActive?: boolean;
   }): ProviderService[] {
-    return this.services.filter((service) => {
-      if (filters.platform && service.platform !== filters.platform)
-        return false;
+    return this.services.filter(service => {
+      if (filters.platform && service.platform !== filters.platform) return false;
       if (filters.type && service.type !== filters.type) return false;
       if (filters.minRate && service.finalRate < filters.minRate) return false;
       if (filters.maxRate && service.finalRate > filters.maxRate) return false;
       if (filters.quality && service.quality !== filters.quality) return false;
-      if (
-        filters.isActive !== undefined &&
-        service.isActive !== filters.isActive
-      )
-        return false;
+      if (filters.isActive !== undefined && service.isActive !== filters.isActive) return false;
 
       return true;
     });
@@ -349,7 +320,7 @@ class AdvancedProviderSync {
 
   // تحديث حالة خدمة
   updateServiceStatus(serviceId: string, isActive: boolean) {
-    const service = this.services.find((s) => s.id === serviceId);
+    const service = this.services.find(s => s.id === serviceId);
     if (service) {
       service.isActive = isActive;
       this.saveServices();
@@ -358,7 +329,7 @@ class AdvancedProviderSync {
 
   // حذف خدمة
   deleteService(serviceId: string) {
-    const index = this.services.findIndex((s) => s.id === serviceId);
+    const index = this.services.findIndex(s => s.id === serviceId);
     if (index >= 0) {
       this.services.splice(index, 1);
       this.saveServices();
@@ -372,7 +343,7 @@ class AdvancedProviderSync {
 
   // تحديث مورد
   updateProvider(providerId: string, updates: Partial<Provider>) {
-    const provider = this.providers.find((p) => p.id === providerId);
+    const provider = this.providers.find(p => p.id === providerId);
     if (provider) {
       Object.assign(provider, updates);
     }
@@ -380,11 +351,11 @@ class AdvancedProviderSync {
 
   // حذف مورد
   deleteProvider(providerId: string) {
-    const index = this.providers.findIndex((p) => p.id === providerId);
+    const index = this.providers.findIndex(p => p.id === providerId);
     if (index >= 0) {
       this.providers.splice(index, 1);
       // حذف جميع خدمات هذا المورد
-      this.services = this.services.filter((s) => s.providerId !== providerId);
+      this.services = this.services.filter(s => s.providerId !== providerId);
       this.saveServices();
     }
   }
