@@ -46,6 +46,7 @@ import NotificationSystem from "@/components/Common/NotificationSystem";
 import KeyboardShortcuts from "@/components/Common/KeyboardShortcuts";
 import LiveStats from "@/components/Common/LiveStats";
 import EnhancedProgressBar from "@/components/Common/EnhancedProgressBar";
+import InteractiveTour from "@/components/Common/InteractiveTour";
 import { Suspense } from "react";
 
 const queryClient = new QueryClient({
