@@ -29,6 +29,7 @@ const Footer = () => {
     { name: "الصفحة الرئيسية", href: "/" },
     { name: "الخدمات", href: "/services" },
     { name: "المساعد الذكي", href: "/ai-chat" },
+    { name: "منشئ المواقع", href: "/site-builder" },
     { name: "الأسعار", href: "/pricing" },
     { name: "تسجيل الدخول", href: "/login" },
     { name: "إنشاء حساب", href: "/register" },
