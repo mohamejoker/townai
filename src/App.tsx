@@ -153,7 +153,10 @@ function App() {
                       }
                     >
                       <Route index element={<TestDashboardPage />} />
-                      <Route path="dashboard" element={<TestDashboardPage />} />
+                      <Route
+                        path="dashboard"
+                        element={<AdminDashboardPage />}
+                      />
                       <Route path="users" element={<UsersPage />} />
                       <Route path="services" element={<ServicesPage />} />
                       <Route path="jobs" element={<JobsAdminPage />} />
@@ -215,7 +218,7 @@ function App() {
                 {/* اختصارات لوحة المفاتيح */}
                 <KeyboardShortcuts />
 
-                {/* إحصائيات مباشرة */}
+                {/* ��حصائيات مباشرة */}
                 <LiveStats />
 
                 {/* الجولة التفاعلية */}
