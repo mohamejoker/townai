@@ -10,8 +10,7 @@ import {
   Palette,
   Type,
   Layout,
-  Space,
-  Shadows,
+  Sparkles,
   Circle,
   Eye,
   RotateCcw,
@@ -437,7 +436,7 @@ const TypographyPanel: React.FC<{
           </div>
 
           <div>
-            <Label htmlFor="font-weight">سُمك الخط</Label>
+            <Label htmlFor="font-weight">سُمك ال��ط</Label>
             <select
               id="font-weight"
               value={(styles.fontWeight as string) || "normal"}
@@ -708,7 +707,7 @@ const LayoutPanel: React.FC<{
           </div>
         </div>
 
-        {/* ال��وضع */}
+        {/* الموضع */}
         <div>
           <Label htmlFor="position">الموضع</Label>
           <select
