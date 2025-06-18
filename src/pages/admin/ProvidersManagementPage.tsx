@@ -238,6 +238,10 @@ const ProvidersManagementPage = () => {
           <PricingManagement />
         </TabsContent>
 
+        <TabsContent value="testing">
+          <ProviderSystemTester />
+        </TabsContent>
+
         <TabsContent value="reports" className="space-y-6">
           {/* تقارير متقدمة */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -283,7 +287,7 @@ const ProvidersManagementPage = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>موقعنا في السوق:</span>
-                    <span className="font-bold text-green-600">المرتب�� 2</span>
+                    <span className="font-bold text-green-600">المرتبة 2</span>
                   </div>
                   <div className="flex justify-between">
                     <span>فرق الأسعار:</span>
@@ -318,7 +322,7 @@ const ProvidersManagementPage = () => {
                   </h4>
                   <p className="text-sm text-gray-600">
                     يمكن زيادة نسبة الربح لخدمات Instagram عالية الجودة بنسبة 5%
-                    لتحقيق زيادة في الأرباح قدرها{" "}
+                    لتحقيق ��يادة في الأرباح قدرها{" "}
                     {Math.round(totalProfit * 0.15).toLocaleString()} ريال
                     شهرياً
                   </p>
