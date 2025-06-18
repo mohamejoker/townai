@@ -15,6 +15,7 @@ import AIChatPage from "@/pages/AIChatPage";
 import SiteBuilderPage from "@/pages/SiteBuilderPage";
 import TestDashboardPage from "@/pages/admin/TestDashboardPage";
 import TestLoginPage from "@/pages/TestLoginPage";
+import SystemTestPage from "@/pages/SystemTestPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import UsersPage from "@/pages/admin/UsersPage";
 import ServicesPage from "@/pages/admin/ServicesPage";
