@@ -14,7 +14,8 @@ export class DataProcessor {
     originalRate: number,
     profitMargin: number,
   ): number {
-    return originalRate * (1 + profitMargin / 100);
+    const markup = originalRate * (profitMargin / 100);
+    return Math.round((originalRate + markup) * 100) / 100;
   }
 
   // ترجمة اسم الخدمة
