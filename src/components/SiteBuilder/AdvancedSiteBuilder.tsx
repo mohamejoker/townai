@@ -47,8 +47,10 @@ import ContentEditor from "./ContentEditor";
 import StyleEditor from "./StyleEditor";
 import PreviewPane from "./PreviewPane";
 import AIAssistant from "./AIAssistant";
-import { useSiteBuilder } from "./hooks/useSiteBuilder";
-import { SiteBuilderProvider } from "./context/SiteBuilderContext";
+import {
+  useSiteBuilder,
+  SiteBuilderProvider,
+} from "./context/SiteBuilderContext";
 
 const AdvancedSiteBuilder: React.FC = () => {
   const {
