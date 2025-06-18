@@ -199,13 +199,13 @@ const AdvancedProvidersManager = () => {
             disabled={isLoading}
             className="flex items-center gap-2"
           >
-            <RefreshCw
+            <Icons.RefreshCw
               className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
             />
             مزامنة جميع الموردين
           </Button>
           <Button variant="outline">
-            <Plus className="h-4 w-4 mr-2" />
+            <Icons.Plus className="h-4 w-4 mr-2" />
             إضافة مورد جديد
           </Button>
         </div>
@@ -613,7 +613,7 @@ const AdvancedProvidersManager = () => {
                   لا توجد خدمات
                 </h3>
                 <p className="text-gray-600">
-                  لم يتم العث��ر على خدمات تطابق الفلاتر المحددة
+                  لم يتم العثور على خدمات تطابق الفلاتر المحددة
                 </p>
               </CardContent>
             </Card>
