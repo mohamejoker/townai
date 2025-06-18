@@ -1,328 +1,327 @@
-
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { useAuth } from '@/contexts/AuthContext';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { Menu, X, ChevronDown, Globe, User, LogOut } from 'lucide-react';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import Logo from "@/components/Common/Logo";
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
-import { useUIControl } from '@/contexts/UIControlContext';
+  Menu,
+  X,
+  Brain,
+  Users,
+  ShoppingCart,
+  MessageSquare,
+  Star,
+  Zap,
+  Crown,
+  Gift,
+  Heart,
+  Shield,
+  Sparkles,
+  ChevronDown,
+} from "lucide-react";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const { user, logout } = useAuth();
-  const { language, setLanguage } = useLanguage();
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const location = useLocation();
-  const { theme } = useUIControl();
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      setIsScrolled(window.scrollY > 10);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: 'الرئيسية', path: '/' },
-    { name: 'الخدمات', path: '/services' },
-    { name: 'التسعير', path: '/pricing' },
-    { name: 'من نحن', path: '/about' },
-    { name: 'تواصل معنا', path: '/contact' },
+  const navigationItems = [
+    {
+      title: "الخدمات",
+      href: "/services",
+      icon: ShoppingCart,
+      dropdown: [
+        {
+          title: "متابعين إنستغرام",
+          href: "/services?platform=instagram&category=followers",
+          icon: "📸",
+        },
+        {
+          title: "مشاهدات تيك توك",
+          href: "/services?platform=tiktok&category=views",
+          icon: "🎵",
+        },
+        {
+          title: "مشتركين يوتيوب",
+          href: "/services?platform=youtube&category=followers",
+          icon: "📺",
+        },
+        {
+          title: "خدمات فيسبوك",
+          href: "/services?platform=facebook",
+          icon: "👥",
+        },
+        { title: "جميع الخدمات", href: "/services", icon: "🌟" },
+        {
+          title: "الخدمات المميزة",
+          href: "/services?category=premium",
+          icon: "👑",
+        },
+      ],
+    },
+    {
+      title: "المساعد الذكي",
+      href: "/ai-chat",
+      icon: Brain,
+      badge: "جديد",
+      dropdown: [
+        { title: "محادثة ذكية", href: "/ai-chat", icon: "🤖" },
+        { title: "تحليل الحساب", href: "/ai-chat?tool=analysis", icon: "📊" },
+        { title: "تصميم ذكي", href: "/ai-chat?tool=design", icon: "🎨" },
+        {
+          title: "استشارة مجانية",
+          href: "/ai-chat?tool=consultation",
+          icon: "💡",
+        },
+      ],
+    },
+    {
+      title: "الأسعار",
+      href: "/pricing",
+      icon: Star,
+    },
+    {
+      title: "المساعدة",
+      href: "/help",
+      icon: MessageSquare,
+      dropdown: [
+        { title: "مركز المساعدة", href: "/help", icon: "❓" },
+        { title: "الأسئلة الشائعة", href: "/faq", icon: "📚" },
+        { title: "اتصل بنا", href: "/contact", icon: "📞" },
+        { title: "واتساب", href: "https://wa.me/1234567890", icon: "💬" },
+        { title: "تيليجرام", href: "https://t.me/townmedia", icon: "✈️" },
+      ],
+    },
   ];
 
-  const userNavLinks = [
-    { name: 'لوحة التحكم', path: '/dashboard' },
-    { name: 'الملف الشخصي', path: '/profile' },
-    { name: 'الإعدادات', path: '/settings' },
-  ];
+  const isActiveLink = (href: string) => {
+    return location.pathname === href;
+  };
 
   return (
-    <nav
-      className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'bg-white/90 backdrop-blur-md shadow-md py-2'
-          : 'bg-transparent py-4'
-      )}
-      style={{
-        backgroundColor: scrolled ? theme.backgroundColor : 'transparent',
-      }}
-    >
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img
-                src="/logo.svg"
-                alt="Town Media Logo"
-                className="h-10 w-auto"
-              />
-              <span
-                className="text-xl font-bold ml-2"
-                style={{ color: theme.primaryColor }}
-              >
-                Town Media
-              </span>
+    <>
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-white/95 backdrop-blur-md shadow-xl border-b"
+            : "bg-white/90 backdrop-blur-sm"
+        }`}
+      >
+        <div className="container mx-auto px-4">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex items-center space-x-3 rtl:space-x-reverse"
+            >
+              <Logo size="sm" />
+              <div className="hidden md:flex flex-col">
+                <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white text-xs">
+                  <Sparkles className="h-3 w-3 ml-1" />
+                  AI-Powered
+                </Badge>
+              </div>
             </Link>
-          </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-1 rtl:space-x-reverse">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                  location.pathname === link.path
-                    ? 'text-primary bg-primary/10'
-                    : 'hover:bg-gray-100'
-                }`}
-                style={{
-                  color:
-                    location.pathname === link.path
-                      ? theme.primaryColor
-                      : theme.textColor,
-                }}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </div>
-
-          <div className="hidden md:flex items-center space-x-2 rtl:space-x-reverse">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  className="flex items-center gap-1"
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center space-x-8 rtl:space-x-reverse">
+              {navigationItems.map((item, index) => (
+                <div
+                  key={index}
+                  className="relative group"
+                  onMouseEnter={() => setActiveDropdown(item.title)}
+                  onMouseLeave={() => setActiveDropdown(null)}
                 >
-                  <Globe className="h-4 w-4" />
-                  <span>{language === 'ar' ? 'العربية' : 'English'}</span>
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => setLanguage('ar')}>
-                  العربية
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setLanguage('en')}>
-                  English
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <Link
+                    to={item.href}
+                    className={`flex items-center space-x-2 rtl:space-x-reverse px-3 py-2 rounded-lg transition-all duration-200 ${
+                      isActiveLink(item.href)
+                        ? "bg-blue-100 text-blue-600"
+                        : "text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+                    }`}
+                  >
+                    <item.icon className="h-4 w-4" />
+                    <span className="font-medium">{item.title}</span>
+                    {item.badge && (
+                      <Badge className="bg-red-500 text-white text-xs">
+                        {item.badge}
+                      </Badge>
+                    )}
+                    {item.dropdown && (
+                      <ChevronDown className="h-3 w-3 ml-1 transition-transform group-hover:rotate-180" />
+                    )}
+                  </Link>
 
-            {user ? (
-              <DropdownMenu>
-                <DropdownMenuTrigger asChild>
+                  {/* Dropdown Menu */}
+                  {item.dropdown && activeDropdown === item.title && (
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 opacity-0 translate-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                      {item.dropdown.map((dropdownItem, dropdownIndex) => (
+                        <Link
+                          key={dropdownIndex}
+                          to={dropdownItem.href}
+                          className="flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-600 transition-colors"
+                        >
+                          <span className="text-lg">{dropdownItem.icon}</span>
+                          <span>{dropdownItem.title}</span>
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex items-center space-x-3 rtl:space-x-reverse">
+              <div className="hidden md:flex items-center space-x-2 rtl:space-x-reverse">
+                <Link to="/login">
                   <Button
                     variant="ghost"
-                    className="relative h-8 w-8 rounded-full"
+                    className="text-gray-700 hover:text-blue-600"
                   >
-                    <Avatar className="h-8 w-8">
-                      <AvatarImage
-                        src={(user as any)?.avatar || ''}
-                        alt={(user as any)?.name || 'User'}
-                      />
-                      <AvatarFallback>
-                        {(user as any)?.name?.charAt(0) || 'U'}
-                      </AvatarFallback>
-                    </Avatar>
+                    تسجيل الدخول
                   </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent className="w-56" align="end" forceMount>
-                  <div className="flex flex-col space-y-1 p-2">
-                    <p className="text-sm font-medium leading-none">
-                      {(user as any)?.name || ''}
-                    </p>
-                    <p className="text-xs leading-none text-muted-foreground">
-                      {(user as any)?.email || ''}
-                    </p>
+                </Link>
+                <Link to="/register">
+                  <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg">
+                    <Crown className="h-4 w-4 ml-2" />
+                    ابدأ الآن
+                  </Button>
+                </Link>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+                <SheetTrigger asChild>
+                  <Button variant="ghost" size="sm" className="lg:hidden">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </SheetTrigger>
+                <SheetContent side="right" className="w-80">
+                  <div className="flex flex-col h-full">
+                    {/* Mobile Header */}
+                    <div className="flex items-center justify-between pb-6 border-b">
+                      <Logo size="sm" />
+                      <Badge className="bg-gradient-to-r from-blue-500 to-purple-600 text-white">
+                        AI-Powered
+                      </Badge>
+                    </div>
+
+                    {/* Mobile Navigation */}
+                    <div className="flex-1 py-6">
+                      <div className="space-y-2">
+                        {navigationItems.map((item, index) => (
+                          <div key={index}>
+                            <Link
+                              to={item.href}
+                              onClick={() => setIsMobileMenuOpen(false)}
+                              className={`flex items-center space-x-3 rtl:space-x-reverse px-4 py-3 rounded-lg transition-colors ${
+                                isActiveLink(item.href)
+                                  ? "bg-blue-100 text-blue-600"
+                                  : "text-gray-700 hover:bg-gray-50"
+                              }`}
+                            >
+                              <item.icon className="h-5 w-5" />
+                              <span className="font-medium">{item.title}</span>
+                              {item.badge && (
+                                <Badge className="bg-red-500 text-white text-xs mr-auto">
+                                  {item.badge}
+                                </Badge>
+                              )}
+                            </Link>
+
+                            {/* Mobile Dropdown */}
+                            {item.dropdown && (
+                              <div className="mr-8 mt-2 space-y-1">
+                                {item.dropdown.map(
+                                  (dropdownItem, dropdownIndex) => (
+                                    <Link
+                                      key={dropdownIndex}
+                                      to={dropdownItem.href}
+                                      onClick={() => setIsMobileMenuOpen(false)}
+                                      className="flex items-center space-x-3 rtl:space-x-reverse px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                                    >
+                                      <span>{dropdownItem.icon}</span>
+                                      <span>{dropdownItem.title}</span>
+                                    </Link>
+                                  ),
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Mobile Action Buttons */}
+                    <div className="border-t pt-6 space-y-3">
+                      <Link
+                        to="/login"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Button variant="outline" className="w-full">
+                          تسجيل الدخول
+                        </Button>
+                      </Link>
+                      <Link
+                        to="/register"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                      >
+                        <Button className="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
+                          <Crown className="h-4 w-4 ml-2" />
+                          ابدأ الآن
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
-                  <div className="border-t my-1"></div>
-                  {userNavLinks.map((link) => (
-                    <DropdownMenuItem key={link.path} asChild>
-                      <Link to={link.path}>{link.name}</Link>
-                    </DropdownMenuItem>
-                  ))}
-                  <div className="border-t my-1"></div>
-                  <DropdownMenuItem
-                    className="text-red-500 focus:text-red-500"
-                    onClick={logout}
-                  >
-                    <LogOut className="ml-2 h-4 w-4" />
-                    تسجيل الخروج
-                  </DropdownMenuItem>
-                </DropdownMenuContent>
-              </DropdownMenu>
-            ) : (
-              <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  asChild
-                  className="text-gray-700"
-                >
-                  <Link to="/login">تسجيل الدخول</Link>
-                </Button>
-                <Button
-                  size="sm"
-                  asChild
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 text-white"
-                >
-                  <Link to="/register">إنشاء حساب</Link>
-                </Button>
-              </div>
-            )}
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden flex items-center">
-            <button
-              onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500"
-            >
-              <span className="sr-only">Open main menu</span>
-              {isMenuOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
-              ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
-              )}
-            </button>
+                </SheetContent>
+              </Sheet>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile menu */}
-      <div
-        className={`md:hidden ${
-          isMenuOpen ? 'block' : 'hidden'
-        } bg-white shadow-lg absolute w-full`}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`block px-3 py-2 rounded-md text-base font-medium ${
-                location.pathname === link.path
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50'
-              }`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              {link.name}
-            </Link>
-          ))}
-
-          <div className="border-t border-gray-200 my-2"></div>
-
-          <div className="flex justify-between items-center px-3 py-2">
-            <span className="text-sm text-gray-500">اللغة</span>
-            <div className="flex space-x-2 rtl:space-x-reverse">
-              <button
-                onClick={() => setLanguage('ar')}
-                className={`px-2 py-1 text-xs rounded ${
-                  language === 'ar'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'bg-gray-100 text-gray-700'
-                }`}
-              >
-                العربية
-              </button>
-              <button
-                onClick={() => setLanguage('en')}
-                className={`px-2 py-1 text-xs rounded ${
-                  language === 'en'
-                    ? 'bg-blue-100 text-blue-700'
-                    : 'bg-gray-100 text-gray-700'
-                }`}
-              >
-                English
-              </button>
+        {/* Trust Bar */}
+        <div className="bg-gradient-to-r from-green-50 to-blue-50 border-t border-green-100">
+          <div className="container mx-auto px-4 py-2">
+            <div className="flex items-center justify-center space-x-6 rtl:space-x-reverse text-sm">
+              <div className="flex items-center">
+                <Shield className="h-4 w-4 text-green-500 ml-1" />
+                <span className="text-green-700 font-medium">آمن 100%</span>
+              </div>
+              <div className="flex items-center">
+                <Heart className="h-4 w-4 text-red-500 ml-1" />
+                <span className="text-red-700 font-medium">+50K عميل راضي</span>
+              </div>
+              <div className="flex items-center">
+                <Zap className="h-4 w-4 text-yellow-500 ml-1" />
+                <span className="text-yellow-700 font-medium">توصيل فوري</span>
+              </div>
+              <div className="flex items-center">
+                <Gift className="h-4 w-4 text-purple-500 ml-1" />
+                <span className="text-purple-700 font-medium">
+                  خصومات يومية
+                </span>
+              </div>
             </div>
           </div>
-
-          {!user && (
-            <div className="flex flex-col space-y-2 px-3 py-2">
-              <Button variant="outline" asChild className="w-full">
-                <Link to="/login" onClick={() => setIsMenuOpen(false)}>
-                  تسجيل الدخول
-                </Link>
-              </Button>
-              <Button asChild className="w-full">
-                <Link to="/register" onClick={() => setIsMenuOpen(false)}>
-                  إنشاء حساب
-                </Link>
-              </Button>
-            </div>
-          )}
-
-          {user && (
-            <div className="px-3 py-2">
-              <div className="flex items-center space-x-3 rtl:space-x-reverse mb-3">
-                <Avatar className="h-10 w-10">
-                  <AvatarImage
-                    src={(user as any)?.avatar || ''}
-                    alt={(user as any)?.name || 'User'}
-                  />
-                  <AvatarFallback>{(user as any)?.name?.charAt(0) || 'U'}</AvatarFallback>
-                </Avatar>
-                <div>
-                  <p className="text-sm font-medium">{(user as any)?.name || ''}</p>
-                  <p className="text-xs text-gray-500">{(user as any)?.email || ''}</p>
-                </div>
-              </div>
-
-              <div className="space-y-1">
-                {userNavLinks.map((link) => (
-                  <Link
-                    key={link.path}
-                    to={link.path}
-                    className="block px-3 py-2 rounded-md text-sm text-gray-700 hover:bg-gray-50"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {link.name}
-                  </Link>
-                ))}
-                <button
-                  onClick={() => {
-                    logout();
-                    setIsMenuOpen(false);
-                  }}
-                  className="w-full text-left px-3 py-2 rounded-md text-sm text-red-600 hover:bg-red-50 flex items-center"
-                >
-                  <LogOut className="ml-2 h-4 w-4" />
-                  تسجيل الخروج
-                </button>
-              </div>
-            </div>
-          )}
         </div>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Spacer for fixed navbar */}
+      <div className="h-24"></div>
+    </>
   );
 };
 
 export default Navbar;
-
