@@ -46,12 +46,15 @@ import {
   JobsAdminPage,
   SystemHealthDetailedPage,
 } from "@/pages/admin";
-import { ErrorBoundaryWrapper, PageLoading } from "@/components/Common";
+import {
+  ErrorBoundaryWrapper,
+  PageLoading,
+  DevAuthControls,
+  NotificationSystem,
+  KeyboardShortcuts,
+} from "@/components/Common";
 import { AdminLayout } from "@/components/Admin";
 import FloatingAIButton from "@/components/AI/FloatingAIButton";
-import DevAuthControls from "@/components/Common/DevAuthControls";
-import NotificationSystem from "@/components/Common/NotificationSystem";
-import KeyboardShortcuts from "@/components/Common/KeyboardShortcuts";
 import LiveStats from "@/components/Common/LiveStats";
 import EnhancedProgressBar from "@/components/Common/EnhancedProgressBar";
 import InteractiveTour from "@/components/Common/InteractiveTour";
