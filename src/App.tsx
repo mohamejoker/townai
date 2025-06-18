@@ -66,6 +66,8 @@ function App() {
             <Toaster />
             <Sonner />
             <BrowserRouter>
+              {/* شريط التقدم المحسن */}
+              <EnhancedProgressBar />
               <div className="min-h-screen w-full">
                 <Suspense
                   fallback={<PageLoading message="جاري تحميل الصفحة..." />}
