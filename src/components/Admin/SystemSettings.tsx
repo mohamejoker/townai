@@ -51,7 +51,10 @@ const SystemSettings = () => {
         acc[setting.category].push(setting);
         return acc;
       },
-      {} as Record<string, any[]>,
+      {} as Record<
+        string,
+        Array<{ id: string; setting_key: string; setting_value: string }>
+      >,
     ) || {};
 
   const getCategoryIcon = (category: string) => {
