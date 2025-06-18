@@ -52,7 +52,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   }, [service, initialData]);
 
   const createMutation = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: Record<string, unknown>) => {
       const { error } = await supabase.from("services").insert([data]);
 
       if (error) throw error;
@@ -69,7 +69,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (data: any) => {
+    mutationFn: async (data: Record<string, unknown>) => {
       const { error } = await supabase
         .from("services")
         .update(data)
@@ -92,7 +92,7 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
     e.preventDefault();
 
     if (!formData.title || !formData.price) {
-      toast.error("الرجاء ملء جميع الحقول المطلوبة");
+      toast.error("الرجاء ملء جميع الحقو�� المطلوبة");
       return;
     }
 
