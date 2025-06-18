@@ -258,13 +258,13 @@ const RealAIChat: React.FC<RealAIChatProps> = ({ onActionClick }) => {
 
         setMessages((prev) => [...prev, analysisMessage]);
       } catch (error: unknown) {
-        const errorMessage =
+        const imageErrorMsg =
           error instanceof Error
             ? error.message
             : "خطأ غير متوقع في تحليل الصورة";
         toast({
           title: "خطأ في تحليل الصورة",
-          description: errorMessage,
+          description: imageErrorMsg,
           variant: "destructive",
         });
       } finally {
