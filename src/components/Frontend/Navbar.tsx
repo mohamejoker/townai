@@ -87,6 +87,26 @@ const Navbar = () => {
       ],
     },
     {
+      title: "منشئ المواقع",
+      href: "/site-builder",
+      icon: Crown,
+      badge: "متطور",
+      dropdown: [
+        { title: "إنشاء موقع جديد", href: "/site-builder", icon: "🌟" },
+        {
+          title: "القوالب الجاهزة",
+          href: "/site-builder?tab=templates",
+          icon: "📋",
+        },
+        { title: "مواقعي", href: "/site-builder?tab=my-sites", icon: "����" },
+        {
+          title: "المساعد الذكي",
+          href: "/site-builder?tab=ai-assistant",
+          icon: "🤖",
+        },
+      ],
+    },
+    {
       title: "الأسعار",
       href: "/pricing",
       icon: Star,
