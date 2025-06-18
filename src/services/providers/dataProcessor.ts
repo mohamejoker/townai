@@ -144,21 +144,24 @@ export class DataProcessor {
   static processService(rawService: any, provider: Provider): ProviderService {
     const originalRate = parseFloat(rawService.rate) || 0;
     const profitMargin = provider.profitMargin;
-    const finalRate = this.calculateFinalPrice(originalRate, profitMargin);
+    const finalRate = DataProcessor.calculateFinalPrice(
+      originalRate,
+      profitMargin,
+    );
 
     const service: ProviderService = {
       id: `${provider.id}-${rawService.service || rawService.id}`,
       providerId: provider.id,
       providerServiceId: rawService.service || rawService.id,
       name: rawService.name || `خدمة ${rawService.id}`,
-      arabicName: this.translateServiceName(rawService.name || ""),
+      arabicName: DataProcessor.translateServiceName(rawService.name || ""),
       description:
-        rawService.description || this.generateDescription(rawService),
-      arabicDescription: this.translateDescription(
+        rawService.description || DataProcessor.generateDescription(rawService),
+      arabicDescription: DataProcessor.translateDescription(
         rawService.description || "",
       ),
-      type: this.mapServiceType(rawService.type),
-      platform: this.mapPlatform(rawService.category),
+      type: DataProcessor.mapServiceType(rawService.type),
+      platform: DataProcessor.mapPlatform(rawService.category),
       category: rawService.category || "عام",
       originalRate,
       profitMargin,
@@ -166,13 +169,13 @@ export class DataProcessor {
       minOrder: parseInt(rawService.min) || 100,
       maxOrder: parseInt(rawService.max) || 10000,
       isActive: true,
-      quality: this.determineQuality(rawService),
+      quality: DataProcessor.determineQuality(rawService),
       refillEnabled: rawService.refill || false,
       cancelEnabled: rawService.cancel || false,
       averageTime: rawService.average_time || "24 ساعة",
       lastUpdated: new Date(),
       syncStatus: "synced",
-      customFields: this.extractCustomFields(rawService),
+      customFields: DataProcessor.extractCustomFields(rawService),
     };
 
     return service;
