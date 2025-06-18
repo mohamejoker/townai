@@ -28,4 +28,32 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          ui: [
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-alert-dialog",
+            "@radix-ui/react-avatar",
+          ],
+          lucide: ["lucide-react"],
+          charts: ["recharts"],
+          forms: ["react-hook-form", "@hookform/resolvers"],
+          utils: ["clsx", "tailwind-merge", "class-variance-authority"],
+          sitebuilder: [
+            "./src/components/SiteBuilder/AdvancedSiteBuilder.tsx",
+            "./src/components/SiteBuilder/DragDropBuilder.tsx",
+            "./src/components/SiteBuilder/ContentEditor.tsx",
+            "./src/components/SiteBuilder/StyleEditor.tsx",
+            "./src/components/SiteBuilder/PreviewPane.tsx",
+            "./src/components/SiteBuilder/TemplateManager.tsx",
+            "./src/components/SiteBuilder/AIAssistant.tsx",
+          ],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 1000,
+  },
 }));
