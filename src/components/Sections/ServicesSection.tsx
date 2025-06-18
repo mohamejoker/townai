@@ -1,15 +1,14 @@
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
-import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { 
-  Users, 
-  Heart, 
-  MessageSquare, 
-  Eye, 
-  TrendingUp, 
+import {
+  Users,
+  Heart,
+  MessageSquare,
+  Eye,
+  TrendingUp,
   Star,
   Zap,
   Gift,
@@ -17,84 +16,115 @@ import {
   Sparkles,
   Shield,
   Clock,
-  CheckCircle
-} from 'lucide-react';
+  CheckCircle,
+} from "lucide-react";
 
 const ServicesSection = () => {
-  const { t } = useLanguage();
-
   const services = [
     {
-      icon: '👥',
-      title: 'زيادة المتابعين الحقيقيين',
-      description: 'متابعين حقيقيين 100% مع ضمان عدم النقصان أبداً',
+      icon: "👥",
+      title: "زيادة المتابعين الحقيقيين",
+      description: "متابعين حقيقيين 100% مع ضمان عدم النقصان أبداً",
       popular: true,
-      features: ['متابعين حقيقيين نشطين', 'ضمان عدم النقصان', 'تسليم آمن ومدروس', 'دعم فني 24/7'],
-      gradient: 'from-blue-500 to-purple-600',
-      badge: 'الأكثر طلباً',
-      results: 'نتائج خلال 24 ساعة'
+      features: [
+        "متابعين حقيقيين نشطين",
+        "ضمان عدم النقصان",
+        "تسليم آمن ومدروس",
+        "دعم فني 24/7",
+      ],
+      gradient: "from-blue-500 to-purple-600",
+      badge: "الأكثر طلباً",
+      results: "نتائج خلال 24 ساعة",
     },
     {
-      icon: '❤️',
-      title: 'تفاعل حقيقي مضمون',
-      description: 'إعجابات وتفاعل فوري من حسابات نشطة وحقيقية',
+      icon: "❤️",
+      title: "تفاعل حقيقي مضمون",
+      description: "إعجابات وتفاعل فوري من حسابات نشطة وحقيقية",
       popular: false,
-      features: ['تسليم فوري آمن', 'حسابات نشطة حقيقية', 'توزيع طبيعي', 'ضمان الجودة العالية'],
-      gradient: 'from-pink-500 to-red-500',
-      badge: 'عرض خاص',
-      results: 'تسليم فوري'
+      features: [
+        "تسليم فوري آمن",
+        "حسابات نشطة حقيقية",
+        "توزيع طبيعي",
+        "ضمان الجودة العالية",
+      ],
+      gradient: "from-pink-500 to-red-500",
+      badge: "عرض خاص",
+      results: "تسليم فوري",
     },
     {
-      icon: '💬',
-      title: 'تعليقات ذكية مخصصة',
-      description: 'تعليقات ذكية ومناسبة لمحتواك من متابعين حقيقيين',
+      icon: "💬",
+      title: "تعليقات ذكية مخصصة",
+      description: "تعليقات ذكية ومناسبة لمحتواك من متابعين حقيقيين",
       popular: false,
-      features: ['تعليقات ذكية مناسبة', 'باللغة العربية', 'متنوعة وطبيعية', 'كتابة احترافية'],
-      gradient: 'from-green-500 to-emerald-600',
-      badge: 'ذكاء اصطناعي',
-      results: 'جودة عالية'
+      features: [
+        "تعليقات ذكية مناسبة",
+        "باللغة العربية",
+        "متنوعة وطبيعية",
+        "كتابة احترافية",
+      ],
+      gradient: "from-green-500 to-emerald-600",
+      badge: "ذكاء اصطناعي",
+      results: "جودة عالية",
     },
     {
-      icon: '👁️',
-      title: 'زيادة المشاهدات الحقيقية',
-      description: 'مشاهدات عالية الجودة لزيادة انتشار محتواك',
+      icon: "👁️",
+      title: "زيادة المشاهدات الحقيقية",
+      description: "مشاهدات عالية الجودة لزيادة انتشار محتواك",
       popular: false,
-      features: ['مشاهدات حقيقية 100%', 'زيادة الوصول', 'تحسين خوارزمية المنصة', 'نتائج سريعة'],
-      gradient: 'from-yellow-500 to-orange-500',
-      badge: 'سريع',
-      results: 'انتشار أوسع'
+      features: [
+        "مشاهدات حقيقية 100%",
+        "زيادة الوصول",
+        "تحسين خوارزمية المنصة",
+        "نتائج سريعة",
+      ],
+      gradient: "from-yellow-500 to-orange-500",
+      badge: "سريع",
+      results: "انتشار أوسع",
     },
     {
-      icon: '📈',
-      title: 'نمو شامل احترافي',
-      description: 'استراتيجية متكاملة لنمو حسابك بشكل طبيعي ومتوازن',
+      icon: "📈",
+      title: "نمو شامل احترافي",
+      description: "استراتيجية متكاملة لنمو حسابك بشكل طبيعي ومتوازن",
       popular: true,
-      features: ['نمو متوازن طبيعي', 'استراتيجية مخصصة', 'تقارير دورية', 'ضمان النتائج 100%'],
-      gradient: 'from-purple-500 to-indigo-600',
-      badge: 'الأفضل قيمة',
-      results: 'نمو مضاعف'
+      features: [
+        "نمو متوازن طبيعي",
+        "استراتيجية مخصصة",
+        "تقارير دورية",
+        "ضمان النتائج 100%",
+      ],
+      gradient: "from-purple-500 to-indigo-600",
+      badge: "الأفضل قيمة",
+      results: "نمو مضاعف",
     },
     {
-      icon: '⭐',
-      title: 'خدمة VIP الحصرية',
-      description: 'خدمة مميزة مع مدير حساب شخصي ونمو مضاعف',
+      icon: "⭐",
+      title: "خدمة VIP الحصرية",
+      description: "خدمة مميزة مع مدير حساب شخصي ونمو مضاعف",
       popular: false,
-      features: ['مدير حساب مخصص', 'نمو مضاعف سريع', 'أولوية في التنفيذ', 'استشارات مجانية'],
-      gradient: 'from-yellow-400 to-yellow-600',
-      badge: 'VIP حصري',
-      results: 'خدمة شخصية'
-    }
+      features: [
+        "مدير حساب مخصص",
+        "نمو مضاعف سريع",
+        "أولوية في التنفيذ",
+        "استشارات مجانية",
+      ],
+      gradient: "from-yellow-400 to-yellow-600",
+      badge: "VIP حصري",
+      results: "خدمة شخصية",
+    },
   ];
 
   const guarantees = [
-    { icon: Shield, text: 'آمان تام 100%' },
-    { icon: CheckCircle, text: 'نتائج مضمونة' },
-    { icon: Clock, text: 'تسليم سريع' },
-    { icon: Crown, text: 'جودة عالية' }
+    { icon: Shield, text: "آمان تام 100%" },
+    { icon: CheckCircle, text: "نتائج مضمونة" },
+    { icon: Clock, text: "تسليم سريع" },
+    { icon: Crown, text: "جودة عالية" },
   ];
 
   return (
-    <section id="services" className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+    <section
+      id="services"
+      className="py-20 bg-gradient-to-br from-gray-50 to-blue-50"
+    >
       <div className="container mx-auto px-4">
         {/* Header Enhanced */}
         <div className="text-center mb-20">
@@ -103,7 +133,7 @@ const ServicesSection = () => {
             🚀 خدمات حصرية لنمو حسابك بسرعة البرق
             <Star className="h-5 w-5 ml-3 animate-pulse" />
           </div>
-          
+
           <h2 className="text-5xl md:text-6xl font-black text-gray-900 mb-6 leading-tight">
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               خدماتنا المميزة
@@ -113,11 +143,13 @@ const ServicesSection = () => {
               لنجاح حقيقي مضمون
             </span>
           </h2>
-          
+
           <p className="text-xl md:text-2xl text-gray-700 max-w-4xl mx-auto mb-10 leading-relaxed font-medium">
             🎯 احصل على أفضل خدمات التسويق الرقمي مع ضمان النتائج المذهلة
             <br />
-            <span className="text-lg text-blue-600 font-semibold">✨ متابعين حقيقيين • تفاعل طبيعي • نمو مضمون ✨</span>
+            <span className="text-lg text-blue-600 font-semibold">
+              ✨ متابعين حقيقيين • تفاعل طبيعي • نمو مضمون ✨
+            </span>
           </p>
 
           {/* Guarantees */}
@@ -125,7 +157,10 @@ const ServicesSection = () => {
             {guarantees.map((guarantee, index) => {
               const IconComponent = guarantee.icon;
               return (
-                <div key={index} className="flex items-center bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-6 py-3 rounded-full border border-green-200 shadow-lg">
+                <div
+                  key={index}
+                  className="flex items-center bg-gradient-to-r from-green-100 to-emerald-100 text-green-800 px-6 py-3 rounded-full border border-green-200 shadow-lg"
+                >
                   <IconComponent className="h-5 w-5 mr-2" />
                   <span className="font-bold">{guarantee.text}</span>
                 </div>
@@ -157,12 +192,12 @@ const ServicesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
           {services.map((service, index) => {
             return (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className={`relative hover:shadow-3xl transition-all duration-700 transform hover:scale-105 overflow-hidden border-4 ${
-                  service.popular 
-                    ? 'ring-4 ring-purple-300/50 scale-110 z-20 border-purple-400 shadow-2xl shadow-purple-500/25' 
-                    : 'border-gray-200 shadow-xl'
+                  service.popular
+                    ? "ring-4 ring-purple-300/50 scale-110 z-20 border-purple-400 shadow-2xl shadow-purple-500/25"
+                    : "border-gray-200 shadow-xl"
                 }`}
               >
                 {/* Popular Badge Enhanced */}
@@ -177,12 +212,15 @@ const ServicesSection = () => {
 
                 {/* Badge */}
                 <div className="absolute top-4 right-4 z-20">
-                  <Badge 
+                  <Badge
                     className={`${
-                      service.badge === 'الأكثر طلباً' ? 'bg-purple-500' : 
-                      service.badge === 'VIP حصري' ? 'bg-yellow-500' :
-                      service.badge === 'ذكاء اصطناعي' ? 'bg-green-500' :
-                      'bg-blue-500'
+                      service.badge === "الأكثر طلباً"
+                        ? "bg-purple-500"
+                        : service.badge === "VIP حصري"
+                          ? "bg-yellow-500"
+                          : service.badge === "ذكاء اصطناعي"
+                            ? "bg-green-500"
+                            : "bg-blue-500"
                     } text-white font-bold px-3 py-1 shadow-lg`}
                   >
                     {service.badge}
@@ -197,18 +235,22 @@ const ServicesSection = () => {
                 </div>
 
                 {/* Gradient Background */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5`}></div>
+                <div
+                  className={`absolute inset-0 bg-gradient-to-br ${service.gradient} opacity-5`}
+                ></div>
                 <div className="absolute inset-0 bg-gradient-to-t from-white/80 to-transparent"></div>
 
                 <CardHeader className="text-center relative z-10 pb-6 pt-12">
-                  <div className={`w-20 h-20 bg-gradient-to-r ${service.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-4 border-white`}>
+                  <div
+                    className={`w-20 h-20 bg-gradient-to-r ${service.gradient} rounded-3xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-4 border-white`}
+                  >
                     <span className="text-3xl">{service.icon}</span>
                   </div>
-                  
+
                   <CardTitle className="text-2xl font-black text-gray-900 mb-4">
                     {service.title}
                   </CardTitle>
-                  
+
                   <p className="text-gray-700 text-lg mb-6 font-medium leading-relaxed">
                     {service.description}
                   </p>
@@ -219,19 +261,23 @@ const ServicesSection = () => {
                   <ul className="space-y-4 mb-8">
                     {service.features.map((feature, featureIndex) => (
                       <li key={featureIndex} className="flex items-start">
-                        <div className={`w-6 h-6 bg-gradient-to-r ${service.gradient} rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0 shadow-lg`}>
+                        <div
+                          className={`w-6 h-6 bg-gradient-to-r ${service.gradient} rounded-full flex items-center justify-center mr-4 mt-1 flex-shrink-0 shadow-lg`}
+                        >
                           <CheckCircle className="h-4 w-4 text-white font-bold" />
                         </div>
-                        <span className="text-gray-800 text-lg font-medium leading-relaxed">{feature}</span>
+                        <span className="text-gray-800 text-lg font-medium leading-relaxed">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
 
                   {/* CTA Button Enhanced */}
-                  <Button 
+                  <Button
                     className={`w-full py-4 text-xl font-black bg-gradient-to-r ${service.gradient} hover:shadow-2xl transition-all duration-500 transform hover:scale-105 mb-6 border-4 border-white shadow-xl`}
                   >
-                    {service.popular ? '🔥 احجز الآن!' : '🚀 ابدأ النجاح'}
+                    {service.popular ? "🔥 احجز الآن!" : "🚀 ابدأ النجاح"}
                   </Button>
 
                   {/* Guarantee Enhanced */}
@@ -255,20 +301,23 @@ const ServicesSection = () => {
               🚀 جاهز لتحقيق النجاح الحقيقي؟
             </h3>
             <p className="text-xl md:text-2xl mb-8 opacity-90 leading-relaxed">
-              انضم لآلاف العملاء الذين حققوا نمواً استثنائياً مع خدماتنا المتميزة
+              انضم لآلاف العملاء الذين حققوا نمواً استثنائياً مع خدماتنا
+              المتميزة
               <br />
-              <span className="text-lg font-semibold text-yellow-200">🎯 نتائج مضمونة خلال 24 ساعة أو استرداد كامل للمال</span>
+              <span className="text-lg font-semibold text-yellow-200">
+                🎯 نتائج مضمونة خلال 24 ساعة أو استرداد كامل للمال
+              </span>
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
+              <Button
                 size="lg"
                 className="bg-white text-blue-600 hover:bg-gray-100 font-black px-10 py-4 text-xl rounded-2xl shadow-2xl transform hover:scale-105 transition-all duration-300"
               >
                 💬 ابدأ محادثة مجانية الآن
               </Button>
-              <Button 
+              <Button
                 variant="outline"
-                size="lg" 
+                size="lg"
                 className="border-2 border-white text-white hover:bg-white/10 font-bold px-10 py-4 text-xl rounded-2xl backdrop-blur-sm"
               >
                 🤖 تحدث مع الوكيل الذكي
