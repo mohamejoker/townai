@@ -94,7 +94,50 @@ function App() {
                     />
                     <Route path="/ai-chat" element={<AIChatPage />} />
                     <Route path="/site-builder" element={<SiteBuilderPage />} />
+                    <Route path="/jobs" element={<JobsPage />} />
                     <Route path="/test" element={<SystemTestPage />} />
+
+                    {/* صفحة المستخدم المحمية */}
+                    <Route
+                      path="/user-dashboard"
+                      element={
+                        <ProtectedRoute>
+                          <div className="min-h-screen bg-gray-50 p-6">
+                            <div className="max-w-6xl mx-auto">
+                              <h1 className="text-3xl font-bold text-gray-900 mb-8">
+                                لوحة تحكم المستخدم
+                              </h1>
+                              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <div className="bg-white p-6 rounded-lg shadow">
+                                  <h2 className="text-xl font-semibold mb-4">
+                                    طلباتي
+                                  </h2>
+                                  <p className="text-gray-600">
+                                    مشاهدة وإدارة طلباتك
+                                  </p>
+                                </div>
+                                <div className="bg-white p-6 rounded-lg shadow">
+                                  <h2 className="text-xl font-semibold mb-4">
+                                    محادثات الذكاء الاصطناعي
+                                  </h2>
+                                  <p className="text-gray-600">
+                                    تاريخ محادثاتك مع AI
+                                  </p>
+                                </div>
+                                <div className="bg-white p-6 rounded-lg shadow">
+                                  <h2 className="text-xl font-semibold mb-4">
+                                    الإعدادات
+                                  </h2>
+                                  <p className="text-gray-600">
+                                    إدارة حسابك وتفضيلاتك
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </ProtectedRoute>
+                      }
+                    />
 
                     {/* المسارات الإدارية */}
                     <Route
