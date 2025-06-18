@@ -22,6 +22,7 @@ import {
   MonitorSpeaker,
   Gauge,
   Briefcase,
+  TrendingUp,
 } from "lucide-react";
 
 interface AdminSidebarProps {
