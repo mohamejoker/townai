@@ -163,7 +163,7 @@ const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
           <p className="text-gray-600">اختر طريقة الدفع المناسبة لك</p>
         </div>
         <Badge variant="outline" className="text-lg px-4 py-2">
-          {amount.toFixed(2)} ج.م
+          {safeAmount.toFixed(2)} ج.م
         </Badge>
       </div>
 
@@ -216,9 +216,10 @@ const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
                         <div className="flex justify-between">
                           <span className="text-gray-600">التكلفة:</span>
                           <span className="font-semibold">
-                            {((amount * method.fees_percentage) / 100).toFixed(
-                              2,
-                            )}{" "}
+                            {(
+                              (safeAmount * method.fees_percentage) /
+                              100
+                            ).toFixed(2)}{" "}
                             ج.م
                           </span>
                         </div>
