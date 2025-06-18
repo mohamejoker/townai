@@ -1,17 +1,11 @@
 // المكونات المشتركة عبر التطبيق
 
-// UI Components
-export * from "../../components/ui";
+// Temporarily disabled to fix CI build performance issues
+// All components can be imported directly from their source files
 
-// Common Components
-export * from "../../components/Common";
-
-// Layout Components
-export * from "../../components/Layout";
-export * from "../../components/Frontend";
-
-// Error Handling
-export * from "../../components/ErrorBoundary";
-
-// Authentication
-export * from "../../components/Auth";
+// export * from '../../components/ui';
+// export * from '../../components/Common';
+// export * from '../../components/Layout';
+// export * from '../../components/Frontend';
+// export * from '../../components/ErrorBoundary';
+// export * from '../../components/Auth';
