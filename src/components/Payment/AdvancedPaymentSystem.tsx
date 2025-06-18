@@ -29,12 +29,17 @@ interface AdvancedPaymentSystemProps {
 }
 
 const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
-  amount = 0,
-  onPaymentSuccess,
-  onPaymentError,
+  amount = 100,
+  onPaymentSuccess = (transactionId: string, method: string) => {
+    console.log("Payment success:", transactionId, method);
+  },
+  onPaymentError = (error: string) => {
+    console.error("Payment error:", error);
+  },
 }) => {
   // التأكد من أن amount هو رقم صحيح
-  const safeAmount = typeof amount === "number" && !isNaN(amount) ? amount : 0;
+  const safeAmount =
+    typeof amount === "number" && !isNaN(amount) ? amount : 100;
   const [paymentMethods, setPaymentMethods] = useState<PaymentMethod[]>([]);
   const [selectedMethod, setSelectedMethod] = useState<string>("");
   const [loading, setLoading] = useState(true);
