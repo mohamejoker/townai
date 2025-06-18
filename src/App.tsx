@@ -42,6 +42,9 @@ import { PageLoading } from "@/components/Common/LoadingStates";
 import AdminLayout from "@/components/Admin/AdminLayout";
 import FloatingAIButton from "@/components/AI/FloatingAIButton";
 import DevAuthControls from "@/components/Common/DevAuthControls";
+import NotificationSystem from "@/components/Common/NotificationSystem";
+import KeyboardShortcuts from "@/components/Common/KeyboardShortcuts";
+import LiveStats from "@/components/Common/LiveStats";
 import { Suspense } from "react";
 
 const queryClient = new QueryClient({
