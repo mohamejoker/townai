@@ -16,27 +16,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import {
-  RefreshCw,
-  Plus,
-  Edit,
-  Trash2,
-  Download,
-  Upload,
-  Settings,
-  Eye,
-  DollarSign,
-  TrendingUp,
-  Users,
-  Globe,
-  Activity,
-  CheckCircle,
-  XCircle,
-  AlertTriangle,
-  Clock,
-  Search,
-  Filter,
-} from "lucide-react";
+import * as Icons from "lucide-react";
 import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
 import type {
   Provider,
@@ -633,7 +613,7 @@ const AdvancedProvidersManager = () => {
                   لا توجد خدمات
                 </h3>
                 <p className="text-gray-600">
-                  لم يتم العثور على خدمات تطابق الفلاتر المحددة
+                  لم يتم العث��ر على خدمات تطابق الفلاتر المحددة
                 </p>
               </CardContent>
             </Card>
