@@ -1,7 +1,7 @@
 // نظام متقدم لسحب وإدارة الخدمات من الموردين
 
 import type { Provider, ProviderService, SyncResult } from "./types";
-import { DataProcessor } from "./dataProcessor";
+import { processService, calculateFinalPrice } from "./dataProcessor";
 
 class AdvancedProviderSync {
   private providers: Provider[] = [];
