@@ -23,6 +23,7 @@ import {
   Wifi,
   Code,
 } from "lucide-react";
+import ConnectionDiagnostics from "@/components/Common/ConnectionDiagnostics";
 
 interface TestResult {
   name: string;
