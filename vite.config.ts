@@ -53,39 +53,6 @@ export default defineConfig(({ mode }) => ({
     drop: mode === "production" ? ["console", "debugger"] : [],
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          // Core vendor libs
-          if (id.includes("react") || id.includes("react-dom")) {
-            return "vendor-react";
-          }
-          // UI component libraries
-          if (id.includes("@radix-ui") || id.includes("lucide-react")) {
-            return "vendor-ui";
-          }
-          // Charts and visualization
-          if (id.includes("recharts") || id.includes("chart")) {
-            return "vendor-charts";
-          }
-          // Admin related components
-          if (
-            id.includes("src/components/Admin") ||
-            id.includes("src/pages/admin")
-          ) {
-            return "admin";
-          }
-          // Services and utilities
-          if (id.includes("src/services") || id.includes("src/utils")) {
-            return "services";
-          }
-          // Other vendor dependencies
-          if (id.includes("node_modules")) {
-            return "vendor-misc";
-          }
-        },
-      },
-    },
     chunkSizeWarningLimit: 800,
     minify: "esbuild",
     target: "es2020",
