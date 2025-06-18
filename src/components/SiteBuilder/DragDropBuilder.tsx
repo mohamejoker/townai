@@ -22,7 +22,7 @@ import {
   MapPin,
   MessageSquare,
 } from "lucide-react";
-import { useSiteBuilder } from "./hooks/useSiteBuilder";
+import { useSiteBuilder } from "./context/SiteBuilderContext";
 import { SiteElement } from "./context/SiteBuilderContext";
 
 // تعريف أنواع العناصر المتاحة
