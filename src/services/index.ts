@@ -1,7 +1,7 @@
 // تصدير مركزي لجميع الخدمات
 
 // Core Services - Specific exports to avoid Node 22.x context issues
-export { default as advancedProviderSync } from "./providers/advancedProviderSync";
+export { advancedProviderSync } from "./providers/advancedProviderSync";
 export * from "./providers/types";
 export { calculateFinalPrice, processService } from "./providers/dataProcessor";
 
