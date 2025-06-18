@@ -14,6 +14,6 @@ export { default as LoadingSpinner } from "./LoadingSpinner";
 export { PageLoading } from "./LoadingStates";
 export { default as Logo } from "./Logo";
 export { default as NotificationSystem } from "./NotificationSystem";
-export { default as StateManager } from "./StateManager";
+export { StateProvider, useAppState } from "./StateManager";
 export { default as TrustBadges } from "./TrustBadges";
 export { default as VisitorCounter } from "./VisitorCounter";
