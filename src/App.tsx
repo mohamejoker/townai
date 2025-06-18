@@ -9,6 +9,8 @@ import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import LandingPage from "@/pages/LandingPage";
 import EnhancedLandingPage from "@/pages/EnhancedLandingPage";
+import EnhancedServicesPage from "@/pages/EnhancedServicesPage";
+import AIChatPage from "@/pages/AIChatPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import UsersPage from "@/pages/admin/UsersPage";
 import ServicesPage from "@/pages/admin/ServicesPage";
@@ -67,7 +69,9 @@ function App() {
                   <Route path="/register" element={<RegisterPage />} />
 
                   {/* الخدمات العامة */}
-                  <Route path="/services" element={<ServicesOverview />} />
+                  <Route path="/services" element={<EnhancedServicesPage />} />
+                  <Route path="/services-old" element={<ServicesOverview />} />
+                  <Route path="/ai-chat" element={<AIChatPage />} />
 
                   {/* المسارات الإدارية */}
                   <Route
