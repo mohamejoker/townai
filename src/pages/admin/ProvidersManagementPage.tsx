@@ -59,7 +59,7 @@ const ProvidersManagementPage = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
-            إدارة الموردين ��الخدمات
+            إدارة الموردين والخدمات
           </h1>
           <p className="text-gray-600">
             نظام شامل لسحب وإدارة الخدمات من الموردين مع التحكم في الأسعار ونسب
@@ -203,7 +203,7 @@ const ProvidersManagementPage = () => {
         onValueChange={setActiveTab}
         className="space-y-6"
       >
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="overview" className="flex items-center gap-2">
             <Settings className="h-4 w-4" />
             إدارة عامة
@@ -215,6 +215,10 @@ const ProvidersManagementPage = () => {
           <TabsTrigger value="pricing" className="flex items-center gap-2">
             <DollarSign className="h-4 w-4" />
             إدارة الأسعار
+          </TabsTrigger>
+          <TabsTrigger value="testing" className="flex items-center gap-2">
+            <Activity className="h-4 w-4" />
+            اختبار النظام
           </TabsTrigger>
           <TabsTrigger value="reports" className="flex items-center gap-2">
             <TrendingUp className="h-4 w-4" />
@@ -279,7 +283,7 @@ const ProvidersManagementPage = () => {
                 <div className="space-y-4">
                   <div className="flex justify-between">
                     <span>موقعنا في السوق:</span>
-                    <span className="font-bold text-green-600">المرتبة 2</span>
+                    <span className="font-bold text-green-600">المرتب�� 2</span>
                   </div>
                   <div className="flex justify-between">
                     <span>فرق الأسعار:</span>
