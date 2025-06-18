@@ -35,7 +35,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isCollapsed }) => {
     { icon: LayoutDashboard, label: "لوحة التحكم", path: "/admin/dashboard" },
     { icon: Users, label: "إدارة المستخدمين", path: "/admin/users" },
     { icon: ShoppingBag, label: "إدارة الخدمات", path: "/admin/services" },
-    { icon: Users, label: "إدارة الوظائف", path: "/admin/jobs" },
+    { icon: Briefcase, label: "إدارة الوظائف", path: "/admin/jobs" },
     { icon: FileText, label: "إدارة الطلبات", path: "/admin/orders" },
     { icon: Globe, label: "إدارة الموردين", path: "/admin/providers" },
     { icon: CreditCard, label: "طرق الدفع", path: "/admin/payment-methods" },
