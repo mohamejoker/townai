@@ -6,7 +6,7 @@ import type {
   ServiceType,
   Platform,
   QualityLevel,
-} from "./types";
+} from "./types.js";
 
 export class DataProcessor {
   // حساب السعر النهائي مع نسبة الربح
