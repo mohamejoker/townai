@@ -37,12 +37,12 @@ import {
   Search,
   Filter,
 } from "lucide-react";
-import {
-  advancedProviderSync,
-  type Provider,
-  type ProviderService,
-  type SyncResult,
-} from "@/services/providers/advancedProviderSync";
+import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
+import type {
+  Provider,
+  ProviderService,
+  SyncResult,
+} from "@/services/providers/types";
 
 const AdvancedProvidersManager = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
