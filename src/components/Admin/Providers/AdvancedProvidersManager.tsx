@@ -16,7 +16,25 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Progress } from "@/components/ui/progress";
 import { Switch } from "@/components/ui/switch";
-import * as Icons from "lucide-react";
+import {
+  RefreshCw,
+  Plus,
+  Edit,
+  Trash2,
+  Download,
+  Settings,
+  Eye,
+  DollarSign,
+  TrendingUp,
+  Users,
+  Globe,
+  Activity,
+  CheckCircle,
+  XCircle,
+  AlertTriangle,
+  Clock,
+  Search,
+} from "lucide-react";
 import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
 import type {
   Provider,
@@ -722,7 +740,7 @@ const AdvancedProvidersManager = () => {
                   />
                 </div>
                 <div>
-                  <Label>نسبة الربح (%):</Label>
+                  <Label>نسبة ا��ربح (%):</Label>
                   <Input
                     type="number"
                     value={editingService.profitMargin}
