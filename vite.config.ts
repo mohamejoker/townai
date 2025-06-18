@@ -35,15 +35,8 @@ export default defineConfig(({ mode }) => ({
   },
   build: {
     target: "es2020",
-    minify: "terser",
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true,
-      },
-    },
+    sourcemap: false,
     rollupOptions: {
-      maxParallelFileOps: 2,
       output: {
         manualChunks: (id) => {
           if (id.includes("node_modules")) {
