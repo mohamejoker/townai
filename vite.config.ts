@@ -34,8 +34,7 @@ export default defineConfig(({ mode }) => ({
     exclude: ["@vite/client", "@vite/env"],
   },
   esbuild: {
-    target: "es2020",
-    logOverride: { "this-is-undefined-in-esm": "silent" },
+    target: "es2019",
   },
   build: {
     target: "es2019",
