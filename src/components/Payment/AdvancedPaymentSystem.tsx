@@ -247,7 +247,7 @@ const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
               <CardContent>
                 {selectedMethod === "vodafone-cash" && (
                   <VodafoneCashPayment
-                    amount={amount}
+                    amount={safeAmount}
                     onSuccess={(transactionId) =>
                       onPaymentSuccess(transactionId, "فودافون كاش")
                     }
@@ -257,7 +257,7 @@ const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
 
                 {selectedMethod === "crypto" && (
                   <CryptoPayment
-                    amount={amount}
+                    amount={safeAmount}
                     onSuccess={(transactionId) =>
                       onPaymentSuccess(transactionId, "العملات الرقمية")
                     }
