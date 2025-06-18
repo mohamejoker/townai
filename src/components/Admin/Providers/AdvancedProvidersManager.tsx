@@ -217,13 +217,13 @@ const AdvancedProvidersManager = () => {
             disabled={isLoading}
             className="flex items-center gap-2"
           >
-            <Icons.RefreshCw
+            <RefreshCw
               className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
             />
             مزامنة جميع الموردين
           </Button>
           <Button variant="outline">
-            <Icons.Plus className="h-4 w-4 mr-2" />
+            <Plus className="h-4 w-4 mr-2" />
             إضافة مورد جديد
           </Button>
         </div>
@@ -740,7 +740,7 @@ const AdvancedProvidersManager = () => {
                   />
                 </div>
                 <div>
-                  <Label>نسبة ا��ربح (%):</Label>
+                  <Label>نسبة الربح (%):</Label>
                   <Input
                     type="number"
                     value={editingService.profitMargin}
