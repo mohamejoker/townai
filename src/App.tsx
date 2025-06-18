@@ -23,12 +23,14 @@ import {
   OrdersPage,
   SettingsPage,
 } from "@/pages/admin";
-import PaymentsDashboard from "@/components/Admin/PaymentsDashboard";
-import SystemDiagnosticsPage from "@/pages/admin/SystemDiagnosticsPage";
-import SystemHealthPage from "@/pages/admin/SystemHealthPage";
-import PerformancePage from "@/pages/admin/PerformancePage";
-import MonitoringPage from "@/pages/admin/MonitoringPage";
-import MaintenancePage from "@/pages/admin/MaintenancePage";
+import { PaymentsDashboard } from "@/components/Admin";
+import {
+  SystemDiagnosticsPage,
+  SystemHealthPage,
+  PerformancePage,
+  MonitoringPage,
+  MaintenancePage,
+} from "@/pages/admin";
 import ServicesOverview from "@/components/Services/ServicesOverview";
 import OrdersManagement from "@/components/Orders/OrdersManagement";
 import NotificationsHub from "@/components/Notifications/NotificationsHub";
