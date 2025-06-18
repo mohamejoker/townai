@@ -1,12 +1,22 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import React, { useState, useEffect, useCallback } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
-  Code, Play, Save, Download, Upload, RefreshCw,
-  Eye, EyeOff, Maximize2, Minimize2, Copy, Check
-} from 'lucide-react';
+  Code,
+  Play,
+  Save,
+  Download,
+  Upload,
+  RefreshCw,
+  Eye,
+  EyeOff,
+  Maximize2,
+  Minimize2,
+  Copy,
+  Check,
+} from "lucide-react";
 
 interface CSSRule {
   selector: string;
@@ -53,14 +63,14 @@ const LiveCSSEditor = () => {
   const applyCSS = useCallback(() => {
     try {
       // Remove existing custom styles
-      const existingStyle = document.getElementById('live-css-editor');
+      const existingStyle = document.getElementById("live-css-editor");
       if (existingStyle) {
         existingStyle.remove();
       }
 
       // Create new style element
-      const styleElement = document.createElement('style');
-      styleElement.id = 'live-css-editor';
+      const styleElement = document.createElement("style");
+      styleElement.id = "live-css-editor";
       styleElement.textContent = cssCode;
       document.head.appendChild(styleElement);
 
@@ -68,21 +78,25 @@ const LiveCSSEditor = () => {
     } catch (error) {
       setErrors([`خطأ في CSS: ${error}`]);
     }
-  };
+  }, [cssCode]);
 
   const validateCSS = (css: string) => {
     const newErrors: string[] = [];
 
     // Basic CSS validation
-    const lines = css.split('\n');
+    const lines = css.split("\n");
     lines.forEach((line, index) => {
       const trimmedLine = line.trim();
-      if (trimmedLine && !trimmedLine.startsWith('/*') && !trimmedLine.endsWith('*/')) {
-        if (trimmedLine.includes('{') && !trimmedLine.includes('}')) {
+      if (
+        trimmedLine &&
+        !trimmedLine.startsWith("/*") &&
+        !trimmedLine.endsWith("*/")
+      ) {
+        if (trimmedLine.includes("{") && !trimmedLine.includes("}")) {
           // Check for unclosed braces in subsequent lines
           let found = false;
           for (let i = index + 1; i < lines.length; i++) {
-            if (lines[i].includes('}')) {
+            if (lines[i].includes("}")) {
               found = true;
               break;
             }
@@ -110,23 +124,23 @@ const LiveCSSEditor = () => {
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('فشل في النسخ:', err);
+      console.error("فشل في النسخ:", err);
     }
   };
 
   const downloadCSS = () => {
-    const blob = new Blob([cssCode], { type: 'text/css' });
+    const blob = new Blob([cssCode], { type: "text/css" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = 'custom-styles.css';
+    a.download = "custom-styles.css";
     a.click();
     URL.revokeObjectURL(url);
   };
 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-    if (file && file.type === 'text/css') {
+    if (file && file.type === "text/css") {
       const reader = new FileReader();
       reader.onload = (e) => {
         const content = e.target?.result as string;
@@ -138,7 +152,7 @@ const LiveCSSEditor = () => {
 
   const presetStyles = [
     {
-      name: 'ثيم داكن',
+      name: "ثيم داكن",
       css: `/* ثيم داكن */
 body {
   background-color: #1a1a1a;
@@ -152,10 +166,10 @@ body {
 
 .btn-primary {
   background: linear-gradient(45deg, #ff6b6b, #ee5a24);
-}`
+}`,
     },
     {
-      name: 'ثيم ملون',
+      name: "ثيم ملون",
       css: `/* ثيم ملون */
 .hero-section {
   background: linear-gradient(45deg, #ff9a9e, #fecfef, #fecfef);
@@ -164,13 +178,13 @@ body {
 .btn-primary {
   background: linear-gradient(45deg, #667eea, #764ba2);
   border-radius: 25px;
-}`
-    }
+}`,
+    },
   ];
 
   return (
-    <div className={`${isFullscreen ? 'fixed inset-0 z-50 bg-white' : ''}`}>
-      <Card className={`${isFullscreen ? 'h-full rounded-none' : ''}`}>
+    <div className={`${isFullscreen ? "fixed inset-0 z-50 bg-white" : ""}`}>
+      <Card className={`${isFullscreen ? "h-full rounded-none" : ""}`}>
         <CardHeader>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
@@ -185,12 +199,20 @@ body {
                 variant="outline"
                 onClick={() => setIsPreviewMode(!isPreviewMode)}
               >
-                {isPreviewMode ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                {isPreviewMode ? 'إيقاف المعاينة' : 'تفعيل المعاينة'}
+                {isPreviewMode ? (
+                  <EyeOff className="h-4 w-4" />
+                ) : (
+                  <Eye className="h-4 w-4" />
+                )}
+                {isPreviewMode ? "إيقاف المعاينة" : "تفعيل المعاينة"}
               </Button>
 
               <Button size="sm" variant="outline" onClick={copyToClipboard}>
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                {copied ? (
+                  <Check className="h-4 w-4" />
+                ) : (
+                  <Copy className="h-4 w-4" />
+                )}
               </Button>
 
               <Button size="sm" variant="outline" onClick={downloadCSS}>
@@ -216,7 +238,11 @@ body {
                 variant="outline"
                 onClick={() => setIsFullscreen(!isFullscreen)}
               >
-                {isFullscreen ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
+                {isFullscreen ? (
+                  <Minimize2 className="h-4 w-4" />
+                ) : (
+                  <Maximize2 className="h-4 w-4" />
+                )}
               </Button>
             </div>
           </div>
@@ -236,8 +262,12 @@ body {
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium">كود CSS</h3>
                     <div className="flex items-center space-x-2">
-                      <Badge variant={errors.length > 0 ? "destructive" : "secondary"}>
-                        {errors.length > 0 ? `${errors.length} خطأ` : 'صحيح'}
+                      <Badge
+                        variant={
+                          errors.length > 0 ? "destructive" : "secondary"
+                        }
+                      >
+                        {errors.length > 0 ? `${errors.length} خطأ` : "صحيح"}
                       </Badge>
                     </div>
                   </div>
@@ -247,9 +277,9 @@ body {
                     onChange={(e) => setCssCode(e.target.value)}
                     className="w-full h-96 p-4 border rounded-lg font-mono text-sm resize-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     style={{
-                      backgroundColor: '#1e1e1e',
-                      color: '#d4d4d4',
-                      lineHeight: '1.5'
+                      backgroundColor: "#1e1e1e",
+                      color: "#d4d4d4",
+                      lineHeight: "1.5",
                     }}
                     dir="ltr"
                     placeholder="/* أضف CSS مخصص هنا */"
@@ -257,7 +287,9 @@ body {
 
                   {errors.length > 0 && (
                     <div className="bg-red-50 border border-red-200 rounded-lg p-3">
-                      <h4 className="text-red-800 font-medium mb-2">أخطاء CSS:</h4>
+                      <h4 className="text-red-800 font-medium mb-2">
+                        أخطاء CSS:
+                      </h4>
                       <ul className="text-red-700 text-sm space-y-1">
                         {errors.map((error, index) => (
                           <li key={index}>• {error}</li>
@@ -288,7 +320,10 @@ body {
             <TabsContent value="presets" className="p-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {presetStyles.map((preset, index) => (
-                  <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+                  <Card
+                    key={index}
+                    className="cursor-pointer hover:shadow-md transition-shadow"
+                  >
                     <CardHeader>
                       <CardTitle className="text-lg">{preset.name}</CardTitle>
                     </CardHeader>
@@ -311,7 +346,7 @@ body {
             <TabsContent value="preview" className="p-4">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h3 className="font-medium">معاينة شاملة</h3>
+                  <h3 className="font-medium">معاينة ش��ملة</h3>
                   <Button onClick={applyCSS}>
                     <RefreshCw className="h-4 w-4 mr-2" />
                     تحديث المعاينة
@@ -321,7 +356,9 @@ body {
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-8">
                   <div className="hero-section rounded-lg mb-6">
                     <h1 className="hero-title">منصة التسويق الرقمي</h1>
-                    <p className="text-lg mb-4">نمو ذكي لوسائل التواصل الاجتماعي</p>
+                    <p className="text-lg mb-4">
+                      نمو ذكي لوسائل التواصل الاجتماعي
+                    </p>
                     <button className="btn-primary mr-3">ابدأ الآن</button>
                     <button className="btn-secondary">تعرف أكثر</button>
                   </div>
@@ -330,8 +367,12 @@ body {
                     {[1, 2, 3].map((i) => (
                       <div key={i} className="card p-4 rounded-lg">
                         <h3 className="text-lg font-bold mb-2">خدمة {i}</h3>
-                        <p className="text-gray-600 mb-4">وصف الخدمة التجريبية</p>
-                        <button className="btn-primary w-full">اطلب الآن</button>
+                        <p className="text-gray-600 mb-4">
+                          وصف الخدمة التجريبية
+                        </p>
+                        <button className="btn-primary w-full">
+                          اطلب الآن
+                        </button>
                       </div>
                     ))}
                   </div>
