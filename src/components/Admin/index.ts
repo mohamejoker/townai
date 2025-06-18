@@ -1,4 +1,4 @@
-// تصدير مركزي لجميع مكونات الإدارة
+// تصدير المكونات الإدارية الأساسية فقط
 
 // Layout Components
 export { default as AdminLayout } from "./AdminLayout";
@@ -40,24 +40,3 @@ export { default as AdvancedReportsManager } from "./AdvancedReportsManager";
 export { default as AnalyticsPanel } from "./AnalyticsPanel";
 export { default as PerformancePanel } from "./PerformancePanel";
 export { default as SecurityPanel } from "./SecurityPanel";
-
-// Automation & Tools
-export { default as AutomationManager } from "./AutomationManager";
-export { default as LiveCSSEditor } from "./LiveCSSEditor";
-export { default as VisualPageBuilder } from "./VisualPageBuilder";
-export { default as ComponentExporter } from "./ComponentExporter";
-
-// Specialized Modules
-export * from "./Dashboard";
-export * from "./NotificationSystem";
-export * from "./Orders";
-export * from "./Payments";
-export * from "./Providers";
-export * from "./RoleManagement";
-export * from "./Services";
-export * from "./SystemMaintenance";
-export * from "./SystemSettings";
-export * from "./ThemeManager";
-export * from "./UISettings";
-export * from "./UserManagement";
-export * from "./Users";
