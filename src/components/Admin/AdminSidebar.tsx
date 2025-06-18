@@ -47,6 +47,7 @@ const AdminSidebar: React.FC<AdminSidebarProps> = ({ isCollapsed }) => {
     { icon: MonitorSpeaker, label: "واجهة المستخدم", path: "/admin/ui" },
     { icon: Activity, label: "مراقبة النظام", path: "/admin/monitoring" },
     { icon: Gauge, label: "الأداء", path: "/admin/performance" },
+    { icon: Activity, label: "صحة النظام", path: "/admin/health-detailed" },
     { icon: Shield, label: "التشخيص", path: "/admin/diagnostics" },
     { icon: Wrench, label: "الصيانة", path: "/admin/maintenance" },
     { icon: Zap, label: "أدوات متقدمة", path: "/admin/advanced-controls" },
