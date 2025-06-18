@@ -98,12 +98,32 @@ const Navbar = () => {
           href: "/site-builder?tab=templates",
           icon: "📋",
         },
-        { title: "مواقعي", href: "/site-builder?tab=my-sites", icon: "����" },
+        { title: "مواقعي", href: "/site-builder?tab=my-sites", icon: "💼" },
         {
           title: "المساعد الذكي",
           href: "/site-builder?tab=ai-assistant",
           icon: "🤖",
         },
+      ],
+    },
+    {
+      title: "الوظائف",
+      href: "/jobs",
+      icon: Users,
+      dropdown: [
+        { title: "تصفح الوظائف", href: "/jobs", icon: "💼" },
+        {
+          title: "وظائف التطوير",
+          href: "/jobs?category=development",
+          icon: "💻",
+        },
+        {
+          title: "وظائف التسويق",
+          href: "/jobs?category=marketing",
+          icon: "📈",
+        },
+        { title: "وظائف التصميم", href: "/jobs?category=design", icon: "🎨" },
+        { title: "العمل عن بُعد", href: "/jobs?type=remote", icon: "🌍" },
       ],
     },
     {
