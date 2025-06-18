@@ -113,7 +113,7 @@ class AdvancedProviderSync {
 
       for (const service of providerServices) {
         try {
-          const processedService = await this.processService(service, provider);
+          const processedService = this.processService(service, provider);
           const existingIndex = this.services.findIndex(
             (s) =>
               s.providerId === provider.id &&
@@ -132,7 +132,7 @@ class AdvancedProviderSync {
         } catch (error) {
           result.errors++;
           result.errorDetails.push(
-            `خطأ في معالجة ��لخدمة ${service.name}: ${error}`,
+            `خطأ في معالجة الخدمة ${service.name}: ${error}`,
           );
         }
       }
@@ -228,11 +228,8 @@ class AdvancedProviderSync {
     return response.json();
   }
 
-  // معالجة وتحويل ا��خدمة
-  private async processService(
-    rawService: any,
-    provider: Provider,
-  ): Promise<ProviderService> {
+  // معالجة وتحويل الخدمة
+  private processService(rawService: any, provider: Provider): ProviderService {
     return DataProcessor.processService(rawService, provider);
   }
 
