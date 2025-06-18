@@ -38,6 +38,7 @@ import ErrorBoundaryWrapper from "@/components/Common/ErrorBoundaryWrapper";
 import { PageLoading } from "@/components/Common/LoadingStates";
 import AdminLayout from "@/components/Admin/AdminLayout";
 import FloatingAIButton from "@/components/AI/FloatingAIButton";
+import DevAuthControls from "@/components/Common/DevAuthControls";
 import { Suspense } from "react";
 
 const queryClient = new QueryClient({
