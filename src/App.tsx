@@ -46,9 +46,8 @@ import {
   JobsAdminPage,
   SystemHealthDetailedPage,
 } from "@/pages/admin";
-import ErrorBoundaryWrapper from "@/components/Common/ErrorBoundaryWrapper";
-import { PageLoading } from "@/components/Common/LoadingStates";
-import AdminLayout from "@/components/Admin/AdminLayout";
+import { ErrorBoundaryWrapper, PageLoading } from "@/components/Common";
+import { AdminLayout } from "@/components/Admin";
 import FloatingAIButton from "@/components/AI/FloatingAIButton";
 import DevAuthControls from "@/components/Common/DevAuthControls";
 import NotificationSystem from "@/components/Common/NotificationSystem";
