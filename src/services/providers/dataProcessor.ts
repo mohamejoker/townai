@@ -1,42 +1,32 @@
 // معالج البيانات للخدمات من الموردين
 
-import type {
-  Provider,
-  ProviderService,
-  ServiceType,
-  Platform,
-  QualityLevel,
-} from "./types";
+import type { Provider, ProviderService, ServiceType, Platform, QualityLevel } from './types';
 
-export class DataProcessor {
-  // حساب السعر النهائي مع نسبة الربح
-  static calculateFinalPrice(
-    originalRate: number,
-    profitMargin: number,
-  ): number {
-    const markup = originalRate * (profitMargin / 100);
-    return Math.round((originalRate + markup) * 100) / 100;
-  }
+// حساب السعر النهائي مع نسبة الربح
+export function calculateFinalPrice(originalRate: number, profitMargin: number): number {
+  const markup = originalRate * (profitMargin / 100);
+  return Math.round((originalRate + markup) * 100) / 100;
+}
 
-  // ترجمة اسم الخدمة
-  static translateServiceName(name: string): string {
+// ترجمة اسم الخدمة
+export function translateServiceName(name: string): string {
     const translations: Record<string, string> = {
-      followers: "متابعين",
-      likes: "إعجابات",
-      views: "مشاهدات",
-      comments: "تعليقات",
-      shares: "مشاركات",
-      subscribers: "مشتركين",
-      instagram: "انستغرام",
-      tiktok: "تيك توك",
-      youtube: "يوتيوب",
-      twitter: "تويتر",
-      facebook: "فيسبوك",
+      'followers': 'متابعين',
+      'likes': 'إعجابات',
+      'views': 'مشاهدات',
+      'comments': 'تعليقات',
+      'shares': 'مشاركات',
+      'subscribers': 'مشتركين',
+      'instagram': 'انستغرام',
+      'tiktok': 'تيك توك',
+      'youtube': 'يوتيوب',
+      'twitter': 'تويتر',
+      'facebook': 'فيسبوك'
     };
 
     let translatedName = name.toLowerCase();
     Object.entries(translations).forEach(([eng, ar]) => {
-      translatedName = translatedName.replace(new RegExp(eng, "gi"), ar);
+      translatedName = translatedName.replace(new RegExp(eng, 'gi'), ar);
     });
 
     return translatedName;
@@ -44,19 +34,19 @@ export class DataProcessor {
 
   // ترجمة الوصف
   static translateDescription(description: string): string {
-    if (!description) return "";
+    if (!description) return '';
 
     const translations: Record<string, string> = {
-      "high quality": "جودة عالية",
-      "fast delivery": "تسليم سريع",
-      "real users": "مستخدمين حقيقيين",
-      "instant start": "بداية فورية",
-      "refill guarantee": "ضمان إعادة التعبئة",
+      'high quality': 'جودة عالية',
+      'fast delivery': 'تسليم سريع',
+      'real users': 'مستخدمين حقيقيين',
+      'instant start': 'بداية فورية',
+      'refill guarantee': 'ضمان إعادة التعبئة'
     };
 
     let translatedDesc = description.toLowerCase();
     Object.entries(translations).forEach(([eng, ar]) => {
-      translatedDesc = translatedDesc.replace(new RegExp(eng, "gi"), ar);
+      translatedDesc = translatedDesc.replace(new RegExp(eng, 'gi'), ar);
     });
 
     return translatedDesc;
@@ -64,74 +54,66 @@ export class DataProcessor {
 
   // توليد وصف تلقائي
   static generateDescription(service: any): string {
-    const platform = service.category || "منصة";
-    const type = service.type || "خدمة";
+    const platform = service.category || 'منصة';
+    const type = service.type || 'خدمة';
     return `خدمة ${type} عالية الجودة لمنصة ${platform} مع ضمان الجودة والتسليم السريع`;
   }
 
   // تحديد نوع الخدمة
   static mapServiceType(type: string): ServiceType {
     const typeMap: Record<string, ServiceType> = {
-      followers: "followers",
-      likes: "likes",
-      views: "views",
-      comments: "comments",
-      shares: "shares",
-      subscribers: "subscribers",
+      'followers': 'followers',
+      'likes': 'likes',
+      'views': 'views',
+      'comments': 'comments',
+      'shares': 'shares',
+      'subscribers': 'subscribers'
     };
 
-    return typeMap[type?.toLowerCase()] || "followers";
+    return typeMap[type?.toLowerCase()] || 'followers';
   }
 
   // تحديد المنصة
   static mapPlatform(category: string): Platform {
     const platformMap: Record<string, Platform> = {
-      instagram: "instagram",
-      tiktok: "tiktok",
-      youtube: "youtube",
-      twitter: "twitter",
-      facebook: "facebook",
-      snapchat: "snapchat",
+      'instagram': 'instagram',
+      'tiktok': 'tiktok',
+      'youtube': 'youtube',
+      'twitter': 'twitter',
+      'facebook': 'facebook',
+      'snapchat': 'snapchat'
     };
 
-    const categoryLower = category?.toLowerCase() || "";
+    const categoryLower = category?.toLowerCase() || '';
     for (const [key, value] of Object.entries(platformMap)) {
       if (categoryLower.includes(key)) {
         return value;
       }
     }
 
-    return "instagram";
+    return 'instagram';
   }
 
   // تحديد جودة الخدمة
   static determineQuality(service: any): QualityLevel {
     const rate = parseFloat(service.rate) || 0;
-    const name = service.name?.toLowerCase() || "";
+    const name = service.name?.toLowerCase() || '';
 
-    if (name.includes("premium") || name.includes("high quality") || rate > 1) {
-      return "high";
-    } else if (name.includes("medium") || rate > 0.5) {
-      return "medium";
+    if (name.includes('premium') || name.includes('high quality') || rate > 1) {
+      return 'high';
+    } else if (name.includes('medium') || rate > 0.5) {
+      return 'medium';
     } else {
-      return "low";
+      return 'low';
     }
   }
 
   // استخراج الحقول المخصصة
   static extractCustomFields(service: any): Record<string, any> {
-    const standardFields = [
-      "service",
-      "name",
-      "type",
-      "rate",
-      "min",
-      "max",
-      "category",
-    ];
+    const standardFields = ['service', 'name', 'type', 'rate', 'min', 'max', 'category'];
     const customFields: Record<string, any> = {};
 
-    Object.keys(service).forEach((key) => {
+    Object.keys(service).forEach(key => {
       if (!standardFields.includes(key)) {
         customFields[key] = service[key];
       }
@@ -141,10 +123,7 @@ export class DataProcessor {
   }
 
   // معالجة وتحويل الخدمة
-  static async processService(
-    rawService: any,
-    provider: Provider,
-  ): Promise<ProviderService> {
+  static async processService(rawService: any, provider: Provider): Promise<ProviderService> {
     const originalRate = parseFloat(rawService.rate) || 0;
     const profitMargin = provider.profitMargin;
     const finalRate = this.calculateFinalPrice(originalRate, profitMargin);
@@ -154,15 +133,12 @@ export class DataProcessor {
       providerId: provider.id,
       providerServiceId: rawService.service || rawService.id,
       name: rawService.name || `خدمة ${rawService.id}`,
-      arabicName: this.translateServiceName(rawService.name || ""),
-      description:
-        rawService.description || this.generateDescription(rawService),
-      arabicDescription: this.translateDescription(
-        rawService.description || "",
-      ),
+      arabicName: this.translateServiceName(rawService.name || ''),
+      description: rawService.description || this.generateDescription(rawService),
+      arabicDescription: this.translateDescription(rawService.description || ''),
       type: this.mapServiceType(rawService.type),
       platform: this.mapPlatform(rawService.category),
-      category: rawService.category || "عام",
+      category: rawService.category || 'عام',
       originalRate,
       profitMargin,
       finalRate,
@@ -172,10 +148,10 @@ export class DataProcessor {
       quality: this.determineQuality(rawService),
       refillEnabled: rawService.refill || false,
       cancelEnabled: rawService.cancel || false,
-      averageTime: rawService.average_time || "24 س��عة",
+      averageTime: rawService.average_time || '24 ساعة',
       lastUpdated: new Date(),
-      syncStatus: "synced",
-      customFields: this.extractCustomFields(rawService),
+      syncStatus: 'synced',
+      customFields: this.extractCustomFields(rawService)
     };
 
     return service;
