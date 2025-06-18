@@ -141,7 +141,10 @@ export class DataProcessor {
   }
 
   // معالجة وتحويل الخدمة
-  static processService(rawService: any, provider: Provider): ProviderService {
+  static async processService(
+    rawService: any,
+    provider: Provider,
+  ): Promise<ProviderService> {
     const originalRate = parseFloat(rawService.rate) || 0;
     const profitMargin = provider.profitMargin;
     const finalRate = this.calculateFinalPrice(originalRate, profitMargin);
