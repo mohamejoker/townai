@@ -228,7 +228,7 @@ class AdvancedProviderSync {
     return response.json();
   }
 
-  // معا��جة وتحويل الخدمة
+  // معالجة وتحويل الخدمة
   private async processService(
     rawService: any,
     provider: Provider,
@@ -273,7 +273,7 @@ class AdvancedProviderSync {
     const service = this.services.find((s) => s.id === serviceId);
     if (service) {
       service.profitMargin = profitMargin;
-      service.finalRate = this.calculateFinalPrice(
+      service.finalRate = DataProcessor.calculateFinalPrice(
         service.originalRate,
         profitMargin,
       );
