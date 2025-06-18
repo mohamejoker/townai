@@ -41,44 +41,17 @@ export default defineConfig(({ mode }) => ({
     sourcemap: false,
     rollupOptions: {
       output: {
-        manualChunks: (id) => {
-          if (id.includes("node_modules")) {
-            if (id.includes("react") || id.includes("react-dom")) {
-              return "vendor";
-            }
-            if (id.includes("@radix-ui")) {
-              return "ui";
-            }
-            if (id.includes("lucide-react")) {
-              return "lucide";
-            }
-            if (id.includes("recharts")) {
-              return "charts";
-            }
-            if (id.includes("react-hook-form") || id.includes("@hookform")) {
-              return "forms";
-            }
-            if (
-              id.includes("clsx") ||
-              id.includes("tailwind-merge") ||
-              id.includes("class-variance-authority")
-            ) {
-              return "utils";
-            }
-            return "vendor";
-          }
-          if (id.includes("SiteBuilder")) {
-            return "sitebuilder";
-          }
-          if (id.includes("Providers/")) {
-            return "providers";
-          }
-          if (id.includes("Admin") && !id.includes("pages")) {
-            return "admin-components";
-          }
-          if (id.includes("pages/admin")) {
-            return "admin-pages";
-          }
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          ui: [
+            "@radix-ui/react-accordion",
+            "@radix-ui/react-alert-dialog",
+            "@radix-ui/react-avatar",
+          ],
+          lucide: ["lucide-react"],
+          charts: ["recharts"],
+          forms: ["react-hook-form", "@hookform/resolvers"],
+          utils: ["clsx", "tailwind-merge", "class-variance-authority"],
         },
       },
     },
