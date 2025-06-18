@@ -71,7 +71,7 @@ function App() {
                     <Route path="/simple" element={<LandingPage />} />
 
                     {/* صفحات المصادقة */}
-                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/login" element={<TestLoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
 
                     {/* الخدمات العامة */}
