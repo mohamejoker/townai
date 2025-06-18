@@ -15,7 +15,6 @@ import {
   Clock,
   HardDrive,
   Cpu,
-  Memory,
   Users,
   Globe,
   AlertTriangle,
