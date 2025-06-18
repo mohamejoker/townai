@@ -1,9 +1,9 @@
+import { useEffect, useState } from "react";
+import { useAuth } from "@/contexts/AuthContext";
+import { useDevRoleAuth } from "@/hooks/useDevAuth";
+import { supabase } from "@/integrations/supabase/client";
 
-import { useEffect, useState } from 'react';
-import { useAuth } from '@/contexts/AuthContext';
-import { supabase } from '@/integrations/supabase/client';
-
-export type UserRole = 'admin' | 'user';
+export type UserRole = "admin" | "user";
 
 interface UseRoleAuthResult {
   userRole: UserRole | null;
@@ -13,10 +13,20 @@ interface UseRoleAuthResult {
   isLoading: boolean;
 }
 
+// تحديد ما إذا كنا في وضع التطوير
+const isDevelopment =
+  import.meta.env.DEV || import.meta.env.VITE_USE_DEV_AUTH === "true";
+
 export const useRoleAuth = (): UseRoleAuthResult => {
   const { user, isAuthenticated } = useAuth();
+  const devRoleAuth = useDevRoleAuth();
   const [userRole, setUserRole] = useState<UserRole | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
+  // إذا كنا في وضع التطوير، استخدم النظام المؤقت
+  if (isDevelopment) {
+    return devRoleAuth;
+  }
 
   useEffect(() => {
     const fetchUserRole = async () => {
@@ -27,35 +37,35 @@ export const useRoleAuth = (): UseRoleAuthResult => {
       }
 
       try {
-        console.log('Fetching user role for:', user.id);
-        
+        console.log("Fetching user role for:", user.id);
+
         // Check if user has admin role in database
         const { data, error } = await supabase
-          .from('user_roles')
-          .select('role')
-          .eq('user_id', user.id)
+          .from("user_roles")
+          .select("role")
+          .eq("user_id", user.id)
           .limit(1);
 
         if (error || !data || data.length === 0) {
           // If no role found, try to add admin role for first user
           const { error: insertError } = await supabase
-            .from('user_roles')
-            .insert({ user_id: user.id, role: 'admin' });
-          
+            .from("user_roles")
+            .insert({ user_id: user.id, role: "admin" });
+
           if (!insertError) {
-            setUserRole('admin');
-            console.log('Successfully added admin role to user');
+            setUserRole("admin");
+            console.log("Successfully added admin role to user");
           } else {
-            setUserRole('user'); // Default to user if can't add admin
+            setUserRole("user"); // Default to user if can't add admin
           }
         } else {
           const role = data[0].role;
           setUserRole(role as UserRole);
-          console.log('User role fetched:', role);
+          console.log("User role fetched:", role);
         }
       } catch (error) {
-        console.error('Error in fetchUserRole:', error);
-        setUserRole('user');
+        console.error("Error in fetchUserRole:", error);
+        setUserRole("user");
       } finally {
         setIsLoading(false);
       }
@@ -66,21 +76,21 @@ export const useRoleAuth = (): UseRoleAuthResult => {
 
   const hasRole = (role: UserRole): boolean => {
     if (!userRole) return false;
-    
+
     // Admin has all permissions
-    if (userRole === 'admin') return true;
-    
+    if (userRole === "admin") return true;
+
     // User only has user permissions
-    if (userRole === 'user' && role === 'user') return true;
-    
+    if (userRole === "user" && role === "user") return true;
+
     return false;
   };
 
   return {
     userRole,
     hasRole,
-    isAdmin: userRole === 'admin',
-    isUser: userRole === 'user',
-    isLoading
+    isAdmin: userRole === "admin",
+    isUser: userRole === "user",
+    isLoading,
   };
 };
