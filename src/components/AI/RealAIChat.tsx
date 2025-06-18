@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -141,7 +141,7 @@ const RealAIChat: React.FC<RealAIChatProps> = ({ onActionClick }) => {
         messageText.startsWith("http")
       ) {
         const analysis = await advancedAI.analyzeContent(messageText, "post");
-        response = `🔍 **تحليل شامل للحساب**\n\n📊 **النتائج:**\n• المشاعر: ${analysis.sentiment}\n• توقع التفاعل: ${analysis.engagement_prediction.toFixed(1)}/10\n• أف��ل وقت للنشر: ${analysis.best_posting_time}\n\n🏷️ **الهاشتاجات المقترحة:**\n${analysis.hashtag_suggestions.map((tag) => `• ${tag}`).join("\n")}\n\n💡 **نصائح التحسين:**\n${analysis.optimization_tips.map((tip) => `• ${tip}`).join("\n")}\n\n🎯 **الجمهور المستهدف:**\n${analysis.target_audience.map((audience) => `• ${audience}`).join("\n")}`;
+        response = `🔍 **تحليل شامل للحساب**\n\n📊 **النتائج:**\n• المشاعر: ${analysis.sentiment}\n• توقع التفاعل: ${analysis.engagement_prediction.toFixed(1)}/10\n• أفضل وقت للنشر: ${analysis.best_posting_time}\n\n🏷️ **الهاشتاجات المقترحة:**\n${analysis.hashtag_suggestions.map((tag) => `• ${tag}`).join("\n")}\n\n💡 **نصائح التحسين:**\n${analysis.optimization_tips.map((tip) => `• ${tip}`).join("\n")}\n\n🎯 **الجمهور المستهدف:**\n${analysis.target_audience.map((audience) => `• ${audience}`).join("\n")}`;
 
         attachments.push({
           type: "analysis",
