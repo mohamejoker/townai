@@ -187,6 +187,10 @@ function App() {
                       <Route path="monitoring" element={<MonitoringPage />} />
                       <Route path="maintenance" element={<MaintenancePage />} />
                       <Route path="health" element={<SystemHealthPage />} />
+                      <Route
+                        path="health-detailed"
+                        element={<SystemHealthDetailedPage />}
+                      />
                       <Route path="performance" element={<PerformancePage />} />
                       <Route path="settings" element={<SettingsPage />} />
                     </Route>
