@@ -1,101 +1,98 @@
-
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Switch } from '@/components/ui/switch';
-import { Badge } from '@/components/ui/badge';
-import { X, Plus } from 'lucide-react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { supabase } from '@/integrations/supabase/client';
-import { toast } from 'sonner';
+import React, { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+import { Badge } from "@/components/ui/badge";
+import { X, Plus } from "lucide-react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
 
 interface ServiceFormProps {
   onClose: () => void;
-  service?: any;
-  onSubmit?: (values: any) => void;
-  initialData?: any;
+  service?: Record<string, unknown>;
+  onSubmit?: (values: Record<string, unknown>) => void;
+  initialData?: Record<string, unknown>;
   isLoading?: boolean;
 }
 
-const ServiceForm: React.FC<ServiceFormProps> = ({ 
-  service, 
-  onClose, 
-  onSubmit, 
-  initialData, 
-  isLoading = false 
+const ServiceForm: React.FC<ServiceFormProps> = ({
+  service,
+  onClose,
+  onSubmit,
+  initialData,
+  isLoading = false,
 }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    price: '',
+    title: "",
+    price: "",
     features: [] as string[],
-    gradient_class: 'from-sky-400 to-blue-500',
-    button_text: 'اطلب الآن',
+    gradient_class: "from-sky-400 to-blue-500",
+    button_text: "اطلب الآن",
     is_active: true,
-    is_popular: false
+    is_popular: false,
   });
-  const [newFeature, setNewFeature] = useState('');
+  const [newFeature, setNewFeature] = useState("");
   const queryClient = useQueryClient();
 
   useEffect(() => {
     const dataToUse = service || initialData;
     if (dataToUse) {
       setFormData({
-        title: dataToUse.title || '',
-        price: dataToUse.price || '',
+        title: dataToUse.title || "",
+        price: dataToUse.price || "",
         features: dataToUse.features || [],
-        gradient_class: dataToUse.gradient_class || 'from-sky-400 to-blue-500',
-        button_text: dataToUse.button_text || 'اطلب الآن',
+        gradient_class: dataToUse.gradient_class || "from-sky-400 to-blue-500",
+        button_text: dataToUse.button_text || "اطلب الآن",
         is_active: dataToUse.is_active ?? true,
-        is_popular: dataToUse.is_popular ?? false
+        is_popular: dataToUse.is_popular ?? false,
       });
     }
   }, [service, initialData]);
 
   const createMutation = useMutation({
     mutationFn: async (data: any) => {
-      const { error } = await supabase
-        .from('services')
-        .insert([data]);
-      
+      const { error } = await supabase.from("services").insert([data]);
+
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success('تم إنشاء الخدمة بنجاح!');
-      queryClient.invalidateQueries({ queryKey: ['admin-services'] });
-      queryClient.invalidateQueries({ queryKey: ['service-stats'] });
+      toast.success("تم إنشاء الخدمة بنجاح!");
+      queryClient.invalidateQueries({ queryKey: ["admin-services"] });
+      queryClient.invalidateQueries({ queryKey: ["service-stats"] });
       onClose();
     },
     onError: (error: Error) => {
       toast.error(`حدث خطأ أثناء إنشاء الخدمة: ${error.message}`);
-    }
+    },
   });
 
   const updateMutation = useMutation({
     mutationFn: async (data: any) => {
       const { error } = await supabase
-        .from('services')
+        .from("services")
         .update(data)
-        .eq('id', (service || initialData).id);
-      
+        .eq("id", (service || initialData).id);
+
       if (error) throw error;
     },
     onSuccess: () => {
-      toast.success('تم تحديث الخدمة بنجاح!');
-      queryClient.invalidateQueries({ queryKey: ['admin-services'] });
-      queryClient.invalidateQueries({ queryKey: ['service-stats'] });
+      toast.success("تم تحديث الخدمة بنجاح!");
+      queryClient.invalidateQueries({ queryKey: ["admin-services"] });
+      queryClient.invalidateQueries({ queryKey: ["service-stats"] });
       onClose();
     },
     onError: (error: Error) => {
       toast.error(`حدث خطأ أثناء تحديث الخدمة: ${error.message}`);
-    }
+    },
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.title || !formData.price) {
-      toast.error('الرجاء ملء جميع الحقول المطلوبة');
+      toast.error("الرجاء ملء جميع الحقول المطلوبة");
       return;
     }
 
@@ -111,28 +108,52 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
 
   const addFeature = () => {
     if (newFeature.trim()) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        features: [...prev.features, newFeature.trim()]
+        features: [...prev.features, newFeature.trim()],
       }));
-      setNewFeature('');
+      setNewFeature("");
     }
   };
 
   const removeFeature = (index: number) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      features: prev.features.filter((_, i) => i !== index)
+      features: prev.features.filter((_, i) => i !== index),
     }));
   };
 
   const gradientOptions = [
-    { value: 'from-sky-400 to-blue-500', label: 'أزرق', color: 'bg-gradient-to-r from-sky-400 to-blue-500' },
-    { value: 'from-purple-400 to-purple-600', label: 'بنفسجي', color: 'bg-gradient-to-r from-purple-400 to-purple-600' },
-    { value: 'from-green-400 to-green-600', label: 'أخضر', color: 'bg-gradient-to-r from-green-400 to-green-600' },
-    { value: 'from-orange-400 to-orange-600', label: 'برتقالي', color: 'bg-gradient-to-r from-orange-400 to-orange-600' },
-    { value: 'from-red-400 to-red-600', label: 'أحمر', color: 'bg-gradient-to-r from-red-400 to-red-600' },
-    { value: 'from-pink-400 to-pink-600', label: 'وردي', color: 'bg-gradient-to-r from-pink-400 to-pink-600' }
+    {
+      value: "from-sky-400 to-blue-500",
+      label: "أزرق",
+      color: "bg-gradient-to-r from-sky-400 to-blue-500",
+    },
+    {
+      value: "from-purple-400 to-purple-600",
+      label: "بنفسجي",
+      color: "bg-gradient-to-r from-purple-400 to-purple-600",
+    },
+    {
+      value: "from-green-400 to-green-600",
+      label: "أخضر",
+      color: "bg-gradient-to-r from-green-400 to-green-600",
+    },
+    {
+      value: "from-orange-400 to-orange-600",
+      label: "برتقالي",
+      color: "bg-gradient-to-r from-orange-400 to-orange-600",
+    },
+    {
+      value: "from-red-400 to-red-600",
+      label: "أحمر",
+      color: "bg-gradient-to-r from-red-400 to-red-600",
+    },
+    {
+      value: "from-pink-400 to-pink-600",
+      label: "وردي",
+      color: "bg-gradient-to-r from-pink-400 to-pink-600",
+    },
   ];
 
   return (
@@ -143,7 +164,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           <Input
             id="title"
             value={formData.title}
-            onChange={(e) => setFormData(prev => ({ ...prev, title: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, title: e.target.value }))
+            }
             placeholder="اكتب عنوان الخدمة"
             required
           />
@@ -154,7 +177,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           <Input
             id="price"
             value={formData.price}
-            onChange={(e) => setFormData(prev => ({ ...prev, price: e.target.value }))}
+            onChange={(e) =>
+              setFormData((prev) => ({ ...prev, price: e.target.value }))
+            }
             placeholder="مثال: من 10 ر.س"
             required
           />
@@ -166,7 +191,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
         <Input
           id="button_text"
           value={formData.button_text}
-          onChange={(e) => setFormData(prev => ({ ...prev, button_text: e.target.value }))}
+          onChange={(e) =>
+            setFormData((prev) => ({ ...prev, button_text: e.target.value }))
+          }
           placeholder="اطلب الآن"
         />
       </div>
@@ -178,9 +205,16 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
             <button
               key={option.value}
               type="button"
-              onClick={() => setFormData(prev => ({ ...prev, gradient_class: option.value }))}
+              onClick={() =>
+                setFormData((prev) => ({
+                  ...prev,
+                  gradient_class: option.value,
+                }))
+              }
               className={`p-3 rounded-lg ${option.color} text-white font-medium border-2 ${
-                formData.gradient_class === option.value ? 'border-white' : 'border-transparent'
+                formData.gradient_class === option.value
+                  ? "border-white"
+                  : "border-transparent"
               }`}
             >
               {option.label}
@@ -196,7 +230,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
             value={newFeature}
             onChange={(e) => setNewFeature(e.target.value)}
             placeholder="أضف ميزة جديدة"
-            onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addFeature())}
+            onKeyPress={(e) =>
+              e.key === "Enter" && (e.preventDefault(), addFeature())
+            }
           />
           <Button type="button" onClick={addFeature} size="sm">
             <Plus className="h-4 w-4" />
@@ -204,7 +240,11 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
         </div>
         <div className="flex flex-wrap gap-2 mt-2">
           {formData.features.map((feature, index) => (
-            <Badge key={index} variant="secondary" className="flex items-center gap-1">
+            <Badge
+              key={index}
+              variant="secondary"
+              className="flex items-center gap-1"
+            >
               {feature}
               <button
                 type="button"
@@ -223,7 +263,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           <Switch
             id="is_active"
             checked={formData.is_active}
-            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_active: checked }))}
+            onCheckedChange={(checked) =>
+              setFormData((prev) => ({ ...prev, is_active: checked }))
+            }
           />
           <Label htmlFor="is_active">تفعيل الخدمة</Label>
         </div>
@@ -232,7 +274,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
           <Switch
             id="is_popular"
             checked={formData.is_popular}
-            onCheckedChange={(checked) => setFormData(prev => ({ ...prev, is_popular: checked }))}
+            onCheckedChange={(checked) =>
+              setFormData((prev) => ({ ...prev, is_popular: checked }))
+            }
           />
           <Label htmlFor="is_popular">خدمة شائعة</Label>
         </div>
@@ -242,11 +286,13 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
         <Button type="button" variant="outline" onClick={onClose}>
           إلغاء
         </Button>
-        <Button 
-          type="submit" 
-          disabled={isLoading || createMutation.isPending || updateMutation.isPending}
+        <Button
+          type="submit"
+          disabled={
+            isLoading || createMutation.isPending || updateMutation.isPending
+          }
         >
-          {(service || initialData) ? 'تحديث الخدمة' : 'إضافة الخدمة'}
+          {service || initialData ? "تحديث الخدمة" : "إضافة الخدمة"}
         </Button>
       </div>
     </form>
