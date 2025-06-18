@@ -15,6 +15,7 @@ export { default as ServicesPage } from "./ServicesPage";
 export { default as JobsAdminPage } from "./JobsAdminPage";
 export { default as OrdersPage } from "./OrdersPage";
 export { default as ProvidersPage } from "./ProvidersPage";
+export { default as ProvidersManagementPage } from "./ProvidersManagementPage";
 
 // Payment Management
 export { default as PaymentsPage } from "./PaymentsPage";
