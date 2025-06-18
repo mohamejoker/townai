@@ -74,7 +74,7 @@ function App() {
                     <Route path="/" element={<EnhancedLandingPage />} />
                     <Route path="/simple" element={<LandingPage />} />
 
-                    {/* صفحات المصادقة */}
+                    {/* ص��حات المصادقة */}
                     <Route path="/login" element={<TestLoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
 
@@ -153,6 +153,15 @@ function App() {
 
                 {/* أدوات التطوير */}
                 <DevAuthControls />
+
+                {/* نظام الإشعارات */}
+                <NotificationSystem />
+
+                {/* اختصارات لوحة المفاتيح */}
+                <KeyboardShortcuts />
+
+                {/* إحصائيات مباشرة */}
+                <LiveStats />
               </div>
             </BrowserRouter>
           </AuthProvider>
