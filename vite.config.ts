@@ -34,7 +34,16 @@ export default defineConfig(({ mode }) => ({
     exclude: ["@vite/client", "@vite/env"],
   },
   build: {
+    target: "es2020",
+    minify: "terser",
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
     rollupOptions: {
+      maxParallelFileOps: 2,
       output: {
         manualChunks: (id) => {
           if (id.includes("node_modules")) {
