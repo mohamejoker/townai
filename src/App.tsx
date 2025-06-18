@@ -155,7 +155,7 @@ function App() {
                       <Route path="dashboard" element={<TestDashboardPage />} />
                       <Route path="users" element={<UsersPage />} />
                       <Route path="services" element={<ServicesPage />} />
-                      <Route path="jobs" element={<JobsPage />} />
+                      <Route path="jobs" element={<JobsAdminPage />} />
                       <Route path="orders" element={<OrdersPage />} />
                       <Route
                         path="orders-management"
