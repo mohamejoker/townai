@@ -1,7 +1,7 @@
 // نظام متقدم لسحب وإدارة الخدمات من الموردين
 
-import type { Provider, ProviderService, SyncResult } from "./types";
-import { DataProcessor } from "./dataProcessor";
+import type { Provider, ProviderService, SyncResult } from "./types.js";
+import { DataProcessor } from "./dataProcessor.js";
 
 class AdvancedProviderSync {
   private providers: Provider[] = [];
