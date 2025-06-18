@@ -68,7 +68,7 @@ const EnhancedAIChat: React.FC<EnhancedAIChatProps> = ({ onActionClick }) => {
       id: "welcome",
       type: "ai",
       content:
-        "👋 مرحباً! أنا وكيل الذكاء الاصطناعي المتطور. يمكنني مساعدتك في:\n\n🔍 تحليل حساباتك على السوشيال ميديا\n📊 اقتراح استراتيجيات نمو مخصصة\n🎯 تحليل المنافسين\n📈 تحسين المحتوى\n🛒 اختيار أفضل الخدمات\n\nما الذي تريد مساعدة فيه اليوم؟",
+        "👋 مرحباً! أنا وكيل الذكاء الاصطناعي المتطور. يمكنني مساعدتك في:\n\n🔍 تحليل حساباتك على السوشيال ميديا\n📊 اقتراح استراتيجيات نمو مخصصة\n🎯 تحليل ال��نافسين\n📈 تحسين المحتوى\n🛒 اختيار أفضل الخدمات\n\nما الذي تريد مساعدة فيه اليوم؟",
       timestamp: new Date(),
       suggestions: [
         "تحليل حسابي على Instagram",
@@ -140,9 +140,11 @@ const EnhancedAIChat: React.FC<EnhancedAIChatProps> = ({ onActionClick }) => {
 
     let response = "";
     let suggestions: string[] = [];
-    let actionButtons: Array<{ label: string; action: string; data?: any }> =
-      [];
-
+    let actionButtons: Array<{
+      label: string;
+      action: string;
+      data?: Record<string, unknown>;
+    }> = [];
     // معالجة الرسائل المختلفة
     if (userMessage.includes("تحليل") && userMessage.includes("حساب")) {
       response =
@@ -223,7 +225,10 @@ const EnhancedAIChat: React.FC<EnhancedAIChatProps> = ({ onActionClick }) => {
     setInput(suggestion);
   };
 
-  const handleActionClick = (action: string, data?: any) => {
+  const handleActionClick = (
+    action: string,
+    data?: Record<string, unknown>,
+  ) => {
     if (onActionClick) {
       onActionClick(action, data);
     }
