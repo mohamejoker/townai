@@ -12,6 +12,7 @@ import LandingPage from "@/pages/LandingPage";
 import EnhancedLandingPage from "@/pages/EnhancedLandingPage";
 import EnhancedServicesPage from "@/pages/EnhancedServicesPage";
 import AIChatPage from "@/pages/AIChatPage";
+import SiteBuilderPage from "@/pages/SiteBuilderPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import UsersPage from "@/pages/admin/UsersPage";
 import ServicesPage from "@/pages/admin/ServicesPage";
@@ -130,7 +131,7 @@ function App() {
                       <Route path="settings" element={<SettingsPage />} />
                     </Route>
 
-                    {/* إعادة ��وجيه للمسارات القديمة */}
+                    {/* إعادة توجيه للمسارات القديمة */}
                     <Route path="/home" element={<Navigate to="/" replace />} />
 
                     {/* مسار افتراضي */}
