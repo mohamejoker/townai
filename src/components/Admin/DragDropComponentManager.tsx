@@ -155,7 +155,10 @@ const DragDropComponentManager = () => {
     setComponents((prev) => [...prev, newComponent]);
   };
 
-  const updateComponentStyle = (id: string, newStyle: Record<string, any>) => {
+  const updateComponentStyle = (
+    id: string,
+    newStyle: Record<string, unknown>,
+  ) => {
     setComponents((prev) =>
       prev.map((comp) =>
         comp.id === id
