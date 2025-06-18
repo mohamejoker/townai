@@ -1,9 +1,15 @@
+import React, { useRef } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { Image, Send, Sparkles, CheckCircle, Eye, Code } from "lucide-react";
 
-import React, { useRef } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Badge } from '@/components/ui/badge';
-import { Image, Send, Sparkles, CheckCircle, Eye, Code } from 'lucide-react';
+interface ProviderType {
+  id: string;
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+}
 
 interface MessageInputProps {
   input: string;
@@ -12,7 +18,7 @@ interface MessageInputProps {
   onImageUpload: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyPress: (e: React.KeyboardEvent) => void;
   isTyping: boolean;
-  currentProvider: any;
+  currentProvider: ProviderType | null;
 }
 
 const MessageInput: React.FC<MessageInputProps> = ({
@@ -22,7 +28,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
   onImageUpload,
   onKeyPress,
   isTyping,
-  currentProvider
+  currentProvider,
 }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
 
@@ -53,7 +59,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
           <Send className="h-5 w-5" />
         </Button>
       </div>
-      
+
       <input
         ref={fileInputRef}
         type="file"
@@ -61,7 +67,7 @@ const MessageInput: React.FC<MessageInputProps> = ({
         onChange={onImageUpload}
         className="hidden"
       />
-      
+
       <div className="flex items-center justify-center gap-4 mt-3 text-xs text-gray-500">
         <Badge variant="secondary" className="flex items-center gap-1">
           <Sparkles className="h-3 w-3" />

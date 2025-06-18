@@ -1,16 +1,27 @@
+import React from "react";
 
-import React from 'react';
+interface ProviderType {
+  id: string;
+  name: string;
+  icon: React.ComponentType<{ className?: string }>;
+  color: string;
+}
 
 interface TypingIndicatorProps {
-  currentProvider: any;
+  currentProvider: ProviderType | null;
   selectedProvider: string;
 }
 
-const TypingIndicator: React.FC<TypingIndicatorProps> = ({ currentProvider, selectedProvider }) => {
+const TypingIndicator: React.FC<TypingIndicatorProps> = ({
+  currentProvider,
+  selectedProvider,
+}) => {
   return (
     <div className="flex justify-start">
       <div className="flex items-center gap-3">
-        <div className={`w-8 h-8 rounded-full bg-gradient-to-r ${currentProvider?.color} text-white flex items-center justify-center`}>
+        <div
+          className={`w-8 h-8 rounded-full bg-gradient-to-r ${currentProvider?.color} text-white flex items-center justify-center`}
+        >
           {currentProvider && <currentProvider.icon className="h-4 w-4" />}
         </div>
         <div className="bg-gray-100 rounded-2xl p-4">
