@@ -1,22 +1,21 @@
-
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Switch } from '@/components/ui/switch';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { 
-  Settings, 
-  Database, 
-  Shield, 
-  Zap, 
-  Mail, 
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Switch } from "@/components/ui/switch";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Settings,
+  Database,
+  Shield,
+  Zap,
+  Mail,
   Bell,
   FileText,
   Users,
-  Activity
-} from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
+  Activity,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 const AdvancedAdminControls = () => {
   const { toast } = useToast();
@@ -29,11 +28,14 @@ const AdvancedAdminControls = () => {
     debugMode: false,
     apiRateLimit: 1000,
     maxFileSize: 10,
-    sessionTimeout: 30
+    sessionTimeout: 30,
   });
 
-  const handleSettingChange = (key: string, value: any) => {
-    setSettings(prev => ({ ...prev, [key]: value }));
+  const handleSettingChange = (
+    key: string,
+    value: string | number | boolean,
+  ) => {
+    setSettings((prev) => ({ ...prev, [key]: value }));
     toast({
       title: "تم تحديث الإعداد",
       description: `تم تغيير ${key} بنجاح`,
@@ -80,18 +82,18 @@ const AdvancedAdminControls = () => {
                   <label>وضع الصيانة</label>
                   <Switch
                     checked={settings.maintenanceMode}
-                    onCheckedChange={(checked) => 
-                      handleSettingChange('maintenanceMode', checked)
+                    onCheckedChange={(checked) =>
+                      handleSettingChange("maintenanceMode", checked)
                     }
                   />
                 </div>
-                
+
                 <div className="flex items-center justify-between">
                   <label>تسجيل المستخدمين الجدد</label>
                   <Switch
                     checked={settings.userRegistration}
-                    onCheckedChange={(checked) => 
-                      handleSettingChange('userRegistration', checked)
+                    onCheckedChange={(checked) =>
+                      handleSettingChange("userRegistration", checked)
                     }
                   />
                 </div>
@@ -101,8 +103,11 @@ const AdvancedAdminControls = () => {
                   <Input
                     type="number"
                     value={settings.apiRateLimit}
-                    onChange={(e) => 
-                      handleSettingChange('apiRateLimit', parseInt(e.target.value))
+                    onChange={(e) =>
+                      handleSettingChange(
+                        "apiRateLimit",
+                        parseInt(e.target.value),
+                      )
                     }
                   />
                 </div>
@@ -112,8 +117,11 @@ const AdvancedAdminControls = () => {
                   <Input
                     type="number"
                     value={settings.maxFileSize}
-                    onChange={(e) => 
-                      handleSettingChange('maxFileSize', parseInt(e.target.value))
+                    onChange={(e) =>
+                      handleSettingChange(
+                        "maxFileSize",
+                        parseInt(e.target.value),
+                      )
                     }
                   />
                 </div>
@@ -128,33 +136,37 @@ const AdvancedAdminControls = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <Button 
-                  className="w-full" 
-                  onClick={() => handleSystemAction('تنظيف ذاكرة التخزين المؤقت')}
+                <Button
+                  className="w-full"
+                  onClick={() =>
+                    handleSystemAction("تنظيف ذاكرة التخزين المؤقت")
+                  }
                 >
                   تنظيف Cache
                 </Button>
-                
-                <Button 
-                  className="w-full" 
+
+                <Button
+                  className="w-full"
                   variant="outline"
-                  onClick={() => handleSystemAction('إعادة تشغيل الخدمات')}
+                  onClick={() => handleSystemAction("إعادة تشغيل الخدمات")}
                 >
                   إعادة تشغيل الخدمات
                 </Button>
-                
-                <Button 
-                  className="w-full" 
+
+                <Button
+                  className="w-full"
                   variant="outline"
-                  onClick={() => handleSystemAction('تحليل الأداء')}
+                  onClick={() => handleSystemAction("تحليل الأداء")}
                 >
                   تحليل الأداء
                 </Button>
-                
-                <Button 
-                  className="w-full" 
+
+                <Button
+                  className="w-full"
                   variant="destructive"
-                  onClick={() => handleSystemAction('إنشاء نسخة احتياطية طارئة')}
+                  onClick={() =>
+                    handleSystemAction("إنشاء نسخة احتياطية طارئة")
+                  }
                 >
                   نسخة احتياطية طارئة
                 </Button>
@@ -176,8 +188,8 @@ const AdvancedAdminControls = () => {
                 <label>وضع التطوير</label>
                 <Switch
                   checked={settings.debugMode}
-                  onCheckedChange={(checked) => 
-                    handleSettingChange('debugMode', checked)
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("debugMode", checked)
                   }
                 />
               </div>
@@ -187,17 +199,22 @@ const AdvancedAdminControls = () => {
                 <Input
                   type="number"
                   value={settings.sessionTimeout}
-                  onChange={(e) => 
-                    handleSettingChange('sessionTimeout', parseInt(e.target.value))
+                  onChange={(e) =>
+                    handleSettingChange(
+                      "sessionTimeout",
+                      parseInt(e.target.value),
+                    )
                   }
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <Button onClick={() => handleSystemAction('فحص الثغرات الأمنية')}>
+                <Button
+                  onClick={() => handleSystemAction("فحص الثغرات الأمنية")}
+                >
                   فحص الأمان
                 </Button>
-                <Button onClick={() => handleSystemAction('تحديث شهادات SSL')}>
+                <Button onClick={() => handleSystemAction("تحديث شهادات SSL")}>
                   تحديث SSL
                 </Button>
               </div>
@@ -218,8 +235,8 @@ const AdvancedAdminControls = () => {
                 <label>إشعارات البريد الإلكتروني</label>
                 <Switch
                   checked={settings.emailNotifications}
-                  onCheckedChange={(checked) => 
-                    handleSettingChange('emailNotifications', checked)
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("emailNotifications", checked)
                   }
                 />
               </div>
@@ -228,15 +245,15 @@ const AdvancedAdminControls = () => {
                 <label>الإشعارات الفورية</label>
                 <Switch
                   checked={settings.pushNotifications}
-                  onCheckedChange={(checked) => 
-                    handleSettingChange('pushNotifications', checked)
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("pushNotifications", checked)
                   }
                 />
               </div>
 
-              <Button 
+              <Button
                 className="w-full"
-                onClick={() => handleSystemAction('إرسال إشعار تجريبي')}
+                onClick={() => handleSystemAction("إرسال إشعار تجريبي")}
               >
                 <Mail className="h-4 w-4 mr-2" />
                 إرسال إشعار تجريبي
@@ -258,17 +275,21 @@ const AdvancedAdminControls = () => {
                 <label>النسخ الاحتياطي التلقائي</label>
                 <Switch
                   checked={settings.autoBackup}
-                  onCheckedChange={(checked) => 
-                    handleSettingChange('autoBackup', checked)
+                  onCheckedChange={(checked) =>
+                    handleSettingChange("autoBackup", checked)
                   }
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
-                <Button onClick={() => handleSystemAction('تحسين قاعدة البيانات')}>
+                <Button
+                  onClick={() => handleSystemAction("تحسين قاعدة البيانات")}
+                >
                   تحسين DB
                 </Button>
-                <Button onClick={() => handleSystemAction('فحص سلامة البيانات')}>
+                <Button
+                  onClick={() => handleSystemAction("فحص سلامة البيانات")}
+                >
                   فحص السلامة
                 </Button>
               </div>
@@ -286,16 +307,26 @@ const AdvancedAdminControls = () => {
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <Button onClick={() => handleSystemAction('تنظيف الحسابات غير المفعلة')}>
+                <Button
+                  onClick={() =>
+                    handleSystemAction("تنظيف الحسابات غير المفعلة")
+                  }
+                >
                   تنظيف الحسابات
                 </Button>
-                <Button onClick={() => handleSystemAction('إرسال تذكير التفعيل')}>
+                <Button
+                  onClick={() => handleSystemAction("إرسال تذكير التفعيل")}
+                >
                   تذكير التفعيل
                 </Button>
-                <Button onClick={() => handleSystemAction('تحليل سلوك المستخدمين')}>
+                <Button
+                  onClick={() => handleSystemAction("تحليل سلوك المستخدمين")}
+                >
                   تحليل السلوك
                 </Button>
-                <Button onClick={() => handleSystemAction('إنشاء تقرير المستخدمين')}>
+                <Button
+                  onClick={() => handleSystemAction("إنشاء تقرير المستخدمين")}
+                >
                   تقرير شامل
                 </Button>
               </div>

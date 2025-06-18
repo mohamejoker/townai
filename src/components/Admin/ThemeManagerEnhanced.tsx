@@ -1,19 +1,24 @@
-
-import React, { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { 
-  Palette, 
-  Download, 
-  Upload, 
-  Star, 
-  Copy, 
-  Trash2, 
+import React, { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Palette,
+  Download,
+  Upload,
+  Star,
+  Copy,
+  Trash2,
   Plus,
   Eye,
   Settings,
@@ -26,15 +31,15 @@ import {
   Monitor,
   Smartphone,
   Sun,
-  Moon
-} from 'lucide-react';
-import { useUIControl } from '@/contexts/UIControlContext';
+  Moon,
+} from "lucide-react";
+import { useUIControl } from "@/contexts/UIControlContext";
 
 interface ThemeTemplate {
   id: string;
   name: string;
   description: string;
-  category: 'modern' | 'classic' | 'minimal' | 'creative' | 'dark';
+  category: "modern" | "classic" | "minimal" | "creative" | "dark";
   isPremium: boolean;
   preview: string;
   colors: {
@@ -61,133 +66,154 @@ interface ThemeTemplate {
 
 const ThemeManagerEnhanced = () => {
   const { theme, updateTheme, settings, updateSettings } = useUIControl();
-  const [selectedTemplate, setSelectedTemplate] = useState<ThemeTemplate | null>(null);
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<ThemeTemplate | null>(null);
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<string>("all");
   const [previewMode, setPreviewMode] = useState(false);
 
   const templates: ThemeTemplate[] = [
     {
-      id: '1',
-      name: 'الأزرق الحديث',
-      description: 'ثيم حديث بألوان زرقاء أنيقة',
-      category: 'modern',
+      id: "1",
+      name: "الأزرق الحديث",
+      description: "ثيم حديث بألوان زرقاء أنيقة",
+      category: "modern",
       isPremium: false,
-      preview: 'linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)',
+      preview: "linear-gradient(135deg, #3B82F6 0%, #1E40AF 100%)",
       colors: {
-        primary: '#3B82F6',
-        secondary: '#1E40AF',
-        accent: '#10B981',
-        background: '#FFFFFF',
-        text: '#1F2937'
+        primary: "#3B82F6",
+        secondary: "#1E40AF",
+        accent: "#10B981",
+        background: "#FFFFFF",
+        text: "#1F2937",
       },
       typography: {
-        fontFamily: 'Cairo',
+        fontFamily: "Cairo",
         fontSize: 16,
-        fontWeight: '400'
+        fontWeight: "400",
       },
       layout: {
         borderRadius: 8,
-        spacing: 'normal',
-        shadows: true
+        spacing: "normal",
+        shadows: true,
       },
       rating: 4.8,
       downloads: 1250,
-      author: 'النظام'
+      author: "النظام",
     },
     {
-      id: '2',
-      name: 'الليل المظلم',
-      description: 'ثيم مظلم مريح للعينين',
-      category: 'dark',
+      id: "2",
+      name: "الليل المظلم",
+      description: "ثيم مظلم مريح للعينين",
+      category: "dark",
       isPremium: false,
-      preview: 'linear-gradient(135deg, #1F2937 0%, #111827 100%)',
+      preview: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
       colors: {
-        primary: '#60A5FA',
-        secondary: '#3B82F6',
-        accent: '#34D399',
-        background: '#111827',
-        text: '#F9FAFB'
+        primary: "#60A5FA",
+        secondary: "#3B82F6",
+        accent: "#34D399",
+        background: "#111827",
+        text: "#F9FAFB",
       },
       typography: {
-        fontFamily: 'Inter',
+        fontFamily: "Inter",
         fontSize: 16,
-        fontWeight: '400'
+        fontWeight: "400",
       },
       layout: {
         borderRadius: 12,
-        spacing: 'comfortable',
-        shadows: true
+        spacing: "comfortable",
+        shadows: true,
       },
       rating: 4.9,
       downloads: 890,
-      author: 'المطور'
+      author: "المطور",
     },
     {
-      id: '3',
-      name: 'الورود الإبداعية',
-      description: 'ثيم وردي إبداعي وحيوي',
-      category: 'creative',
+      id: "3",
+      name: "الورود الإبداعية",
+      description: "ثيم وردي إبداعي وحيوي",
+      category: "creative",
       isPremium: true,
-      preview: 'linear-gradient(135deg, #EC4899 0%, #BE185D 100%)',
+      preview: "linear-gradient(135deg, #EC4899 0%, #BE185D 100%)",
       colors: {
-        primary: '#EC4899',
-        secondary: '#BE185D',
-        accent: '#F59E0B',
-        background: '#FFFFFF',
-        text: '#1F2937'
+        primary: "#EC4899",
+        secondary: "#BE185D",
+        accent: "#F59E0B",
+        background: "#FFFFFF",
+        text: "#1F2937",
       },
       typography: {
-        fontFamily: 'Tajawal',
+        fontFamily: "Tajawal",
         fontSize: 17,
-        fontWeight: '500'
+        fontWeight: "500",
       },
       layout: {
         borderRadius: 16,
-        spacing: 'comfortable',
-        shadows: true
+        spacing: "comfortable",
+        shadows: true,
       },
       rating: 4.7,
       downloads: 650,
-      author: 'المصمم'
+      author: "المصمم",
     },
     {
-      id: '4',
-      name: 'البساطة الكلاسيكية',
-      description: 'تصميم بسيط وكلاسيكي',
-      category: 'minimal',
+      id: "4",
+      name: "البساطة الكلاسيكية",
+      description: "تصميم بسيط وكلاسيكي",
+      category: "minimal",
       isPremium: false,
-      preview: 'linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%)',
+      preview: "linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%)",
       colors: {
-        primary: '#475569',
-        secondary: '#334155',
-        accent: '#0EA5E9',
-        background: '#FFFFFF',
-        text: '#1E293B'
+        primary: "#475569",
+        secondary: "#334155",
+        accent: "#0EA5E9",
+        background: "#FFFFFF",
+        text: "#1E293B",
       },
       typography: {
-        fontFamily: 'Inter',
+        fontFamily: "Inter",
         fontSize: 15,
-        fontWeight: '400'
+        fontWeight: "400",
       },
       layout: {
         borderRadius: 6,
-        spacing: 'compact',
-        shadows: false
+        spacing: "compact",
+        shadows: false,
       },
       rating: 4.6,
       downloads: 420,
-      author: 'النظام'
-    }
+      author: "النظام",
+    },
   ];
 
   const categories = [
-    { id: 'all', name: 'الكل', count: templates.length },
-    { id: 'modern', name: 'حديث', count: templates.filter(t => t.category === 'modern').length },
-    { id: 'dark', name: 'مظلم', count: templates.filter(t => t.category === 'dark').length },
-    { id: 'creative', name: 'إبداعي', count: templates.filter(t => t.category === 'creative').length },
-    { id: 'minimal', name: 'بسيط', count: templates.filter(t => t.category === 'minimal').length },
-    { id: 'classic', name: 'كلاسيكي', count: templates.filter(t => t.category === 'classic').length }
+    { id: "all", name: "الكل", count: templates.length },
+    {
+      id: "modern",
+      name: "حديث",
+      count: templates.filter((t) => t.category === "modern").length,
+    },
+    {
+      id: "dark",
+      name: "مظلم",
+      count: templates.filter((t) => t.category === "dark").length,
+    },
+    {
+      id: "creative",
+      name: "إبداعي",
+      count: templates.filter((t) => t.category === "creative").length,
+    },
+    {
+      id: "minimal",
+      name: "بسيط",
+      count: templates.filter((t) => t.category === "minimal").length,
+    },
+    {
+      id: "classic",
+      name: "كلاسيكي",
+      count: templates.filter((t) => t.category === "classic").length,
+    },
   ];
 
   const applyTemplate = (template: ThemeTemplate) => {
@@ -199,7 +225,7 @@ const ThemeManagerEnhanced = () => {
       fontFamily: template.typography.fontFamily,
       fontSize: template.typography.fontSize,
       borderRadius: template.layout.borderRadius,
-      spacing: template.layout.spacing as any
+      spacing: template.layout.spacing as number,
     });
 
     updateSettings({
@@ -211,13 +237,19 @@ const ThemeManagerEnhanced = () => {
       fontFamily: template.typography.fontFamily,
       fontSize: `${template.typography.fontSize}px`,
       borderRadius: `${template.layout.borderRadius}px`,
-      spacing: template.layout.spacing === 'compact' ? '0.75rem' : template.layout.spacing === 'comfortable' ? '1.25rem' : '1rem'
+      spacing:
+        template.layout.spacing === "compact"
+          ? "0.75rem"
+          : template.layout.spacing === "comfortable"
+            ? "1.25rem"
+            : "1rem",
     });
   };
 
-  const filteredTemplates = activeCategory === 'all' 
-    ? templates 
-    : templates.filter(t => t.category === activeCategory);
+  const filteredTemplates =
+    activeCategory === "all"
+      ? templates
+      : templates.filter((t) => t.category === activeCategory);
 
   return (
     <div className="space-y-6">
@@ -239,9 +271,15 @@ const ThemeManagerEnhanced = () => {
                 <Download className="h-4 w-4 mr-2" />
                 تصدير
               </Button>
-              <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
+              <Dialog
+                open={isCreateDialogOpen}
+                onOpenChange={setIsCreateDialogOpen}
+              >
                 <DialogTrigger asChild>
-                  <Button size="sm" className="bg-gradient-to-r from-purple-600 to-pink-600">
+                  <Button
+                    size="sm"
+                    className="bg-gradient-to-r from-purple-600 to-pink-600"
+                  >
                     <Plus className="h-4 w-4 mr-2" />
                     إنشاء ثيم
                   </Button>
@@ -302,7 +340,12 @@ const ThemeManagerEnhanced = () => {
                         </div>
                         <div className="space-y-2">
                           <Label>حجم الخط</Label>
-                          <Input type="number" defaultValue="16" min="12" max="24" />
+                          <Input
+                            type="number"
+                            defaultValue="16"
+                            min="12"
+                            max="24"
+                          />
                         </div>
                       </div>
                     </div>
@@ -329,7 +372,10 @@ const ThemeManagerEnhanced = () => {
                   </div>
 
                   <div className="flex justify-end space-x-2 rtl:space-x-reverse pt-4">
-                    <Button variant="outline" onClick={() => setIsCreateDialogOpen(false)}>
+                    <Button
+                      variant="outline"
+                      onClick={() => setIsCreateDialogOpen(false)}
+                    >
                       إلغاء
                     </Button>
                     <Button className="bg-gradient-to-r from-purple-600 to-pink-600">
@@ -364,16 +410,19 @@ const ThemeManagerEnhanced = () => {
       {/* Templates Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredTemplates.map((template) => (
-          <Card key={template.id} className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 shadow-lg">
+          <Card
+            key={template.id}
+            className="group hover:shadow-xl transition-all duration-300 overflow-hidden border-0 shadow-lg"
+          >
             <div className="relative">
               {/* معاينة الثيم */}
-              <div 
+              <div
                 className="h-40 relative cursor-pointer"
                 style={{ background: template.preview }}
                 onClick={() => setSelectedTemplate(template)}
               >
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
-                
+
                 {template.isPremium && (
                   <div className="absolute top-3 right-3">
                     <Badge className="bg-yellow-500 text-white">
@@ -385,12 +434,16 @@ const ThemeManagerEnhanced = () => {
 
                 <div className="absolute bottom-3 left-3 right-3">
                   <div className="flex space-x-2 rtl:space-x-reverse">
-                    <Button size="sm" variant="secondary" className="flex-1 text-xs">
+                    <Button
+                      size="sm"
+                      variant="secondary"
+                      className="flex-1 text-xs"
+                    >
                       <Eye className="h-3 w-3 ml-1" />
                       معاينة
                     </Button>
-                    <Button 
-                      size="sm" 
+                    <Button
+                      size="sm"
                       className="flex-1 text-xs bg-white/20 backdrop-blur-sm hover:bg-white/30"
                       onClick={(e) => {
                         e.stopPropagation();
@@ -408,26 +461,30 @@ const ThemeManagerEnhanced = () => {
                   <div className="flex items-start justify-between">
                     <div>
                       <h3 className="font-semibold text-lg">{template.name}</h3>
-                      <p className="text-sm text-gray-600">{template.description}</p>
+                      <p className="text-sm text-gray-600">
+                        {template.description}
+                      </p>
                     </div>
                     <Badge variant="outline" className="text-xs">
-                      {template.category === 'modern' && 'حديث'}
-                      {template.category === 'classic' && 'كلاسيكي'}
-                      {template.category === 'minimal' && 'بسيط'}
-                      {template.category === 'creative' && 'إبداعي'}
-                      {template.category === 'dark' && 'مظلم'}
+                      {template.category === "modern" && "حديث"}
+                      {template.category === "classic" && "كلاسيكي"}
+                      {template.category === "minimal" && "بسيط"}
+                      {template.category === "creative" && "إبداعي"}
+                      {template.category === "dark" && "مظلم"}
                     </Badge>
                   </div>
 
                   {/* عرض الألوان */}
                   <div className="flex space-x-1 rtl:space-x-reverse">
-                    {Object.values(template.colors).slice(0, 4).map((color, index) => (
-                      <div
-                        key={index}
-                        className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
-                        style={{ backgroundColor: color }}
-                      />
-                    ))}
+                    {Object.values(template.colors)
+                      .slice(0, 4)
+                      .map((color, index) => (
+                        <div
+                          key={index}
+                          className="w-6 h-6 rounded-full border-2 border-white shadow-sm"
+                          style={{ backgroundColor: color }}
+                        />
+                      ))}
                   </div>
 
                   {/* الإحصائيات */}
@@ -489,14 +546,14 @@ const ThemeManagerEnhanced = () => {
               <h4 className="font-medium">الألوان</h4>
               <div className="space-y-2">
                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <div 
+                  <div
                     className="w-4 h-4 rounded border"
                     style={{ backgroundColor: theme.primaryColor }}
                   />
                   <span className="text-sm">أساسي: {theme.primaryColor}</span>
                 </div>
                 <div className="flex items-center space-x-2 rtl:space-x-reverse">
-                  <div 
+                  <div
                     className="w-4 h-4 rounded border"
                     style={{ backgroundColor: theme.secondaryColor }}
                   />

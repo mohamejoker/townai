@@ -1,30 +1,29 @@
-
-import React, { useState, useEffect, useRef } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Badge } from '@/components/ui/badge';
-import { Textarea } from '@/components/ui/textarea';
-import { 
-  Send, 
-  Image, 
-  Brain, 
-  User, 
-  Settings, 
-  Download, 
+import React, { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import { Textarea } from "@/components/ui/textarea";
+import {
+  Send,
+  Image,
+  Brain,
+  User,
+  Settings,
+  Download,
   Share,
   Clock,
   MessageSquare,
-  Sparkles
-} from 'lucide-react';
-import { useToast } from '@/hooks/use-toast';
-import { chatPlansService } from '@/services/ai/chatPlansService';
-import { advancedAI } from '@/services/ai/advancedAI';
+  Sparkles,
+} from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
+import { chatPlansService } from "@/services/ai/chatPlansService";
+import { advancedAI } from "@/services/ai/advancedAI";
 
 interface Message {
   id: string;
-  type: 'user' | 'ai' | 'system';
+  type: "user" | "ai" | "system";
   content: string;
   timestamp: Date;
   tokens?: number;
@@ -36,11 +35,14 @@ interface ChatInterfaceProps {
   onUpgradeNeeded: () => void;
 }
 
-const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNeeded }) => {
+const ChatInterface: React.FC<ChatInterfaceProps> = ({
+  currentPlan,
+  onUpgradeNeeded,
+}) => {
   const [messages, setMessages] = useState<Message[]>([]);
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [conversationTitle, setConversationTitle] = useState('محادثة جديدة');
+  const [conversationTitle, setConversationTitle] = useState("محادثة جديدة");
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast();
@@ -48,16 +50,16 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
   useEffect(() => {
     // رسالة الترحيب
     const welcomeMessage: Message = {
-      id: 'welcome',
-      type: 'ai',
+      id: "welcome",
+      type: "ai",
       content: `🤖 **مرحباً بك في محادثة الذكاء الاصطناعي!**\n\nأنا هنا لمساعدتك في:\n\n🔍 **تحليل حساباتك** على جميع المنصات\n📊 **وضع استراتيجيات تسويقية** مخصصة\n🎨 **إنشاء محتوى إبداعي** وجذاب\n📈 **تحليل المنافسين** ودراسة السوق\n💡 **نصائح لتحسين الأداء** والنمو\n\nما الذي تريد مساعدة فيه اليوم؟`,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
     setMessages([welcomeMessage]);
   }, []);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   useEffect(() => {
@@ -68,8 +70,11 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
     if (!input.trim()) return;
 
     // فحص حدود الاستخدام
-    const usageCheck = await chatPlansService.checkUsageLimit('user123', currentPlan);
-    
+    const usageCheck = await chatPlansService.checkUsageLimit(
+      "user123",
+      currentPlan,
+    );
+
     if (!usageCheck.canSend) {
       onUpgradeNeeded();
       return;
@@ -77,33 +82,40 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
 
     const userMessage: Message = {
       id: Date.now().toString(),
-      type: 'user',
+      type: "user",
       content: input,
-      timestamp: new Date()
+      timestamp: new Date(),
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setMessages((prev) => [...prev, userMessage]);
     const messageText = input;
-    setInput('');
+    setInput("");
     setIsTyping(true);
 
     try {
       // تسجيل استخدام الرسالة
-      await chatPlansService.recordMessageUsage('user123', currentPlan);
+      await chatPlansService.recordMessageUsage("user123", currentPlan);
 
-      let response = '';
+      let response = "";
       let tokens = 0;
       let cost = 0;
 
       // تحديد نوع الطلب وإجراء المعالجة المناسبة
-      if (messageText.includes('تحليل') || messageText.startsWith('http')) {
-        const analysis = await advancedAI.analyzeContent(messageText, 'post');
-        response = `🔍 **تحليل شامل:**\n\n📊 **النتائج:**\n• تقييم المحتوى: ${analysis.sentiment}\n• توقع التفاعل: ${analysis.engagement_prediction}/10\n• أفضل وقت للنشر: ${analysis.best_posting_time}\n\n🏷️ **هاشتاجات مقترحة:**\n${analysis.hashtag_suggestions.map(tag => `#${tag}`).join(' ')}\n\n💡 **نصائح التحسين:**\n${analysis.optimization_tips.map(tip => `• ${tip}`).join('\n')}`;
+      if (messageText.includes("تحليل") || messageText.startsWith("http")) {
+        const analysis = await advancedAI.analyzeContent(messageText, "post");
+        response = `🔍 **تحليل شامل:**\n\n📊 **النتائج:**\n• تقييم المحتوى: ${analysis.sentiment}\n• توقع التفاعل: ${analysis.engagement_prediction}/10\n• أفضل وقت للنشر: ${analysis.best_posting_time}\n\n🏷️ **هاشتاجات مقترحة:**\n${analysis.hashtag_suggestions.map((tag) => `#${tag}`).join(" ")}\n\n💡 **نصائح التحسين:**\n${analysis.optimization_tips.map((tip) => `• ${tip}`).join("\n")}`;
         tokens = 150;
         cost = 0.003;
-      } else if (messageText.includes('محتوى') || messageText.includes('اكتب')) {
-        const content = await advancedAI.generateContent(messageText, 'instagram', 'احترافي');
-        response = `✨ **محتوى جديد:**\n\n📝 **العنوان:**\n${content.title}\n\n📄 **النص:**\n${content.content}\n\n🏷️ **الهاشتاجات:**\n${content.hashtags.join(' ')}\n\n📢 **دعوة للعمل:**\n${content.call_to_action}`;
+      } else if (
+        messageText.includes("محتوى") ||
+        messageText.includes("اكتب")
+      ) {
+        const content = await advancedAI.generateContent(
+          messageText,
+          "instagram",
+          "احترافي",
+        );
+        response = `✨ **محتوى جديد:**\n\n📝 **العنوان:**\n${content.title}\n\n📄 **النص:**\n${content.content}\n\n🏷️ **الهاشتاجات:**\n${content.hashtags.join(" ")}\n\n📢 **دعوة للعمل:**\n${content.call_to_action}`;
         tokens = 200;
         cost = 0.004;
       } else {
@@ -114,34 +126,35 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
 
       const aiMessage: Message = {
         id: Date.now().toString(),
-        type: 'ai',
+        type: "ai",
         content: response,
         timestamp: new Date(),
         tokens,
-        cost
+        cost,
       };
 
-      setMessages(prev => [...prev, aiMessage]);
+      setMessages((prev) => [...prev, aiMessage]);
 
       // تحديث عنوان المحادثة إذا كانت أول رسالة
       if (messages.length === 1) {
-        const title = messageText.slice(0, 50) + (messageText.length > 50 ? '...' : '');
+        const title =
+          messageText.slice(0, 50) + (messageText.length > 50 ? "..." : "");
         setConversationTitle(title);
       }
-
-    } catch (error: any) {
+    } catch (error: unknown) {
+      const errorMsg = error instanceof Error ? error.message : "خطأ غير متوقع";
       const errorMessage: Message = {
         id: Date.now().toString(),
-        type: 'ai',
-        content: `❌ **خطأ:** ${error.message}\n\n💡 تأكد من الاتصال بالإنترنت وحاول مرة أخرى.`,
-        timestamp: new Date()
+        type: "ai",
+        content: `❌ **خطأ:** ${errorMsg}\n\n💡 تأكد من الاتصال بالإنترنت وحاول مرة أخرى.`,
+        timestamp: new Date(),
       };
-      setMessages(prev => [...prev, errorMessage]);
+      setMessages((prev) => [...prev, errorMessage]);
 
       toast({
         title: "خطأ في المعالجة",
-        description: error.message,
-        variant: "destructive"
+        description: errorMsg,
+        variant: "destructive",
       });
     } finally {
       setIsTyping(false);
@@ -155,55 +168,62 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
     const reader = new FileReader();
     reader.onload = async () => {
       const imageUrl = reader.result as string;
-      
+
       // إضافة رسالة الصورة
       const imageMessage: Message = {
         id: Date.now().toString(),
-        type: 'user',
+        type: "user",
         content: `🖼️ تم رفع صورة للتحليل`,
-        timestamp: new Date()
+        timestamp: new Date(),
       };
-      
-      setMessages(prev => [...prev, imageMessage]);
+
+      setMessages((prev) => [...prev, imageMessage]);
       setIsTyping(true);
-      
+
       try {
         const analysis = await advancedAI.analyzeImage(imageUrl);
-        
+
         const analysisMessage: Message = {
           id: Date.now().toString(),
-          type: 'ai',
-          content: `🖼️ **تحليل الصورة:**\n\n📝 **الوصف:** ${analysis.description}\n\n🎯 **العناصر:** ${analysis.objects.join('، ')}\n\n😊 **المشاعر:** ${analysis.emotions.join('، ')}\n\n🎨 **الألوان:** ${analysis.colors.join('، ')}\n\n💡 **اقتراحات:** ${analysis.suggestions.join('، ')}`,
+          type: "ai",
+          content: `🖼️ **تحليل الصورة:**\n\n📝 **الوصف:** ${analysis.description}\n\n🎯 **العناصر:** ${analysis.objects.join("، ")}\n\n😊 **المشاعر:** ${analysis.emotions.join("، ")}\n\n🎨 **الألوان:** ${analysis.colors.join("، ")}\n\n💡 **اقتراحات:** ${analysis.suggestions.join("، ")}`,
           timestamp: new Date(),
           tokens: 120,
-          cost: 0.006
+          cost: 0.006,
         };
-        
-        setMessages(prev => [...prev, analysisMessage]);
-      } catch (error: any) {
+
+        setMessages((prev) => [...prev, analysisMessage]);
+      } catch (error: unknown) {
+        const errorMsg =
+          error instanceof Error
+            ? error.message
+            : "خطأ غير متوقع في تحليل الصورة";
         toast({
           title: "خطأ في تحليل الصورة",
-          description: error.message,
-          variant: "destructive"
+          description: errorMsg,
+          variant: "destructive",
         });
       } finally {
         setIsTyping(false);
       }
     };
-    
+
     reader.readAsDataURL(file);
   };
 
   const exportChat = () => {
-    const chatContent = messages.map(msg => 
-      `[${msg.timestamp.toLocaleString('ar-EG')}] ${msg.type === 'user' ? 'أنت' : 'AI'}: ${msg.content}`
-    ).join('\n\n');
-    
-    const blob = new Blob([chatContent], { type: 'text/plain' });
+    const chatContent = messages
+      .map(
+        (msg) =>
+          `[${msg.timestamp.toLocaleString("ar-EG")}] ${msg.type === "user" ? "أنت" : "AI"}: ${msg.content}`,
+      )
+      .join("\n\n");
+
+    const blob = new Blob([chatContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
-    a.download = `محادثة-AI-${new Date().toLocaleDateString('ar-EG')}.txt`;
+    a.download = `محادثة-AI-${new Date().toLocaleDateString("ar-EG")}.txt`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -214,13 +234,13 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
       navigator.share({
         title: summary,
         text: `تفاعلت مع AI للحصول على نصائح تسويقية مخصصة`,
-        url: window.location.href
+        url: window.location.href,
       });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast({
         title: "تم النسخ",
-        description: "تم نسخ رابط المحادثة"
+        description: "تم نسخ رابط المحادثة",
       });
     }
   };
@@ -235,16 +255,26 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
               <h3 className="font-bold">{conversationTitle}</h3>
               <p className="text-blue-100 text-sm flex items-center gap-1">
                 <Clock className="h-3 w-3" />
-                {new Date().toLocaleString('ar-EG')}
+                {new Date().toLocaleString("ar-EG")}
               </p>
             </div>
           </CardTitle>
-          
+
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={exportChat} className="text-white hover:bg-white/20">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={exportChat}
+              className="text-white hover:bg-white/20"
+            >
               <Download className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="sm" onClick={shareChat} className="text-white hover:bg-white/20">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={shareChat}
+              className="text-white hover:bg-white/20"
+            >
               <Share className="h-4 w-4" />
             </Button>
             <Badge className="bg-white/20 text-white">
@@ -259,23 +289,36 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
         <ScrollArea className="flex-1 p-4">
           <div className="space-y-4">
             {messages.map((message) => (
-              <div key={message.id} className={`flex ${message.type === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`flex items-start gap-3 max-w-[85%] ${message.type === 'user' ? 'flex-row-reverse' : ''}`}>
-                  <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
-                    message.type === 'user' 
-                      ? 'bg-blue-500 text-white' 
-                      : 'bg-gradient-to-r from-green-500 to-blue-500 text-white'
-                  }`}>
-                    {message.type === 'user' ? <User className="h-4 w-4" /> : <Brain className="h-4 w-4" />}
+              <div
+                key={message.id}
+                className={`flex ${message.type === "user" ? "justify-end" : "justify-start"}`}
+              >
+                <div
+                  className={`flex items-start gap-3 max-w-[85%] ${message.type === "user" ? "flex-row-reverse" : ""}`}
+                >
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      message.type === "user"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gradient-to-r from-green-500 to-blue-500 text-white"
+                    }`}
+                  >
+                    {message.type === "user" ? (
+                      <User className="h-4 w-4" />
+                    ) : (
+                      <Brain className="h-4 w-4" />
+                    )}
                   </div>
-                  
-                  <div className={`rounded-2xl p-4 ${
-                    message.type === 'user'
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-gray-100 text-gray-900'
-                  }`}>
+
+                  <div
+                    className={`rounded-2xl p-4 ${
+                      message.type === "user"
+                        ? "bg-blue-500 text-white"
+                        : "bg-gray-100 text-gray-900"
+                    }`}
+                  >
                     <div className="whitespace-pre-wrap">{message.content}</div>
-                    
+
                     {message.tokens && (
                       <div className="flex items-center gap-2 mt-2 pt-2 border-t border-gray-200">
                         <Badge variant="outline" className="text-xs">
@@ -290,7 +333,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
                 </div>
               </div>
             ))}
-            
+
             {isTyping && (
               <div className="flex justify-start">
                 <div className="flex items-center gap-3">
@@ -310,7 +353,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
                 </div>
               </div>
             )}
-            
+
             <div ref={messagesEndRef} />
           </div>
         </ScrollArea>
@@ -325,21 +368,21 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
             >
               <Image className="h-4 w-4" />
             </Button>
-            
+
             <Textarea
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="اكتب رسالتك هنا... مثل: 'حلل حساب @username' أو 'اكتب محتوى عن التسويق الرقمي'"
               className="flex-1 min-h-[50px] max-h-[120px] resize-none"
               onKeyPress={(e) => {
-                if (e.key === 'Enter' && !e.shiftKey) {
+                if (e.key === "Enter" && !e.shiftKey) {
                   e.preventDefault();
                   handleSend();
                 }
               }}
               disabled={isTyping}
             />
-            
+
             <Button
               onClick={handleSend}
               disabled={!input.trim() || isTyping}
@@ -348,7 +391,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
               <Send className="h-5 w-5" />
             </Button>
           </div>
-          
+
           <input
             ref={fileInputRef}
             type="file"
@@ -356,7 +399,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({ currentPlan, onUpgradeNee
             onChange={handleImageUpload}
             className="hidden"
           />
-          
+
           <div className="flex items-center justify-center gap-4 mt-3 text-xs text-gray-500">
             <Badge variant="secondary" className="flex items-center gap-1">
               <Sparkles className="h-3 w-3" />
