@@ -35,7 +35,9 @@ export function translateServiceName(name: string): string {
 
   let translatedName = name.toLowerCase();
   Object.entries(translations).forEach(([eng, ar]) => {
-    translatedName = translatedName.replace(new RegExp(eng, "gi"), ar);
+    // Escape special regex characters and use global case-insensitive replace
+    const escapedEng = eng.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    translatedName = translatedName.replace(new RegExp(escapedEng, "gi"), ar);
   });
 
   return translatedName;
@@ -55,7 +57,9 @@ export function translateDescription(description: string): string {
 
   let translatedDesc = description.toLowerCase();
   Object.entries(translations).forEach(([eng, ar]) => {
-    translatedDesc = translatedDesc.replace(new RegExp(eng, "gi"), ar);
+    // Escape special regex characters and use global case-insensitive replace
+    const escapedEng = eng.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    translatedDesc = translatedDesc.replace(new RegExp(escapedEng, "gi"), ar);
   });
 
   return translatedDesc;
