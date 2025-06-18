@@ -37,6 +37,14 @@ export default defineConfig(({ mode }) => ({
     target: "es2019",
   },
   build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          charts: ["recharts"],
+        },
+      },
+    },
     chunkSizeWarningLimit: 1000,
   },
 }));
