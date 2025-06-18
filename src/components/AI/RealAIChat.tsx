@@ -201,14 +201,13 @@ const RealAIChat: React.FC<RealAIChatProps> = ({ onActionClick }) => {
         description: `استخدام ${selectedProvider.toUpperCase()} - ${tokensUsed} رمز مميز`,
       });
     } catch (error: unknown) {
-      const errorMessage =
-        error instanceof Error ? error.message : "خطأ غير متوقع";
+      const errorMsg = error instanceof Error ? error.message : "خطأ غير متوقع";
       console.error("خطأ في الـ AI:", error);
 
       const errorMessage: Message = {
         id: Date.now().toString(),
         type: "ai",
-        content: `❌ **خطأ في الاتصال بـ ${selectedProvider.toUpperCase()}**\n\nالسبب: ${errorMessage}\n\n🔧 **الحلول المقترحة:**\n• تأكد من وجود مفتاح API صحيح\n• تحقق من الاتصال بالإنترنت\n• جرب مزود آخر\n\n💡 يمكنك إعداد مفاتيح API من إعدادات المنصة.`,
+        content: `❌ **خطأ في الاتصال بـ ${selectedProvider.toUpperCase()}**\n\nالسبب: ${errorMsg}\n\n🔧 **الحلول المقترحة:**\n• تأكد من وجود مفتاح API صحيح\n• تحقق من الاتصال بالإنترنت\n• جرب مزود آخر\n\n💡 يمكنك إعداد مفاتيح API من إعدادات المنصة.`,
         timestamp: new Date(),
         provider: selectedProvider,
         model: selectedModel,
@@ -218,7 +217,7 @@ const RealAIChat: React.FC<RealAIChatProps> = ({ onActionClick }) => {
 
       toast({
         title: "خطأ في الـ AI",
-        description: errorMessage,
+        description: errorMsg,
         variant: "destructive",
       });
     } finally {
