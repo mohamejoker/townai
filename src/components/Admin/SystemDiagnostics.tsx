@@ -180,7 +180,7 @@ const SystemDiagnostics = () => {
     }
 
     setIsRunning(false);
-  }, []);
+  }, [initialChecks]);
 
   const updateCheckStatus = (
     checkId: string,
