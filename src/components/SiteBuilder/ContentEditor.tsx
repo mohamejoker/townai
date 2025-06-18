@@ -228,7 +228,7 @@ const HeroEditor: React.FC<{
       </div>
 
       <div>
-        <Label htmlFor="hero-bg-image">ص��رة الخلفية</Label>
+        <Label htmlFor="hero-bg-image">صورة الخلفية</Label>
         <Input
           id="hero-bg-image"
           value={(content.backgroundImage as string) || ""}
@@ -510,7 +510,7 @@ const GalleryEditor: React.FC<{
             id="gallery-title"
             value={(content.title as string) || ""}
             onChange={(e) => onUpdate("title", e.target.value)}
-            placeholder="معرض ��لصور"
+            placeholder="معرض الصور"
           />
         </div>
 
