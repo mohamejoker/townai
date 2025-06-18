@@ -22,7 +22,6 @@ import CompactAIChat from "@/components/Sections/CompactAIChat";
 import RealAIChat from "@/components/AI/RealAIChat";
 import Footer from "@/components/Frontend/Footer";
 import Navbar from "@/components/Frontend/Navbar";
-import AdvancedPaymentSystem from "@/components/Payment/AdvancedPaymentSystem";
 
 import {
   Star,
@@ -203,7 +202,7 @@ const EnhancedLandingPage = () => {
     },
     {
       name: "سارة أحمد",
-      role: "صاحبة متجر إل��تروني",
+      role: "صاحبة متجر إلكتروني",
       avatar: "👩‍💻",
       content:
         "الذكاء الاصطناعي ساعدني أفهم جمهوري أكثر وأزيد مبيعاتي بنسبة 300%.",
