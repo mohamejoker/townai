@@ -5,14 +5,6 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Memory-efficient settings for CI builds
-  ...(process.env.CI && {
-    experimental: {
-      renderBuiltUrl(filename, { hostType }) {
-        return filename;
-      },
-    },
-  }),
   server: {
     host: "0.0.0.0",
     port: 8080,
@@ -38,62 +30,21 @@ export default defineConfig(({ mode }) => ({
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
   },
   optimizeDeps: {
-    include: [
-      "react",
-      "react-dom",
-      "@radix-ui/react-dialog",
-      "@radix-ui/react-dropdown-menu",
-    ],
+    include: ["react", "react-dom"],
     exclude: ["@vite/client", "@vite/env"],
-    force: true,
   },
   esbuild: {
-    target: "es2020",
-    logLimit: 0,
-    drop: mode === "production" ? ["console", "debugger"] : [],
+    target: "es2019",
   },
   build: {
-    chunkSizeWarningLimit: 800,
-    minify: "esbuild",
-    target: "es2020",
-    sourcemap: false,
     rollupOptions: {
-      ...(mode === "production" && {
-        treeshake: {
-          preset: "recommended",
-        },
-      }),
       output: {
-        manualChunks: (id) => {
-          // Core vendor libs
-          if (id.includes("react") || id.includes("react-dom")) {
-            return "vendor-react";
-          }
-          // UI component libraries
-          if (id.includes("@radix-ui") || id.includes("lucide-react")) {
-            return "vendor-ui";
-          }
-          // Charts and visualization
-          if (id.includes("recharts") || id.includes("chart")) {
-            return "vendor-charts";
-          }
-          // Admin related components
-          if (
-            id.includes("src/components/Admin") ||
-            id.includes("src/pages/admin")
-          ) {
-            return "admin";
-          }
-          // Services and utilities
-          if (id.includes("src/services") || id.includes("src/utils")) {
-            return "services";
-          }
-          // Other vendor dependencies
-          if (id.includes("node_modules")) {
-            return "vendor-misc";
-          }
+        manualChunks: {
+          vendor: ["react", "react-dom"],
+          charts: ["recharts"],
         },
       },
     },
+    chunkSizeWarningLimit: 1000,
   },
 }));
