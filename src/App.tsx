@@ -143,6 +143,9 @@ function App() {
 
                 {/* زر الذكاء الاصطناعي العائم */}
                 <FloatingAIButton />
+
+                {/* أدوات التطوير */}
+                <DevAuthControls />
               </div>
             </BrowserRouter>
           </AuthProvider>
