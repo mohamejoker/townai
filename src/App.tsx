@@ -81,6 +81,7 @@ function App() {
                       element={<ServicesOverview />}
                     />
                     <Route path="/ai-chat" element={<AIChatPage />} />
+                    <Route path="/site-builder" element={<SiteBuilderPage />} />
 
                     {/* المسارات الإدارية */}
                     <Route
