@@ -1,7 +1,6 @@
 // المكونات المشتركة عبر التطبيق
 
-// Note: Using wildcard exports temporarily disabled to prevent Node.js version compatibility issues
-// Individual components can be imported directly from their source files when needed
+// All exports temporarily disabled to diagnose circular dependency issues
+// Import components directly from their source files
 
-// Essential re-exports only - no wildcards to avoid circular dependencies
-export { Button } from "../../components/ui/button";
+// export { Button } from '../../components/ui/button';
