@@ -1,4 +1,4 @@
-// نظام متقدم لسحب وإدارة الخدمات ��ن الموردين
+// نظام متقدم لسحب وإدارة الخدمات من الموردين
 
 import type { Provider, ProviderService, SyncResult } from "./types";
 import { processService, calculateFinalPrice } from "./dataProcessor";
@@ -229,10 +229,7 @@ class AdvancedProviderSync {
   }
 
   // معالجة وتحويل الخدمة
-  private async processService(
-    rawService: any,
-    provider: Provider,
-  ): Promise<ProviderService> {
+  private processService(rawService: any, provider: Provider): ProviderService {
     return processService(rawService, provider);
   }
 
