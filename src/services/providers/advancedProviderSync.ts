@@ -1,7 +1,7 @@
 // نظام متقدم لسحب وإدارة الخدمات من الموردين
 
 import type { Provider, ProviderService, SyncResult } from "./types";
-import { processService, calculateFinalPrice } from "./dataProcessor";
+import { DataProcessor } from "./dataProcessor";
 
 class AdvancedProviderSync {
   private providers: Provider[] = [];
@@ -113,7 +113,7 @@ class AdvancedProviderSync {
 
       for (const service of providerServices) {
         try {
-          const processedService = this.processService(service, provider);
+          const processedService = await this.processService(service, provider);
           const existingIndex = this.services.findIndex(
             (s) =>
               s.providerId === provider.id &&
@@ -132,7 +132,7 @@ class AdvancedProviderSync {
         } catch (error) {
           result.errors++;
           result.errorDetails.push(
-            `خطأ في معالجة الخدمة ${service.name}: ${error}`,
+            `خطأ في معالجة ��لخدمة ${service.name}: ${error}`,
           );
         }
       }
@@ -228,9 +228,12 @@ class AdvancedProviderSync {
     return response.json();
   }
 
-  // معالجة وتحويل الخد��ة
-  private processService(rawService: any, provider: Provider): ProviderService {
-    return processService(rawService, provider);
+  // معالجة وتحويل ا��خدمة
+  private async processService(
+    rawService: any,
+    provider: Provider,
+  ): Promise<ProviderService> {
+    return DataProcessor.processService(rawService, provider);
   }
 
   // إعداد المزامنة التلقائية
@@ -254,7 +257,7 @@ class AdvancedProviderSync {
       this.services.forEach((service) => {
         if (service.providerId === providerId) {
           service.profitMargin = profitMargin;
-          service.finalRate = calculateFinalPrice(
+          service.finalRate = DataProcessor.calculateFinalPrice(
             service.originalRate,
             profitMargin,
           );
@@ -270,7 +273,7 @@ class AdvancedProviderSync {
     const service = this.services.find((s) => s.id === serviceId);
     if (service) {
       service.profitMargin = profitMargin;
-      service.finalRate = calculateFinalPrice(
+      service.finalRate = DataProcessor.calculateFinalPrice(
         service.originalRate,
         profitMargin,
       );
