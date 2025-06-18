@@ -30,11 +30,19 @@ export default defineConfig(({ mode }) => ({
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
   },
   optimizeDeps: {
-    include: ["react", "react-dom"],
+    include: [
+      "react",
+      "react-dom",
+      "@radix-ui/react-dialog",
+      "@radix-ui/react-dropdown-menu",
+    ],
     exclude: ["@vite/client", "@vite/env"],
+    force: true,
   },
   esbuild: {
-    target: "es2019",
+    target: "es2020",
+    logLimit: 0,
+    drop: mode === "production" ? ["console", "debugger"] : [],
   },
   build: {
     rollupOptions: {
