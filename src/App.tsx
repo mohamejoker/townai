@@ -13,14 +13,16 @@ import EnhancedLandingPage from "@/pages/EnhancedLandingPage";
 import EnhancedServicesPage from "@/pages/EnhancedServicesPage";
 import AIChatPage from "@/pages/AIChatPage";
 import SiteBuilderPage from "@/pages/SiteBuilderPage";
-import TestDashboardPage from "@/pages/admin/TestDashboardPage";
 import TestLoginPage from "@/pages/TestLoginPage";
 import SystemTestPage from "@/pages/SystemTestPage";
-import { AdminDashboardPage } from "@/pages/admin";
-import UsersPage from "@/pages/admin/UsersPage";
-import ServicesPage from "@/pages/admin/ServicesPage";
-import OrdersPage from "@/pages/admin/OrdersPage";
-import SettingsPage from "@/pages/admin/SettingsPage";
+import {
+  AdminDashboardPage,
+  TestDashboardPage,
+  UsersPage,
+  ServicesPage,
+  OrdersPage,
+  SettingsPage,
+} from "@/pages/admin";
 import PaymentsDashboard from "@/components/Admin/PaymentsDashboard";
 import SystemDiagnosticsPage from "@/pages/admin/SystemDiagnosticsPage";
 import SystemHealthPage from "@/pages/admin/SystemHealthPage";
