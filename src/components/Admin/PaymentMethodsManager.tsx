@@ -29,7 +29,10 @@ import PaymentMethodForm from "./Payments/PaymentMethodForm";
 
 const PaymentMethodsManager = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const [selectedMethod, setSelectedMethod] = useState<any>(null);
+  const [selectedMethod, setSelectedMethod] = useState<Record<
+    string,
+    unknown
+  > | null>(null);
   const queryClient = useQueryClient();
 
   // جلب طرق الدفع
