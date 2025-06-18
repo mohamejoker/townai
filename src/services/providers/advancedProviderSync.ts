@@ -257,7 +257,7 @@ class AdvancedProviderSync {
       this.services.forEach((service) => {
         if (service.providerId === providerId) {
           service.profitMargin = profitMargin;
-          service.finalRate = this.calculateFinalPrice(
+          service.finalRate = DataProcessor.calculateFinalPrice(
             service.originalRate,
             profitMargin,
           );
