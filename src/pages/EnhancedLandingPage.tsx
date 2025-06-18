@@ -21,6 +21,7 @@ import Logo from "@/components/Common/Logo";
 import CompactAIChat from "@/components/Sections/CompactAIChat";
 import RealAIChat from "@/components/AI/RealAIChat";
 import Footer from "@/components/Frontend/Footer";
+import Navbar from "@/components/Frontend/Navbar";
 import AdvancedPaymentSystem from "@/components/Payment/AdvancedPaymentSystem";
 
 import {
@@ -202,7 +203,7 @@ const EnhancedLandingPage = () => {
     },
     {
       name: "سارة أحمد",
-      role: "صاحبة متجر إلكتروني",
+      role: "صاحبة متجر إل��تروني",
       avatar: "👩‍💻",
       content:
         "الذكاء الاصطناعي ساعدني أفهم جمهوري أكثر وأزيد مبيعاتي بنسبة 300%.",
@@ -229,71 +230,10 @@ const EnhancedLandingPage = () => {
         />
       </div>
 
-      {/* Enhanced Header */}
-      <header className="fixed top-1 left-0 w-full bg-white/95 backdrop-blur-md shadow-lg border-b z-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-4 rtl:space-x-reverse">
-              <Logo size="sm" />
-              <Badge className="bg-gradient-to-r from-green-500 to-blue-500 text-white">
-                <Sparkles className="h-3 w-3 ml-1" />
-                AI-Powered
-              </Badge>
-            </div>
+      {/* Enhanced Navbar */}
+      <Navbar />
 
-            <nav className="hidden md:flex items-center space-x-8 rtl:space-x-reverse">
-              <a
-                href="#services"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                الخدمات
-              </a>
-              <a
-                href="#pricing"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                الأسعار
-              </a>
-              <a
-                href="#ai-chat"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                المساعد الذكي
-              </a>
-              <a
-                href="#testimonials"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                آراء العملاء
-              </a>
-            </nav>
-
-            <div className="flex items-center space-x-3 rtl:space-x-reverse">
-              <Button
-                variant="ghost"
-                onClick={() => setShowAIChat(!showAIChat)}
-                className="text-gray-700"
-              >
-                <MessageSquare className="h-4 w-4 ml-2" />
-                المساعد الذكي
-              </Button>
-              <Link to="/login">
-                <Button variant="ghost" className="text-gray-700">
-                  تسجيل الدخول
-                </Button>
-              </Link>
-              <Link to="/register">
-                <Button className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700">
-                  <Crown className="h-4 w-4 ml-2" />
-                  ابدأ الآن
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </header>
-
-      <div className="pt-16">
+      <div>
         {/* AI-Focused Hero Section */}
         <AIFocusedHero />
 
