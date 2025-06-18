@@ -37,6 +37,7 @@ import PaymentMethodsPage from "@/pages/admin/PaymentMethodsPage";
 import ThemeControlPage from "@/pages/admin/ThemeControlPage";
 import ReportsPage from "@/pages/admin/ReportsPage";
 import UIPage from "@/pages/admin/UIPage";
+import JobsPage from "@/pages/JobsPage";
 import ErrorBoundaryWrapper from "@/components/Common/ErrorBoundaryWrapper";
 import { PageLoading } from "@/components/Common/LoadingStates";
 import AdminLayout from "@/components/Admin/AdminLayout";
