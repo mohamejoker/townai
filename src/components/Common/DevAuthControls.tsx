@@ -21,7 +21,10 @@ const DevAuthControls: React.FC = () => {
   if (!import.meta.env.DEV) return null;
 
   return (
-    <Card className="fixed bottom-4 right-4 w-80 bg-yellow-50 border-yellow-200 shadow-lg z-50">
+    <Card
+      data-tour="dev-auth"
+      className="fixed bottom-4 right-4 w-80 bg-yellow-50 border-yellow-200 shadow-lg z-50"
+    >
       <CardHeader className="pb-3">
         <CardTitle className="flex items-center text-sm">
           <Settings className="w-4 h-4 mr-2" />
