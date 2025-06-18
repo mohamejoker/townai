@@ -168,7 +168,7 @@ const StyleEditor: React.FC<StyleEditorProps> = ({
             تخطيط
           </TabsTrigger>
           <TabsTrigger value="effects">
-            <Shadow className="w-4 h-4 mr-1" />
+            <Shadows className="w-4 h-4 mr-1" />
             تأثيرات
           </TabsTrigger>
         </TabsList>
@@ -708,7 +708,7 @@ const LayoutPanel: React.FC<{
           </div>
         </div>
 
-        {/* الموضع */}
+        {/* ال��وضع */}
         <div>
           <Label htmlFor="position">الموضع</Label>
           <select
