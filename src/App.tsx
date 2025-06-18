@@ -52,12 +52,12 @@ import {
   DevAuthControls,
   NotificationSystem,
   KeyboardShortcuts,
+  LiveStats,
+  EnhancedProgressBar,
+  InteractiveTour,
 } from "@/components/Common";
 import { AdminLayout } from "@/components/Admin";
 import FloatingAIButton from "@/components/AI/FloatingAIButton";
-import LiveStats from "@/components/Common/LiveStats";
-import EnhancedProgressBar from "@/components/Common/EnhancedProgressBar";
-import InteractiveTour from "@/components/Common/InteractiveTour";
 import { Suspense } from "react";
 
 const queryClient = new QueryClient({
@@ -128,7 +128,7 @@ function App() {
                                 </div>
                                 <div className="bg-white p-6 rounded-lg shadow">
                                   <h2 className="text-xl font-semibold mb-4">
-                                    محادثات الذكاء الاصطناعي
+                                    محادثات ا��ذكاء الاصطناعي
                                   </h2>
                                   <p className="text-gray-600">
                                     تاريخ محادثاتك مع AI
