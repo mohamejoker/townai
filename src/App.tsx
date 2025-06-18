@@ -166,6 +166,9 @@ function App() {
 
                 {/* إحصائيات مباشرة */}
                 <LiveStats />
+
+                {/* الجولة التفاعلية */}
+                <InteractiveTour />
               </div>
             </BrowserRouter>
           </AuthProvider>
