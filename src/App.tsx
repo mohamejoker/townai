@@ -35,15 +35,17 @@ import ServicesOverview from "@/components/Services/ServicesOverview";
 import OrdersManagement from "@/components/Orders/OrdersManagement";
 import NotificationsHub from "@/components/Notifications/NotificationsHub";
 import AdvancedAnalytics from "@/components/Analytics/AdvancedAnalytics";
-import AdvancedAdminControls from "@/components/Admin/AdvancedAdminControls";
-import ProvidersPage from "@/pages/admin/ProvidersPage";
-import PaymentMethodsPage from "@/pages/admin/PaymentMethodsPage";
-import ThemeControlPage from "@/pages/admin/ThemeControlPage";
-import ReportsPage from "@/pages/admin/ReportsPage";
-import UIPage from "@/pages/admin/UIPage";
+import { AdvancedAdminControls } from "@/components/Admin";
 import JobsPage from "@/pages/JobsPage";
-import JobsAdminPage from "@/pages/admin/JobsAdminPage";
-import SystemHealthDetailedPage from "@/pages/admin/SystemHealthDetailedPage";
+import {
+  ProvidersPage,
+  PaymentMethodsPage,
+  ThemeControlPage,
+  ReportsPage,
+  UIPage,
+  JobsAdminPage,
+  SystemHealthDetailedPage,
+} from "@/pages/admin";
 import ErrorBoundaryWrapper from "@/components/Common/ErrorBoundaryWrapper";
 import { PageLoading } from "@/components/Common/LoadingStates";
 import AdminLayout from "@/components/Admin/AdminLayout";
