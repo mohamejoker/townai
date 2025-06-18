@@ -167,7 +167,7 @@ const StyleEditor: React.FC<StyleEditorProps> = ({
             تخطيط
           </TabsTrigger>
           <TabsTrigger value="effects">
-            <Shadows className="w-4 h-4 mr-1" />
+            <Sparkles className="w-4 h-4 mr-1" />
             تأثيرات
           </TabsTrigger>
         </TabsList>
@@ -436,7 +436,7 @@ const TypographyPanel: React.FC<{
           </div>
 
           <div>
-            <Label htmlFor="font-weight">سُمك ال��ط</Label>
+            <Label htmlFor="font-weight">سُمك الخط</Label>
             <select
               id="font-weight"
               value={(styles.fontWeight as string) || "normal"}
@@ -744,7 +744,7 @@ const EffectsPanel: React.FC<{
   return (
     <Card>
       <CardHeader>
-        <CardTitle>التأثيرات البصرية</CardTitle>
+        <CardTitle>التأثيرات ا��بصرية</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         {/* الظلال */}
