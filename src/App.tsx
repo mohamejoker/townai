@@ -39,6 +39,7 @@ import { AdvancedAdminControls } from "@/components/Admin";
 import JobsPage from "@/pages/JobsPage";
 import {
   ProvidersPage,
+  ProvidersManagementPage,
   PaymentMethodsPage,
   ThemeControlPage,
   ReportsPage,
@@ -128,7 +129,7 @@ function App() {
                                 </div>
                                 <div className="bg-white p-6 rounded-lg shadow">
                                   <h2 className="text-xl font-semibold mb-4">
-                                    محادثات ا��ذكاء الاصطناعي
+                                    محادثات الذكاء الاصطناعي
                                   </h2>
                                   <p className="text-gray-600">
                                     تاريخ محادثاتك مع AI
@@ -206,7 +207,7 @@ function App() {
                       <Route path="settings" element={<SettingsPage />} />
                     </Route>
 
-                    {/* إعادة توجيه للمسارات القديمة */}
+                    {/* إعادة توجيه للمسارات القد��مة */}
                     <Route path="/home" element={<Navigate to="/" replace />} />
 
                     {/* مسار افتراضي */}
