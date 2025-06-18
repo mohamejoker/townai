@@ -32,4 +32,4 @@ export { default as platformExpansion } from "./platformExpansion";
 export { stateManager } from "./state/stateManager";
 
 // Theme Services
-export { themeManager as themeService } from "./theme/manager";
+export { themeManager } from "./theme/manager";
