@@ -45,6 +45,7 @@ import DevAuthControls from "@/components/Common/DevAuthControls";
 import NotificationSystem from "@/components/Common/NotificationSystem";
 import KeyboardShortcuts from "@/components/Common/KeyboardShortcuts";
 import LiveStats from "@/components/Common/LiveStats";
+import EnhancedProgressBar from "@/components/Common/EnhancedProgressBar";
 import { Suspense } from "react";
 
 const queryClient = new QueryClient({
@@ -74,7 +75,7 @@ function App() {
                     <Route path="/" element={<EnhancedLandingPage />} />
                     <Route path="/simple" element={<LandingPage />} />
 
-                    {/* ص��حات المصادقة */}
+                    {/* صفحات المصادقة */}
                     <Route path="/login" element={<TestLoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
 
