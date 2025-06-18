@@ -23,9 +23,9 @@ import CryptoPayment from "./CryptoPayment";
 import { useToast } from "@/hooks/use-toast";
 
 interface AdvancedPaymentSystemProps {
-  amount: number;
-  onPaymentSuccess: (transactionId: string, method: string) => void;
-  onPaymentError: (error: string) => void;
+  amount?: number;
+  onPaymentSuccess?: (transactionId: string, method: string) => void;
+  onPaymentError?: (error: string) => void;
 }
 
 const AdvancedPaymentSystem: React.FC<AdvancedPaymentSystemProps> = ({
