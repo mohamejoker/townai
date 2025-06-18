@@ -24,7 +24,7 @@ import {
   Phone,
   MapPin,
 } from "lucide-react";
-import { SiteElement } from "./context/SiteBuilderContext";
+import { SiteElement, useSiteBuilder } from "./context/SiteBuilderContext";
 
 interface ContentEditorProps {
   selectedElement: SiteElement | null;
@@ -228,7 +228,7 @@ const HeroEditor: React.FC<{
       </div>
 
       <div>
-        <Label htmlFor="hero-bg-image">صورة الخلفية</Label>
+        <Label htmlFor="hero-bg-image">ص��رة الخلفية</Label>
         <Input
           id="hero-bg-image"
           value={(content.backgroundImage as string) || ""}
@@ -510,7 +510,7 @@ const GalleryEditor: React.FC<{
             id="gallery-title"
             value={(content.title as string) || ""}
             onChange={(e) => onUpdate("title", e.target.value)}
-            placeholder="معرض الصور"
+            placeholder="معرض ��لصور"
           />
         </div>
 
