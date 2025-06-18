@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,6 +8,7 @@ import ProtectedRoute from "@/components/Auth/ProtectedRoute";
 import LoginPage from "@/pages/LoginPage";
 import RegisterPage from "@/pages/RegisterPage";
 import LandingPage from "@/pages/LandingPage";
+import EnhancedLandingPage from "@/pages/EnhancedLandingPage";
 import DashboardPage from "@/pages/admin/DashboardPage";
 import UsersPage from "@/pages/admin/UsersPage";
 import ServicesPage from "@/pages/admin/ServicesPage";
@@ -54,15 +54,18 @@ function App() {
           <Sonner />
           <BrowserRouter>
             <div className="min-h-screen w-full">
-              <Suspense fallback={<PageLoading message="جاري تحميل الصفحة..." />}>
+              <Suspense
+                fallback={<PageLoading message="جاري تحميل الصفحة..." />}
+              >
                 <Routes>
                   {/* الصفحة الرئيسية */}
-                  <Route path="/" element={<LandingPage />} />
-                  
+                  <Route path="/" element={<EnhancedLandingPage />} />
+                  <Route path="/simple" element={<LandingPage />} />
+
                   {/* صفحات المصادقة */}
                   <Route path="/login" element={<LoginPage />} />
                   <Route path="/register" element={<RegisterPage />} />
-                  
+
                   {/* الخدمات العامة */}
                   <Route path="/services" element={<ServicesOverview />} />
 
@@ -82,17 +85,32 @@ function App() {
                     <Route path="users" element={<UsersPage />} />
                     <Route path="services" element={<ServicesPage />} />
                     <Route path="orders" element={<OrdersPage />} />
-                    <Route path="orders-management" element={<OrdersManagement />} />
+                    <Route
+                      path="orders-management"
+                      element={<OrdersManagement />}
+                    />
                     <Route path="providers" element={<ProvidersPage />} />
-                    <Route path="payment-methods" element={<PaymentMethodsPage />} />
+                    <Route
+                      path="payment-methods"
+                      element={<PaymentMethodsPage />}
+                    />
                     <Route path="payments" element={<PaymentsDashboard />} />
                     <Route path="reports" element={<ReportsPage />} />
                     <Route path="analytics" element={<AdvancedAnalytics />} />
-                    <Route path="notifications" element={<NotificationsHub />} />
+                    <Route
+                      path="notifications"
+                      element={<NotificationsHub />}
+                    />
                     <Route path="theme" element={<ThemeControlPage />} />
                     <Route path="ui" element={<UIPage />} />
-                    <Route path="advanced-controls" element={<AdvancedAdminControls />} />
-                    <Route path="diagnostics" element={<SystemDiagnosticsPage />} />
+                    <Route
+                      path="advanced-controls"
+                      element={<AdvancedAdminControls />}
+                    />
+                    <Route
+                      path="diagnostics"
+                      element={<SystemDiagnosticsPage />}
+                    />
                     <Route path="monitoring" element={<MonitoringPage />} />
                     <Route path="maintenance" element={<MaintenancePage />} />
                     <Route path="health" element={<SystemHealthPage />} />
@@ -102,12 +120,12 @@ function App() {
 
                   {/* إعادة توجيه للمسارات القديمة */}
                   <Route path="/home" element={<Navigate to="/" replace />} />
-                  
+
                   {/* مسار افتراضي */}
                   <Route path="*" element={<Navigate to="/" replace />} />
                 </Routes>
               </Suspense>
-              
+
               {/* زر الذكاء الاصطناعي العائم */}
               <FloatingAIButton />
             </div>
