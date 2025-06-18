@@ -1,14 +1,20 @@
 // تصدير مركزي لجميع الخدمات
 
-// Core Services
-export * from "./ai";
-export * from "./admin";
-export * from "./analytics";
-export * from "./payment";
-export * from "./providers";
-export * from "./reports";
-export * from "./services";
-export * from "./social";
+// Core Services - Specific exports to avoid Node 22.x context issues
+export { default as advancedProviderSync } from "./providers/advancedProviderSync";
+export * from "./providers/types";
+export { calculateFinalPrice, processService } from "./providers/dataProcessor";
+
+// Payment Services
+export { default as egyptianPaymentService } from "./payment/egyptianPaymentService";
+export { default as paymentService } from "./payment/paymentService";
+
+// AI Services
+export { default as openaiService } from "./openai/openaiService";
+export { default as conversationManager } from "./ai/conversationManager";
+
+// Analytics
+export { default as intelligentAnalytics } from "./analytics/intelligentAnalytics";
 
 // Authentication & Security
 export { default as roleService } from "./roleService";
