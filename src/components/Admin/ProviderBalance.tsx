@@ -1,18 +1,20 @@
-
-import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { DollarSign, RefreshCw, AlertCircle } from 'lucide-react';
-import { providerService } from '@/services/providers/providerService';
-import { useToast } from '@/hooks/use-toast';
+import React, { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { DollarSign, RefreshCw, AlertCircle } from "lucide-react";
+import { providerService } from "@/services/providers/providerService";
+import { useToast } from "@/hooks/use-toast";
 
 interface ProviderBalanceProps {
   providerId: string;
   providerName: string;
 }
 
-const ProviderBalance: React.FC<ProviderBalanceProps> = ({ providerId, providerName }) => {
+const ProviderBalance: React.FC<ProviderBalanceProps> = ({
+  providerId,
+  providerName,
+}) => {
   const [balance, setBalance] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -21,17 +23,19 @@ const ProviderBalance: React.FC<ProviderBalanceProps> = ({ providerId, providerN
   const fetchBalance = async () => {
     setIsLoading(true);
     setError(null);
-    
+
     try {
-      const providerBalance = await providerService.getProviderBalance(providerId);
+      const providerBalance =
+        await providerService.getProviderBalance(providerId);
       setBalance(providerBalance);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'فشل في جلب الرصيد';
+      const errorMessage =
+        err instanceof Error ? err.message : "فشل في جلب الرصيد";
       setError(errorMessage);
       toast({
         title: "خطأ في جلب الرصيد",
         description: errorMessage,
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -40,7 +44,7 @@ const ProviderBalance: React.FC<ProviderBalanceProps> = ({ providerId, providerN
 
   useEffect(() => {
     fetchBalance();
-  }, [providerId]);
+  }, [providerId, fetchBalance]);
 
   return (
     <Card className="w-full">
@@ -56,7 +60,9 @@ const ProviderBalance: React.FC<ProviderBalanceProps> = ({ providerId, providerN
             onClick={fetchBalance}
             disabled={isLoading}
           >
-            <RefreshCw className={`h-4 w-4 ${isLoading ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
+            />
           </Button>
         </div>
       </CardHeader>
