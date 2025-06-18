@@ -176,6 +176,10 @@ function App() {
                       />
                       <Route path="providers" element={<ProvidersPage />} />
                       <Route
+                        path="providers-management"
+                        element={<ProvidersManagementPage />}
+                      />
+                      <Route
                         path="payment-methods"
                         element={<PaymentMethodsPage />}
                       />
@@ -207,7 +211,7 @@ function App() {
                       <Route path="settings" element={<SettingsPage />} />
                     </Route>
 
-                    {/* إعادة توجيه للمسارات القد��مة */}
+                    {/* إعادة توجيه للمسارات القديمة */}
                     <Route path="/home" element={<Navigate to="/" replace />} />
 
                     {/* مسار افتراضي */}
