@@ -96,8 +96,8 @@ function App() {
                         </ErrorBoundaryWrapper>
                       }
                     >
-                      <Route index element={<DashboardPage />} />
-                      <Route path="dashboard" element={<DashboardPage />} />
+                      <Route index element={<TestDashboardPage />} />
+                      <Route path="dashboard" element={<TestDashboardPage />} />
                       <Route path="users" element={<UsersPage />} />
                       <Route path="services" element={<ServicesPage />} />
                       <Route path="orders" element={<OrdersPage />} />
@@ -142,7 +142,7 @@ function App() {
                   </Routes>
                 </Suspense>
 
-                {/* زر الذكاء الاص��ناعي العائم */}
+                {/* زر الذكاء الاصطناعي العائم */}
                 <FloatingAIButton />
 
                 {/* أدوات التطوير */}
