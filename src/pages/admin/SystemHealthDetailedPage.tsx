@@ -79,7 +79,7 @@ const SystemHealthDetailedPage = () => {
         value: Math.random() * 85 + 5,
         unit: "%",
         status: Math.random() > 0.8 ? "critical" : "good",
-        icon: Memory,
+        icon: HardDrive,
         description: "استخدام ذاكرة الوصول العشوائي",
       },
       {
@@ -487,7 +487,7 @@ const SystemHealthDetailedPage = () => {
                             {service.name}
                           </h3>
                           <p className="text-sm text-gray-600">
-                            آخر فحص: {service.lastCheck}
+                            آخر ف��ص: {service.lastCheck}
                           </p>
                         </div>
                       </div>
