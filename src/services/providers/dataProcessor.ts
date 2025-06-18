@@ -6,7 +6,7 @@ import type {
   ServiceType,
   Platform,
   QualityLevel,
-} from "./types.js";
+} from "./types";
 
 export class DataProcessor {
   // حساب السعر النهائي مع نسبة الربح
@@ -172,7 +172,7 @@ export class DataProcessor {
       quality: this.determineQuality(rawService),
       refillEnabled: rawService.refill || false,
       cancelEnabled: rawService.cancel || false,
-      averageTime: rawService.average_time || "24 ساعة",
+      averageTime: rawService.average_time || "24 س��عة",
       lastUpdated: new Date(),
       syncStatus: "synced",
       customFields: this.extractCustomFields(rawService),
