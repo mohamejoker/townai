@@ -1,7 +1,7 @@
-// المكونات المشتركة عبر التطبيق - Node 20.x/22.x compatible exports
+// المكونات المشتركة عبر التطبيق
 
-// Essential UI Components only
+// Note: Using wildcard exports temporarily disabled to prevent Node.js version compatibility issues
+// Individual components can be imported directly from their source files when needed
+
+// Essential re-exports only - no wildcards to avoid circular dependencies
 export { Button } from "../../components/ui/button";
-
-// Core Common Components
-export { default as LoadingSpinner } from "../../components/Common/LoadingSpinner";
