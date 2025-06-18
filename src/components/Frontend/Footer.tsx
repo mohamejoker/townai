@@ -12,7 +12,7 @@ import {
   Twitter,
   Instagram,
   Youtube,
-  Telegram,
+  Send,
   Heart,
   Shield,
   Award,
@@ -67,7 +67,7 @@ const Footer = () => {
   const socialLinks = [
     {
       name: "تيليجرام",
-      icon: Telegram,
+      icon: Send,
       href: "https://t.me/townmedia",
       color: "text-blue-400",
     },
