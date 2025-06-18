@@ -21,6 +21,7 @@ import {
 import AdvancedProvidersManager from "@/components/Admin/Providers/AdvancedProvidersManager";
 import ProfitabilityAnalytics from "@/components/Admin/Providers/ProfitabilityAnalytics";
 import PricingManagement from "@/components/Admin/Providers/PricingManagement";
+import ProviderSystemTester from "@/components/Admin/Providers/ProviderSystemTester";
 import { advancedProviderSync } from "@/services/providers/advancedProviderSync";
 
 const ProvidersManagementPage = () => {
@@ -58,7 +59,7 @@ const ProvidersManagementPage = () => {
       <div className="flex justify-between items-center">
         <div>
           <h1 className="text-3xl font-bold text-gray-900">
-            إدارة الموردين والخدمات
+            إدارة الموردين ��الخدمات
           </h1>
           <p className="text-gray-600">
             نظام شامل لسحب وإدارة الخدمات من الموردين مع التحكم في الأسعار ونسب
