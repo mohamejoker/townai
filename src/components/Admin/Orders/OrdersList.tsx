@@ -1,9 +1,16 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ExternalLink, User, Calendar, DollarSign } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import OrderDetails from '@/components/Orders/OrderDetails';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from 'sonner';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
 
 interface Order {
   id: string;
@@ -26,6 +33,45 @@ interface OrdersListProps {
 }
 
 const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
+  const [selectedOrderDetail, setSelectedOrderDetail] = useState<Order | null>(null);
+  const [isDetailModalOpen, setIsDetailModalOpen] = useState(false);
+
+  const queryClient = useQueryClient();
+  const [orderToUpdateStatus, setOrderToUpdateStatus] = useState<Order | null>(null);
+  const [isStatusUpdateModalOpen, setIsStatusUpdateModalOpen] = useState(false);
+  const [selectedStatus, setSelectedStatus] = useState<string>('');
+
+  const ORDER_STATUSES = [
+    { value: 'pending', label: 'معلق' },
+    { value: 'processing', label: 'قيد المعالجة' },
+    { value: 'completed', label: 'مكتمل' },
+    { value: 'cancelled', label: 'ملغي' },
+  ];
+
+  const updateOrderStatusMutation = useMutation({
+    mutationFn: async ({ orderId, newStatus }: { orderId: string; newStatus: string }) => {
+      const { error } = await supabase
+        .from('service_orders')
+        .update({ status: newStatus })
+        .eq('id', orderId);
+      if (error) {
+        console.error("Error updating order status:", error);
+        throw new Error(error.message || 'فشل تحديث حالة الطلب.');
+      }
+      return null;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-orders'] });
+      queryClient.invalidateQueries({ queryKey: ['order-stats'] });
+      toast.success('تم تحديث حالة الطلب بنجاح!');
+      setIsStatusUpdateModalOpen(false);
+      setOrderToUpdateStatus(null);
+    },
+    onError: (error: Error) => {
+      toast.error(error.message || 'حدث خطأ أثناء تحديث حالة الطلب.');
+    },
+  });
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'pending':
@@ -136,16 +182,99 @@ const OrdersList: React.FC<OrdersListProps> = ({ orders }) => {
             </div>
 
             <div className="flex gap-2 mt-4 pt-4 border-t">
-              <Button variant="outline" size="sm">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setSelectedOrderDetail(order);
+                  setIsDetailModalOpen(true);
+                }}
+              >
                 عرض التفاصيل
               </Button>
-              <Button variant="outline" size="sm">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => {
+                  setOrderToUpdateStatus(order);
+                  setSelectedStatus(order.status);
+                  setIsStatusUpdateModalOpen(true);
+                }}
+              >
                 تحديث الحالة
               </Button>
             </div>
           </CardContent>
         </Card>
       ))}
+
+      {selectedOrderDetail && (
+        <Dialog open={isDetailModalOpen} onOpenChange={setIsDetailModalOpen}>
+          <DialogContent className="sm:max-w-2xl max-h-[80vh] overflow-y-auto"> {/* Adjusted size */}
+            <DialogHeader>
+              <DialogTitle>تفاصيل الطلب</DialogTitle>
+            </DialogHeader>
+            <OrderDetails order={selectedOrderDetail} onClose={() => setIsDetailModalOpen(false)} />
+          </DialogContent>
+        </Dialog>
+      )}
+
+      {orderToUpdateStatus && (
+        <Dialog open={isStatusUpdateModalOpen} onOpenChange={(isOpen) => {
+          setIsStatusUpdateModalOpen(isOpen);
+          if (!isOpen) setOrderToUpdateStatus(null);
+        }}>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>تحديث حالة الطلب #{orderToUpdateStatus.id.slice(0,8)}</DialogTitle>
+            </DialogHeader>
+            <div className="py-4 space-y-4">
+              <div>
+                <Label htmlFor="status-select">اختر الحالة الجديدة:</Label>
+                <Select
+                  value={selectedStatus}
+                  onValueChange={setSelectedStatus}
+                >
+                  <SelectTrigger id="status-select">
+                    <SelectValue placeholder="اختر حالة..." />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ORDER_STATUSES.map(statusOption => (
+                      <SelectItem key={statusOption.value} value={statusOption.value}>
+                        {statusOption.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="flex justify-end gap-2">
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setIsStatusUpdateModalOpen(false);
+                    setOrderToUpdateStatus(null);
+                  }}
+                >
+                  إلغاء
+                </Button>
+                <Button
+                  onClick={() => {
+                    if (orderToUpdateStatus && selectedStatus) {
+                      updateOrderStatusMutation.mutate({
+                        orderId: orderToUpdateStatus.id,
+                        newStatus: selectedStatus
+                      });
+                    }
+                  }}
+                  disabled={updateOrderStatusMutation.isPending || !selectedStatus || selectedStatus === orderToUpdateStatus.status}
+                >
+                  {updateOrderStatusMutation.isPending ? 'جار الحفظ...' : 'حفظ التغييرات'}
+                </Button>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </div>
   );
 };

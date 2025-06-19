@@ -16,6 +16,12 @@ interface Order {
   profit: number;
   status: string;
   created_at: string;
+  // This field will hold the raw data from the Supabase join
+  profiles?: {
+    full_name?: string;
+    email?: string;
+  } | null;
+  // This field will be populated by the map function for OrdersList
   user_profile?: {
     full_name?: string;
     email?: string;
@@ -31,20 +37,44 @@ const OrdersPage = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from('service_orders')
-        .select('*')
+        .select(`
+          *,
+          profiles (
+            full_name,
+            email
+          )
+        `)
         .order('created_at', { ascending: false });
-      
-      if (error) throw error;
-      
-      // تحويل البيانات للصيغة المطلوبة مع بيانات وهمية للمستخدمين
-      const formattedOrders = (data || []).map(order => ({
-        ...order,
-        user_profile: {
-          full_name: `عميل ${order.id.slice(0, 8)}`,
-          email: `user${order.id.slice(0, 6)}@example.com`
-        }
-      }));
-      
+
+      if (error) {
+        // It is good practice to log the specific error for debugging
+        console.error('Supabase error fetching orders with profiles:', error);
+        throw error;
+      }
+
+      // Explicitly type data as any[] if Supabase types are not precise enough for joined data
+      const typedData = data as any[] || [];
+
+      const formattedOrders = typedData.map(order => {
+        const profileData = order.profiles; // This is the object from the join
+
+        // Default/fallback values if profile data or specific fields are missing
+        const defaultFullName = `عميل ${order.id.slice(0, 8)}`;
+        const defaultEmail = `user${order.id.slice(0, 6)}@example.com`;
+
+        return {
+          ...order, // Spread all original order fields
+          profiles: profileData, // Keep the raw profiles data if needed elsewhere
+          user_profile: profileData ? {
+            full_name: profileData.full_name || defaultFullName,
+            email: profileData.email || defaultEmail
+          } : {
+            full_name: 'مستخدم غير معروف', // Fallback if profiles object itself is null/undefined
+            email: 'بريد غير متوفر'
+          }
+        };
+      });
+
       return formattedOrders as Order[];
     }
   });
