@@ -32,7 +32,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
     gradient_class: 'from-sky-400 to-blue-500',
     button_text: 'اطلب الآن',
     is_active: true,
-    is_popular: false
+    is_popular: false,
+    linked_provider_service_id: undefined as string | undefined,
+    source_provider_service_data: undefined as Record<string, any> | undefined,
   });
   const [newFeature, setNewFeature] = useState('');
   const queryClient = useQueryClient();
@@ -47,18 +49,32 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
         gradient_class: dataToUse.gradient_class || 'from-sky-400 to-blue-500',
         button_text: dataToUse.button_text || 'اطلب الآن',
         is_active: dataToUse.is_active ?? true,
-        is_popular: dataToUse.is_popular ?? false
+        is_popular: dataToUse.is_popular ?? false,
+        linked_provider_service_id: dataToUse.linked_provider_service_id,
+        source_provider_service_data: dataToUse.source_provider_service_data,
+      });
+    } else {
+      // Reset to default, ensuring new optional fields are also cleared
+      setFormData({
+        title: '',
+        price: '',
+        features: [] as string[],
+        gradient_class: 'from-sky-400 to-blue-500',
+        button_text: 'اطلب الآن',
+        is_active: true,
+        is_popular: false,
+        linked_provider_service_id: undefined,
+        source_provider_service_data: undefined,
       });
     }
   }, [service, initialData]);
 
   const createMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const { error } = await supabase
-        .from('services')
-        .insert([data]);
-      
-      if (error) throw error;
+    mutationFn: async (data: any) => { // data here is formData
+      // serviceService.createService expects ServiceFormValues type
+      // which should now include the new optional fields.
+      // The actual insertion logic is within serviceService.createService
+      return serviceService.createService(data);
     },
     onSuccess: () => {
       toast.success('تم إنشاء الخدمة بنجاح!');
@@ -72,13 +88,9 @@ const ServiceForm: React.FC<ServiceFormProps> = ({
   });
 
   const updateMutation = useMutation({
-    mutationFn: async (data: any) => {
-      const { error } = await supabase
-        .from('services')
-        .update(data)
-        .eq('id', (service || initialData).id);
-      
-      if (error) throw error;
+    mutationFn: async (data: any) => { // data here is formData
+      // serviceService.updateService expects ServiceFormValues type
+      return serviceService.updateService((service || initialData).id, data);
     },
     onSuccess: () => {
       toast.success('تم تحديث الخدمة بنجاح!');

@@ -6,6 +6,9 @@ export type Service = {
     id: string;
     created_at: string;
     updated_at: string;
+    // Potentially add these if they need to be part of the main Service type
+    linked_provider_service_id?: string | null;
+    source_provider_service_data?: Record<string, any> | null; // Or string for JSON
 } & ServiceFormValues;
 
 export const serviceService = {
@@ -56,8 +59,19 @@ export const serviceService = {
         button_text: service.button_text || 'اطلب الآن',
         gradient_class: service.gradient_class || 'from-sky-400 to-blue-500',
         is_popular: service.is_popular || false,
-        is_active: service.is_active !== undefined ? service.is_active : true
+        is_active: service.is_active !== undefined ? service.is_active : true,
+        // Include new optional fields if they are present in ServiceFormValues
+        linked_provider_service_id: service.linked_provider_service_id,
+        source_provider_service_data: service.source_provider_service_data,
       };
+
+      // Filter out undefined new fields to avoid sending them to Supabase if not provided
+      Object.keys(serviceData).forEach(key => {
+        const K = key as keyof typeof serviceData;
+        if (serviceData[K] === undefined) {
+          delete serviceData[K];
+        }
+      });
 
       const { data, error } = await supabase
         .from('services')
@@ -83,9 +97,16 @@ export const serviceService = {
         service.features = service.features.filter(f => f.trim() !== '');
       }
 
+      const updateData: Partial<ServiceFormValues & { linked_provider_service_id?: string; source_provider_service_data?: Record<string, any> }> = { ...service };
+
+      // Filter out undefined new fields to avoid sending them to Supabase if not provided explicitly for update
+      if (updateData.linked_provider_service_id === undefined) delete updateData.linked_provider_service_id;
+      if (updateData.source_provider_service_data === undefined) delete updateData.source_provider_service_data;
+
+
       const { data, error } = await supabase
         .from('services')
-        .update(service)
+        .update(updateData)
         .eq('id', id)
         .select()
         .single();
